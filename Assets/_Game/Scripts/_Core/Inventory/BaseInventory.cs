@@ -1,5 +1,5 @@
 using UnityEngine;
-public abstract class BaseInventory
+public abstract class BaseInventory : MonoBehaviour
 {
     
 }

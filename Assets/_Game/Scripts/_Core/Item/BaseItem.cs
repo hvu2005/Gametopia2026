@@ -1,16 +1,17 @@
 using System.Collections.Generic;
+using UnityEngine;
 
-public abstract class BaseItem : IEquippable
+public abstract class BaseItem : MonoBehaviour, IEquippable
 {
     public string ItemID { get; protected set; }
     public string ItemName { get; protected set; }
-    public int Level { get; protected set; } // Sao của vật phẩm (1-3)
+    public int Tier { get; protected set; } // Sao của vật phẩm (1-3)
     public ItemType Type { get; protected set; }
     public SynergyType SetBonus { get; protected set; }
 
-    public EquipmentSlot AllowedSlot {get; protected set;}
+    public EquipmentSlotType AllowedSlot {get; protected set;}
 
-    public abstract List<StatModifier> GetItemStats();
+    public Stats Stats;
     
     // Hàm xử lý khi người chơi kéo vật phẩm này đè lên vật phẩm khác để nâng cấp
     public abstract bool TryMergeWith(BaseItem otherItem);

@@ -1,4 +1,4 @@
-public enum ItemRarity
+public enum RarityType
 {
     Normal,
     Rare,
