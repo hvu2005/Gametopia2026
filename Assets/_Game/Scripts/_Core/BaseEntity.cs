@@ -22,6 +22,8 @@ public abstract class BaseEntity : MonoBehaviour, ICombatant {
 
     public float currentHp;
 
+    public SpriteRenderer hpBar;
+
     public SpriteRenderer visual;
     private Color originalColor;
 
@@ -31,6 +33,24 @@ public abstract class BaseEntity : MonoBehaviour, ICombatant {
     {
         this.originalColor = new Color(visual.color.r, visual.color.g, visual.color.b, visual.color.a);
         this.currentHp = Stats.hp;
+    }
+
+    public virtual void OnUpdateStat()
+    {
+        SetHpFill(currentHp / Stats.hp);
+    }
+
+    public virtual void Die() {
+        Debug.Log($"{name} has died.");
+        // Thêm hiệu ứng chết, rơi đồ, v.v. ở đây
+    }
+
+    public void SetHpFill(float amount)
+    {
+        if(hpBar)
+        {
+            hpBar.transform.localScale = new Vector3(amount, 1, 1);
+        }
     }
 
     public T GetEffect<T>() where T : StatProcessor
