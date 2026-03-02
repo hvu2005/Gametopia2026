@@ -11,6 +11,8 @@ public class StatSystem : Singleton<StatSystem>
         statProcessors.Add(new StunEffect());
         statProcessors.Add(new LifeStealEffect());
         statProcessors.Add(new PoisonEffect());
+        statProcessors.Add(new PhysicalDamageProcessor());
+        statProcessors.Add(new CritProcessor());
 
     }
 

@@ -11,9 +11,9 @@ public class Player : BaseEntity
     {
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            BattleSystem.Instance.ExecuteTurn(this, dummy);
+            BattleSystem.Instance.StartBattle(dummy);
 
-            BattleSystem.Instance.ExecuteTurn(dummy, this);
+
         }
     }
 }

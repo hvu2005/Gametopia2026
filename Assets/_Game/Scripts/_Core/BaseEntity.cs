@@ -17,14 +17,30 @@ public interface ITurnBased
 
 public abstract class BaseEntity : MonoBehaviour, ICombatant {
     public Stats Stats;
-    public bool IsDead => Stats.hp <= 0;
+    public bool IsDead => currentHp <= 0;
     public bool IsAttacked { get; set; } = false;
 
+    public float currentHp;
+
+    public SpriteRenderer visual;
+    private Color originalColor;
+
     public List<StatProcessor> ActiveEffects = new List<StatProcessor>();
+
+    public void Awake()
+    {
+        this.originalColor = new Color(visual.color.r, visual.color.g, visual.color.b, visual.color.a);
+        this.currentHp = Stats.hp;
+    }
 
     public T GetEffect<T>() where T : StatProcessor
     {
         return ActiveEffects.Find(e => e is T) as T;
+    }
+
+    public virtual void Heal(float amount)
+    {
+        currentHp = Mathf.Min(currentHp + amount, Stats.hp);
     }
     
     // Các hành động trong Combat
@@ -38,4 +54,24 @@ public abstract class BaseEntity : MonoBehaviour, ICombatant {
     }
     // public abstract void ApplyStats(Stats stats);
     // public abstract void RemoveStats(Stats stats);
+
+    public void SetActiveTurn(bool isActive)
+    {
+        if(!visual) return;
+
+        if (isActive)
+        {
+            // Bình thường
+            visual.color = new Color(originalColor.r, originalColor.g, originalColor.b);
+        }
+        else
+        {
+            // Làm xám + không trong suốt
+            visual.color = new Color(
+                visual.color.r * 0.5f,
+                visual.color.g * 0.5f,
+                visual.color.b * 0.5f
+            );
+        }
+    }
 }

@@ -11,6 +11,6 @@ public class LifeStealEffect : StatProcessor, IPostAttack
 
     public void ProcessPostAttack(BaseEntity source, BaseEntity target)
     {
-        source.Stats.hp += source.Stats.lifeSteal;
+        source.Heal(source.Stats.lifeSteal);
     }
 }
