@@ -19,11 +19,24 @@ public class Player : BaseEntity
         {
             statManager.Register(inventory);
         }
+
+        // Sync FinalStats -> BaseEntity.Stats để BattleSystem dùng đúng chỉ số khi equip item
+        EventBus.On<Stats>(ItemEventType.OnStatsChanged, OnStatsChanged);
+    }
+
+    void OnDestroy()
+    {
+        EventBus.Off<Stats>(ItemEventType.OnStatsChanged, OnStatsChanged);
+    }
+
+    private void OnStatsChanged(Stats finalStats)
+    {
+        this.Stats = finalStats;
     }
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             BattleSystem.Instance.StartBattle(dummy);
         }

@@ -19,17 +19,16 @@ public class ItemSlotUI : MonoBehaviour
 
             if (_canvas != null && _canvas.renderMode == RenderMode.ScreenSpaceOverlay)
             {
+                // ScreenSpaceOverlay: transform.position là screen position
                 return transform.position;
             }
+
             RectTransform rt = transform as RectTransform;
             if (rt != null)
             {
-                Vector3 worldPos;
-                RectTransformUtility.ScreenPointToWorldPoint(
-                    _canvas != null ? _canvas.worldCamera : Camera.main,
-                    transform.position,
-                    out worldPos
-                );
+                Camera cam = (_canvas != null ? _canvas.worldCamera : null) ?? Camera.main;
+                Vector2 screenPos = RectTransformUtility.WorldToScreenPoint(cam, rt.position);
+                RectTransformUtility.ScreenPointToWorldPointInRectangle(rt, screenPos, cam, out Vector3 worldPos);
                 return worldPos;
             }
 
