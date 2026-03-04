@@ -29,7 +29,7 @@ public class DebugItemSpawner : MonoBehaviour
         {
             Debug.LogError("DebugItemSpawner: worldItemPrefab chưa được gán!");
         }
-    }
+    }  
 
     public void SpawnRandomItem()
     {

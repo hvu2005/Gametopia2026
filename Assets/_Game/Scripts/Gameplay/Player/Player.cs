@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : BaseEntity
@@ -11,7 +12,7 @@ public class Player : BaseEntity
     public PlayerInventory Inventory => inventory;
     public PlayerStatManager StatManager => statManager;
 
-    public BaseEnemy dummy;
+    public BaseEnemy[] dummies;
 
     void Start()
     {
@@ -34,11 +35,25 @@ public class Player : BaseEntity
         this.Stats = finalStats;
     }
 
-    void Update()
+void Update()
+{
+    if (Input.GetKeyDown(KeyCode.Space))
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        List<BaseEnemy> activeEnemies = new List<BaseEnemy>();
+
+        foreach (var enemy in dummies)
         {
-            BattleSystem.Instance.StartBattle(dummy);
+            if (enemy.gameObject.activeSelf)
+            {
+                activeEnemies.Add(enemy);
+            }
+        }
+
+        if (activeEnemies.Count > 0)
+        {
+            int randomIndex = Random.Range(0, activeEnemies.Count);
+            BattleSystem.Instance.StartBattle(activeEnemies[randomIndex]);
         }
     }
+}
 }
