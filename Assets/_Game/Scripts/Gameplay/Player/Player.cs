@@ -35,25 +35,5 @@ public class Player : BaseEntity
         this.Stats = finalStats;
     }
 
-void Update()
-{
-    if (Input.GetKeyDown(KeyCode.Space))
-    {
-        List<BaseEnemy> activeEnemies = new List<BaseEnemy>();
 
-        foreach (var enemy in dummies)
-        {
-            if (enemy.gameObject.activeSelf)
-            {
-                activeEnemies.Add(enemy);
-            }
-        }
-
-        if (activeEnemies.Count > 0)
-        {
-            int randomIndex = Random.Range(0, activeEnemies.Count);
-            BattleSystem.Instance.StartBattle(activeEnemies[randomIndex]);
-        }
-    }
-}
 }

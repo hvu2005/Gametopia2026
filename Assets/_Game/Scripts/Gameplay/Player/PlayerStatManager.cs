@@ -44,7 +44,7 @@ public class PlayerStatManager : MonoBehaviour
 
     public Stats GetTotalBonus()
     {
-        Stats totalBonus = new Stats();
+        Stats totalBonus = new();
         foreach (var provider in _providers)
         {
             totalBonus = totalBonus + provider.GetBonusStats();
