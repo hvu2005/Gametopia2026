@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -31,6 +32,22 @@ public class GameManager : Singleton<GameManager>
         enemyManager.LoadLevelData(levelData);
     }
 
+    public async Task NextLevel()
+    {
+        currentLevel++;
+        if (currentLevel >= levels.Length)
+        {
+            Debug.Log("All levels completed!");
+            await Task.Yield();
+            return;
+        }
+
+
+        mapManager.ShowLeftTransition();
+        LoadLevel(currentLevel);
+        mapManager.ShowRightTransition();
+    }
+
     public void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
@@ -51,4 +68,6 @@ public class GameManager : Singleton<GameManager>
             enemyManager.GetAliveEnemies()
         );
     }
+
+
 }
