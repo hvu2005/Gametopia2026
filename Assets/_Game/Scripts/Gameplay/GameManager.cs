@@ -16,6 +16,13 @@ public class GameManager : Singleton<GameManager>
     void Start()
     {
         LoadLevel(currentLevel);
+
+        this.RegistEvents();
+    }
+
+    public void RegistEvents()
+    {
+        battleManager.On<string>(BattleEventType.Win, OnWinBattle);
     }
 
     public void LoadLevel(int levelIndex)
@@ -43,9 +50,10 @@ public class GameManager : Singleton<GameManager>
         }
 
 
-        mapManager.ShowLeftTransition();
+        _ = mapManager.ShowLeftTransition();
+        await Task.Delay(500); 
+
         LoadLevel(currentLevel);
-        mapManager.ShowRightTransition();
     }
 
     public void Update()
@@ -69,5 +77,9 @@ public class GameManager : Singleton<GameManager>
         );
     }
 
+    public void OnWinBattle(string message)
+    {
+        _ = this.NextLevel();
+    }
 
 }

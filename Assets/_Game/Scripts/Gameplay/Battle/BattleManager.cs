@@ -3,18 +3,24 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 
+public enum BattleEventType
+{
+    Win,
+    Lose,
+}
+
 [System.Serializable]
-public class BattleManager
+public class BattleManager : EventEmitter
 {
 
     private EffectSystem _effectSystem = new();
     private StatProcessSystem _statProcessSystem = new();
 
-    public async Task StartBattle(BaseEntity player, BaseEnemy target, List<BaseEnemy> otherEnemies)
+    public async Task StartBattle(BaseEntity player, BaseEnemy target, List<BaseEnemy> enemiesInBattle)
     {
         await ExecutePlayerTurn(player, target);
 
-        foreach (var enemy in otherEnemies)
+        foreach (var enemy in enemiesInBattle)
         {
             if (enemy.IsDead)
             {
@@ -23,6 +29,8 @@ public class BattleManager
             }
             await ExecuteEnemyTurn(enemy, player);
         }
+
+        this.CheckEnemies(enemiesInBattle);
     }
 
     public async Task ExecuteEnemyTurn(BaseEntity attacker, BaseEntity target)
@@ -67,15 +75,14 @@ public class BattleManager
         attacker.OnUpdateStat();
         target.OnUpdateStat();
 
-        // this.CheckWin();
+        
     }
 
-    // public void CheckWin()
-    // {
-    //     if (enemiesInBattle.TrueForAll(e => e.IsDead))
-    //     {
-    //         Debug.Log("Player wins!");
-    //         // Xử lý khi người chơi thắng
-    //     }
-    // }
+    public void CheckEnemies(List<BaseEnemy> enemiesInBattle)
+    {
+        if (enemiesInBattle.TrueForAll(e => e.IsDead))
+        {
+            this.Emit<string>(BattleEventType.Win, "Player wins!");
+        }
+    }
 }

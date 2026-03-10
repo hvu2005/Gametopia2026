@@ -62,25 +62,25 @@ public class MapManager
         transitionPanel.SetActive(false);
     }
 
-    public async Task ShowRightTransition()
-    {
+    // public async Task ShowRightTransition()
+    // {
 
-        float canvasWidth = canvasRect.rect.width;
+    //     float canvasWidth = canvasRect.rect.width;
 
-        Vector2 outsideRight = new Vector2(canvasWidth, 0);
-        Vector2 center = Vector2.zero;
+    //     Vector2 outsideRight = new Vector2(canvasWidth, 0);
+    //     Vector2 center = Vector2.zero;
 
-        transitionPanel.SetActive(true);
+    //     transitionPanel.SetActive(true);
 
-        // trượt từ phải vào
-        await Slide(outsideRight, center);
+    //     // trượt từ phải vào
+    //     await Slide(outsideRight, center);
 
-        await Task.Delay(300);
+    //     await Task.Delay(300);
 
-        // trượt ra trái
-        await Slide(center, new Vector2(-canvasWidth, 0));
+    //     // trượt ra trái
+    //     await Slide(center, new Vector2(-canvasWidth, 0));
 
-        transitionPanel.SetActive(false);
-    }
+    //     transitionPanel.SetActive(false);
+    // }
 
 }
