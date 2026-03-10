@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class DebugItemSpawner : MonoBehaviour
@@ -9,18 +10,19 @@ public class DebugItemSpawner : MonoBehaviour
     [SerializeField] private GameObject worldItemPrefab;
     [SerializeField] private int poolSize = 10;
 
-    [Header("Spawn Area")]
-    [Tooltip("Khu vực spawn item trong viewport (0-1). Default: giữa màn hình")]
-    [SerializeField] private Vector2 viewportMin = new Vector2(0.2f, 0.3f);
-    [SerializeField] private Vector2 viewportMax = new Vector2(0.8f, 0.7f);
+    [Header("Drop Config")]
+    [Tooltip("Cấu hình xác suất Star và Rarity khi debug spawn")]
+    [SerializeField] private DropConfig dropConfig = new();
+
+    [Header("Spawn Points")]
+    [Tooltip("Danh sách vị trí spawn. Mỗi lần spawn sẽ dùng điểm kế tiếp (quay vòng).")]
+    [SerializeField] private List<Transform> spawnPoints = new();
 
     private ObjectPool _pool;
-    private Camera _camera;
+    private int _nextSpawnIndex = 0;
 
     private void Start()
     {
-        _camera = Camera.main;
-
         if (worldItemPrefab != null)
         {
             _pool = new ObjectPool(worldItemPrefab, poolSize);
@@ -29,7 +31,7 @@ public class DebugItemSpawner : MonoBehaviour
         {
             Debug.LogError("DebugItemSpawner: worldItemPrefab chưa được gán!");
         }
-    }  
+    }
 
     public void SpawnRandomItem()
     {
@@ -45,8 +47,16 @@ public class DebugItemSpawner : MonoBehaviour
             return;
         }
 
-        ItemDataSO randomItem = database.GetRandom();
-        if (randomItem == null) return;
+        if (spawnPoints == null || spawnPoints.Count == 0)
+        {
+            Debug.LogError("DebugItemSpawner: Chưa có SpawnPoint nào! Kéo Transform vào danh sách spawnPoints.");
+            return;
+        }
+
+        ItemDefinitionSO def = database.GetRandom();
+        if (def == null) return;
+
+        ItemInstance instance = ItemFactory.CreateRandom(def, dropConfig);
 
         GameObject obj = _pool.Get();
         WorldItem worldItem = obj.GetComponent<WorldItem>();
@@ -57,16 +67,14 @@ public class DebugItemSpawner : MonoBehaviour
             return;
         }
 
-        // Vị trí ngẫu nhiên trong viewport
-        float viewX = Random.Range(viewportMin.x, viewportMax.x);
-        float viewY = Random.Range(viewportMin.y, viewportMax.y);
-        Vector3 worldPos = _camera.ViewportToWorldPoint(new Vector3(viewX, viewY, 10f));
-        worldPos.z = 0f;
+        // Lấy spawn point theo thứ tự tuần tự, quay vòng khi hết
+        Transform spawnPoint = spawnPoints[_nextSpawnIndex % spawnPoints.Count];
+        _nextSpawnIndex++;
 
-        obj.transform.position = worldPos;
-        worldItem.Init(randomItem);
+        obj.transform.position = spawnPoint.position;
+        worldItem.Init(instance);
 
-        EventBus.Emit(ItemEventType.OnItemSpawned, randomItem);
-        Debug.Log($"🎲 Spawned: {randomItem.ItemName} at ({viewX:F2}, {viewY:F2})");
+        EventBus.Emit(ItemEventType.OnItemSpawned, instance);
+        Debug.Log($"🎲 Spawned: [{instance.Rarity}] {instance.DisplayName} (Star {instance.StarLevel}) tại điểm [{_nextSpawnIndex - 1}]");
     }
 }

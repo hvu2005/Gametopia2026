@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 291173cfbb811b3449f470fb5a4ab919, type: 3}
+  m_Name: Trait_ 1
+  m_EditorClassIdentifier: 
+  TraitType: 5
+  DisplayName: "M\xE1y m\xF3c"
+  Description: "M\xF3c m\xF3c m\xF3c"
+  Icon: {fileID: 1577090223, guid: 127dd476519e11b4894b84da434f790d, type: 3}
+  Milestones:
+  - RequiredCount: 2
+    Description: "si\xEAu m\xF3c"
+    MilestoneEffect: {fileID: 11400000, guid: 8ed78712d9530c24fbf98569eb9e1168, type: 2}
+  - RequiredCount: 4
+    Description: "si\xEAu si\xEAu m\xF3c"
+    MilestoneEffect: {fileID: 11400000, guid: 8ed78712d9530c24fbf98569eb9e1168, type: 2}

@@ -4,5 +4,6 @@ public enum ItemEventType
     OnItemPickedUp,
     OnItemRemoved,
     OnInventoryChanged,
-    OnStatsChanged
+    OnStatsChanged,
+    OnSynergyChanged
 }

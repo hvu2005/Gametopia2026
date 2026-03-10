@@ -6,15 +6,15 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider2D))]
 public class WorldItem : MonoBehaviour
 {
-    public ItemDataSO Data { get; private set; }
+    public ItemInstance Instance { get; private set; }
 
     private SpriteRenderer _spriteRenderer;
     private BoxCollider2D _collider;
     private bool _isPickedUp;
 
-    public void Init(ItemDataSO data)
+    public void Init(ItemInstance instance)
     {
-        Data = data;
+        Instance = instance;
         _isPickedUp = false;
 
         if (_spriteRenderer == null)
@@ -22,7 +22,7 @@ public class WorldItem : MonoBehaviour
         if (_collider == null)
             _collider = GetComponent<BoxCollider2D>();
 
-        _spriteRenderer.sprite = data.Icon;
+        _spriteRenderer.sprite = instance.Definition.Icon;
         _collider.isTrigger = true;
         _collider.enabled = true;
         gameObject.SetActive(true);
@@ -48,12 +48,10 @@ public class WorldItem : MonoBehaviour
             float t = elapsed / duration;
 
             float eased = 1f - Mathf.Pow(1f - t, 3f);
-
             float arc = Mathf.Sin(t * Mathf.PI) * 0.5f;
 
             Vector3 pos = Vector3.Lerp(start, target, eased);
             pos.y += arc;
-
             transform.position = pos;
 
             float scale = Mathf.Lerp(1f, 0.3f, eased);
@@ -71,7 +69,7 @@ public class WorldItem : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (_isPickedUp || Data == null) return;
+        if (_isPickedUp || Instance == null) return;
 
         if (InventoryUI.Instance != null)
         {

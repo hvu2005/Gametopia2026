@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 [System.Serializable]
 public struct Stats
 {
@@ -11,6 +13,56 @@ public struct Stats
     public float magicDamage;
     public float poisonous;
     public float stunChance;
+
+    /// <summary>
+    /// Chuyển Stats thành Dictionary để dùng trong Modifier Pipeline.
+    /// Key = StatType enum, Value = giá trị tương ứng.
+    /// </summary>
+    public Dictionary<StatType, float> ToDictionary() => new()
+    {
+        { StatType.HP,              hp },
+        { StatType.PhysicalDamage,  physicalDamage },
+        { StatType.Defense,         def },
+        { StatType.CriticalChance,  criticalChance },
+        { StatType.CriticalDamage,  criticalDamage },
+        { StatType.LifeSteal,       lifeSteal },
+        { StatType.Fortune,         fortune },
+        { StatType.MagicDamage,     magicDamage },
+        { StatType.Poisonous,       poisonous },
+        { StatType.StunChance,      stunChance },
+    };
+
+    /// <summary>
+    /// Tạo Stats từ Dictionary sau khi Modifier Pipeline đã tính xong.
+    /// Key nào không có trong dict sẽ nhận giá trị mặc định 0.
+    /// </summary>
+    public static Stats FromDictionary(Dictionary<StatType, float> dict)
+    {
+        dict.TryGetValue(StatType.HP,             out float hp);
+        dict.TryGetValue(StatType.PhysicalDamage, out float phys);
+        dict.TryGetValue(StatType.Defense,         out float def);
+        dict.TryGetValue(StatType.CriticalChance,  out float cc);
+        dict.TryGetValue(StatType.CriticalDamage,  out float cd);
+        dict.TryGetValue(StatType.LifeSteal,       out float ls);
+        dict.TryGetValue(StatType.Fortune,         out float fort);
+        dict.TryGetValue(StatType.MagicDamage,     out float mag);
+        dict.TryGetValue(StatType.Poisonous,       out float poi);
+        dict.TryGetValue(StatType.StunChance,      out float stun);
+
+        return new Stats
+        {
+            hp             = hp,
+            physicalDamage = phys,
+            def            = def,
+            criticalChance = cc,
+            criticalDamage = cd,
+            lifeSteal      = ls,
+            fortune        = fort,
+            magicDamage    = mag,
+            poisonous      = poi,
+            stunChance     = stun
+        };
+    }
 
     public static Stats operator +(Stats a, Stats b)
     {

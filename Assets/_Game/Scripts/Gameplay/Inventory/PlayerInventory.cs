@@ -1,49 +1,73 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerInventory : BaseInventory, IStatProvider
+/// <summary>
+/// Túi đồ của Player — chịu trách nhiệm LƯU TRỮ danh sách ItemInstance.
+/// Việc Equip/Unequip (mặc đồ, kiểm tra slot, kích hoạt Effect) thuộc về EquipmentManager.
+/// </summary>
+public class PlayerInventory : BaseInventory
 {
     public const int MaxSlots = 6;
 
-    [SerializeField] private ItemDataSO[] equippedItems;
+    private ItemInstance[] _items;
 
     public int ItemCount { get; private set; }
 
-    public ItemDataSO GetItemAt(int index)
+    // ─── Read Access ─────────────────────────────────────────────────────────
+
+    public ItemInstance GetItemAt(int index)
     {
         if (index < 0 || index >= MaxSlots) return null;
-        return equippedItems[index];
+        return _items[index];
     }
 
-    public bool TryAddItem(ItemDataSO item, out int slotIndex)
+    public IReadOnlyList<ItemInstance> GetAllItems() => _items;
+
+    public bool HasEmptySlot()
     {
-        slotIndex = -1;
-
         for (int i = 0; i < MaxSlots; i++)
-        {
-            if (equippedItems[i] == null)
-            {
-                equippedItems[i] = item;
-                slotIndex = i;
-                ItemCount++;
-
-                EventBus.Emit(ItemEventType.OnItemPickedUp, item);
-                EventBus.Emit(ItemEventType.OnInventoryChanged, slotIndex);
-                return true;
-            }
-        }
-
-        Debug.Log("⚠️ PlayerInventory: Inventory đầy!");
+            if (_items[i] == null) return true;
         return false;
     }
 
-    public ItemDataSO RemoveItemAt(int index)
+    public int GetFirstEmptySlot()
     {
-        if (index < 0 || index >= MaxSlots || equippedItems[index] == null)
+        for (int i = 0; i < MaxSlots; i++)
+            if (_items[i] == null) return i;
+        return -1;
+    }
+
+    // ─── Write Access ────────────────────────────────────────────────────────
+
+    /// <summary>
+    /// Thêm item vào ô trống đầu tiên.
+    /// Trả về slotIndex (≥0) nếu thành công, -1 nếu đầy.
+    /// </summary>
+    public bool TryAddItem(ItemInstance item, out int slotIndex)
+    {
+        slotIndex = GetFirstEmptySlot();
+        if (slotIndex < 0)
+        {
+            Debug.Log("⚠️ PlayerInventory: Inventory đầy!");
+            return false;
+        }
+
+        _items[slotIndex] = item;
+        ItemCount++;
+
+        EventBus.Emit(ItemEventType.OnItemPickedUp, item);
+        EventBus.Emit(ItemEventType.OnInventoryChanged, slotIndex);
+        return true;
+    }
+
+    public ItemInstance RemoveItemAt(int index)
+    {
+        if (index < 0 || index >= MaxSlots || _items[index] == null)
             return null;
 
-        var removed = equippedItems[index];
-        equippedItems[index] = null;
+        var removed = _items[index];
+        _items[index] = null;
         ItemCount--;
 
         EventBus.Emit(ItemEventType.OnItemRemoved, removed);
@@ -51,40 +75,11 @@ public class PlayerInventory : BaseInventory, IStatProvider
         return removed;
     }
 
-    public bool HasEmptySlot()
-    {
-        for (int i = 0; i < MaxSlots; i++)
-        {
-            if (equippedItems[i] == null) return true;
-        }
-        return false;
-    }
-
-    public int GetFirstEmptySlot()
-    {
-        for (int i = 0; i < MaxSlots; i++)
-        {
-            if (equippedItems[i] == null) return i;
-        }
-        return -1;
-    }
-
-    public Stats GetBonusStats()
-    {
-        Stats total = new Stats();
-        for (int i = 0; i < MaxSlots; i++)
-        {
-            if (equippedItems[i] != null)
-            {
-                total = total + equippedItems[i].BuffStats;
-            }
-        }
-        return total;
-    }
+    // ─── Unity Lifecycle ─────────────────────────────────────────────────────
 
     private void Awake()
     {
-        equippedItems = new ItemDataSO[MaxSlots];
+        _items = new ItemInstance[MaxSlots];
         ItemCount = 0;
     }
 }
