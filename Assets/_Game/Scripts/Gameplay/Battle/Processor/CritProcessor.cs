@@ -1,8 +1,5 @@
 
-
 using UnityEngine;
-
-
 
 public class CritProcessor : BaseStatProcessor, IPreAttack, IPostAttack
 {

@@ -3,12 +3,9 @@ using UnityEngine;
 
 public class PoisonProcessor : BaseStatProcessor, IPostAttack
 {
-    public int count = 0;
-    public int penalty = 6;
-
     public PoisonProcessor()
     {
-        this.count = 0;
+
     }
 
     public void ProcessPostAttack(BaseEntity source, BaseEntity target)

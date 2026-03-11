@@ -2,7 +2,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // Interface cho các hành động chiến đấu cơ bản
-public interface ICombatant {
+public interface ICombatant
+{
     void TakeDamage(float amount, bool isCritical);
     void PerformBasicAttack(BaseEntity target);
 }
@@ -15,7 +16,8 @@ public interface ITurnBased
     void OnTurnEnd();
 }
 
-public abstract class BaseEntity : MonoBehaviour, ICombatant {
+public abstract class BaseEntity : MonoBehaviour, ICombatant
+{
     public Stats Stats;
     public bool IsDead => currentHp <= 0;
     public bool IsAttacked { get; set; } = false;
@@ -40,14 +42,15 @@ public abstract class BaseEntity : MonoBehaviour, ICombatant {
         SetHpFill(currentHp / Stats.hp);
     }
 
-    public virtual void Die() {
+    public virtual void Die()
+    {
         Debug.Log($"{name} has died.");
         // Thêm hiệu ứng chết, rơi đồ, v.v. ở đây
     }
 
     public void SetHpFill(float amount)
     {
-        if(hpBar)
+        if (hpBar)
         {
             hpBar.transform.localScale = new Vector3(amount, 1, 1);
         }
@@ -62,7 +65,7 @@ public abstract class BaseEntity : MonoBehaviour, ICombatant {
     {
         currentHp = Mathf.Min(currentHp + amount, Stats.hp);
     }
-    
+
     // Các hành động trong Combat
     public virtual void TakeDamage(float amount, bool isCritical)
     {
@@ -75,9 +78,20 @@ public abstract class BaseEntity : MonoBehaviour, ICombatant {
     // public abstract void ApplyStats(Stats stats);
     // public abstract void RemoveStats(Stats stats);
 
+    public void IncreaseStats(Stats stats)
+    {
+        this.Stats += stats;
+    }
+
+    public void DecreaseStats(Stats stats)
+    {
+        this.Stats -= stats;
+    }
+
+
     public void SetActiveTurn(bool isActive)
     {
-        if(!visual) return;
+        if (!visual) return;
 
         if (isActive)
         {

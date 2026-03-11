@@ -19,7 +19,7 @@ public class StunProcessor : BaseStatProcessor, IPostAttack, IProcEffect
         {
             if (stun == null)
             {
-                stun = new StunEffect();
+                stun = new();
                 target.ActiveEffects.Add(stun);
             }
         }

@@ -9,7 +9,7 @@ public struct Stats
     public float lifeSteal;
     public float fortune;
     public float magicDamage;
-    public float poisonous;
+    public float poisonous; 
     public float stunChance;
 
     public static Stats operator +(Stats a, Stats b)
@@ -79,5 +79,4 @@ public struct Stats
             stunChance = a.stunChance / divisor
         };
     }
-
 }
