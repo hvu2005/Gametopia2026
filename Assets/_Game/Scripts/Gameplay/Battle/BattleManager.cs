@@ -75,7 +75,7 @@ public class BattleManager : EventEmitter
         attacker.OnUpdateStat();
         target.OnUpdateStat();
 
-        
+
     }
 
     public void CheckEnemies(List<BaseEnemy> enemiesInBattle)
@@ -84,5 +84,14 @@ public class BattleManager : EventEmitter
         {
             this.Emit<string>(BattleEventType.Win, "Player wins!");
         }
+    }
+
+    /// <summary>
+    /// Gọi sau khi kết thúc toàn bộ combat để hồi giáp về đầy cho player và tất cả enemy còn sống.
+    /// </summary>
+    public void RestoreAllDefense(BaseEntity player, List<BaseEnemy> enemiesInBattle)
+    {
+        player.RestoreDefense();
+        Debug.Log("[Defense] Giáp của nhân vật đã hồi về đầy sau combat.");
     }
 }
