@@ -11,22 +11,34 @@ using UnityEngine;
 [Serializable]
 public class ItemManager : EventEmitter
 {
-    public List<Item> items;
-    public List<RectTransform> itemSlots;   
+    public List<ItemDataSO> itemDataList;
+    public List<InventorySlot> itemSlots;   
+    public Item itemPrefab;
 
-    public Item SpawnItem(Item item)
+    public Item SpawnItem(ItemDataSO itemData, Transform parent)
     {
-        var spawnedItem = UnityEngine.Object.Instantiate(item);
+        var spawnedItem = UnityEngine.Object.Instantiate(itemPrefab, parent);
+        spawnedItem.Init(itemData);
+
+        foreach(var itemSlot in itemSlots)
+        {
+            if(!itemSlot.IsEmpty()) continue;
+
+            var rectItem = spawnedItem.GetComponent<RectTransform>();
+            var rectSlot = itemSlot.GetComponent<RectTransform>();
+
+            rectItem.position = rectSlot.position;
+
+            break;
+        }
 
         return spawnedItem;    
     }
-
-    public List<Item> SpawnRandomItem()
+    public List<ItemDataSO> GetRandomItemDataList(int count = 3)
     {
-        return items
+        return itemDataList
             .OrderBy(x => UnityEngine.Random.value)
-            .Take(3)
-            .Select(item => SpawnItem(item))
+            .Take(count)
             .ToList();
     }
 

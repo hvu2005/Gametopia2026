@@ -3,21 +3,23 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Item_", menuName = "Game/Item Data")]
 public class ItemDataSO : ScriptableObject
 {
-    [Header("Identity")]
-    public string ItemID;
-    public string ItemName;
-    [TextArea(2, 4)]
-    public string Description;
+    [SerializeField] private string itemId;
+    [SerializeField] private string itemName;
 
-    [Header("Visual")]
-    public Sprite Icon;
+    [SerializeField] private Sprite sprite;
 
-    [Header("Classification")]
-    public ItemType Type;
-    public RarityType Rarity;
-    public EquipmentSlotType AllowedSlot;
+    [SerializeField] private ItemType type;
+    [SerializeField] private RarityType rarity;
+    [SerializeField] private EquipmentSlotType slotType;
 
-    [Header("Stat Buffs")]
-    [Tooltip("Chỉ số sẽ cộng vào player khi equip item này")]
-    public Stats BuffStats;
+    [SerializeField] private Stats stats;
+
+    // Getters
+    public string ItemId => itemId;
+    public string ItemName => itemName;
+    public Sprite Sprite => sprite;
+    public ItemType Type => type;
+    public RarityType Rarity => rarity;
+    public EquipmentSlotType SlotType => slotType;
+    public Stats Stats => stats;
 }

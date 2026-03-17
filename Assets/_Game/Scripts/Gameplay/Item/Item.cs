@@ -4,8 +4,11 @@
 
 
 using DG.Tweening;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
+
 
 public class Item : MonoBehaviour
 {
@@ -14,9 +17,17 @@ public class Item : MonoBehaviour
 
     public Slot nextSlot;
 
+    public Image itemImage;
+
     public RectTransform rectTransform;
 
     public bool canSelect = true;
+
+    public void Init(ItemDataSO itemData)
+    {
+        itemImage.sprite = itemData.Sprite;
+        this.stats = new Stats() + itemData.Stats;
+    }
 
     void OnMouseDown()
     {

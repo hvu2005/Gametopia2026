@@ -64,6 +64,7 @@ MonoBehaviour:
     stunChance: 0
   currentSlot: {fileID: 0}
   nextSlot: {fileID: 0}
+  itemImage: {fileID: 694967286681843677}
   rectTransform: {fileID: 639462323749957445}
   canSelect: 1
 --- !u!61 &9126135944184537695
@@ -196,7 +197,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.051886797, g: 0.36925384, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

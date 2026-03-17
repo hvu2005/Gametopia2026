@@ -12,4 +12,4 @@ public class PoisonEffect : BaseEffect
         Debug.Log($"{target.name} is poisoned!");
         
     }
-}//
+}

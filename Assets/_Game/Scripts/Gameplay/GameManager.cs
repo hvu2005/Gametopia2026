@@ -7,6 +7,8 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private int currentLevel;
     [SerializeField] private LevelSO[] levels;
 
+    [SerializeField] private Canvas gameplayCanvas;
+
     [Header("Managers")]
     public PlayerManager playerManager;
     public EnemyManager enemyManager;
@@ -34,6 +36,14 @@ public class GameManager : Singleton<GameManager>
         playerManager.On<Item>(ItemEventType.Unequipe, (item) =>
         {
             playerManager.UnequipItem(item);
+        });
+
+        uiManager.On<ItemDataSO>(ItemEventType.Select, (itemData) =>
+        {
+            uiManager.CloseItemPanel();
+            itemManager.SpawnItem(itemData, this.gameplayCanvas.transform); 
+
+            _ = NextLevel();
         });
     }
 
@@ -91,13 +101,15 @@ public class GameManager : Singleton<GameManager>
 
     public void SpawnItemWhenWin()
     {
-        var spawnedItems = itemManager.SpawnRandomItem();
+        var spawnedItems = itemManager.GetRandomItemDataList();
         uiManager.ShowItemSelection(spawnedItems);
     }
 
     public void OnWinBattle(string message)
     {
-        _ = this.NextLevel();
+        // _ = this.NextLevel();
+
+        this.SpawnItemWhenWin();
     }
 
 }
