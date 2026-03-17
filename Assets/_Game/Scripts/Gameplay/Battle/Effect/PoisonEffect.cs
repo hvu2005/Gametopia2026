@@ -10,5 +10,6 @@ public class PoisonEffect : BaseEffect
     public override void ApplyEffect(BaseEntity target)
     {
         Debug.Log($"{target.name} is poisoned!");
+        
     }
 }//

@@ -81,11 +81,14 @@ public abstract class BaseEntity : MonoBehaviour, ICombatant
     public void IncreaseStats(Stats stats)
     {
         this.Stats += stats;
+        this.OnUpdateStat();
     }
 
     public void DecreaseStats(Stats stats)
     {
         this.Stats -= stats;
+        this.OnUpdateStat();
+
     }
 
 

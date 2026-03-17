@@ -39,7 +39,7 @@ public class PlayerStatManager : MonoBehaviour
 
         FinalStats = baseStats + totalBonus;
 
-        EventBus.Emit(ItemEventType.OnStatsChanged, FinalStats);
+        // EventBus.Emit(ItemEventType.OnStatsChanged, FinalStats);
     }
 
     public Stats GetTotalBonus()

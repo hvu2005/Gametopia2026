@@ -12,6 +12,8 @@ public class GameManager : Singleton<GameManager>
     public EnemyManager enemyManager;
     public BattleManager battleManager;
     public MapManager mapManager;
+    public ItemManager itemManager;
+    public UIManager uiManager;
 
     void Start()
     {
@@ -23,6 +25,16 @@ public class GameManager : Singleton<GameManager>
     public void RegistEvents()
     {
         battleManager.On<string>(BattleEventType.Win, OnWinBattle);
+
+        playerManager.On<Item>(ItemEventType.Equipe, (item) =>
+        {
+            playerManager.EquipItem(item);
+        });
+
+        playerManager.On<Item>(ItemEventType.Unequipe, (item) =>
+        {
+            playerManager.UnequipItem(item);
+        });
     }
 
     public void LoadLevel(int levelIndex)
@@ -34,7 +46,7 @@ public class GameManager : Singleton<GameManager>
         }
 
         var levelData = levels[levelIndex];
-        
+
         mapManager.LoadLevelData(levelData);
         enemyManager.LoadLevelData(levelData);
     }
@@ -51,7 +63,7 @@ public class GameManager : Singleton<GameManager>
 
 
         _ = mapManager.ShowLeftTransition();
-        await Task.Delay(500); 
+        await Task.Delay(500);
 
         LoadLevel(currentLevel);
     }
@@ -75,6 +87,12 @@ public class GameManager : Singleton<GameManager>
             enemy,
             enemyManager.GetAliveEnemies()
         );
+    }
+
+    public void SpawnItemWhenWin()
+    {
+        var spawnedItems = itemManager.SpawnRandomItem();
+        uiManager.ShowItemSelection(spawnedItems);
     }
 
     public void OnWinBattle(string message)

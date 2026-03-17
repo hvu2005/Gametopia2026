@@ -2,19 +2,46 @@
 
 
 
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 
-public class ItemManager
+
+[Serializable]
+public class ItemManager : EventEmitter
 {
     public List<Item> items;
+    public List<RectTransform> itemSlots;   
 
-    public void EquipItem(Item item, BaseEntity player)
+    public Item SpawnItem(Item item)
     {
-        player.Stats += item.stats;
+        var spawnedItem = UnityEngine.Object.Instantiate(item);
+
+        return spawnedItem;    
     }
 
-    public void UnequipItem(Item item, BaseEntity player)
+    public List<Item> SpawnRandomItem()
     {
-        player.Stats -= item.stats;
+        return items
+            .OrderBy(x => UnityEngine.Random.value)
+            .Take(3)
+            .Select(item => SpawnItem(item))
+            .ToList();
+    }
+
+    public void OnUpgradeRarity(Item item1, Item item2)
+    {
+        
+    }
+
+    public void OnMergeItems(Item item1, Item item2)
+    {
+        
+    }
+
+    public void OnMoveItemToSlot(Item item, int slotIndex)
+    {
+        
     }
 }

@@ -2,7 +2,7 @@
 
 
 [System.Serializable]
-public class PlayerManager
+public class PlayerManager : EventEmitter
 {
     public Player player;
 
@@ -14,5 +14,15 @@ public class PlayerManager
     public void DecreasePlayerStats(Stats stats)
     {
         player.DecreaseStats(stats);
+    }
+
+    public void EquipItem(Item item)
+    {
+        IncreasePlayerStats(item.stats);
+    }
+
+    public void UnequipItem(Item item)
+    {
+        DecreasePlayerStats(item.stats);
     }
 }

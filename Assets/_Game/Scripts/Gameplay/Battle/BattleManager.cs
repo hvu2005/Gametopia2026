@@ -82,6 +82,7 @@ public class BattleManager : EventEmitter
     {
         if (enemiesInBattle.TrueForAll(e => e.IsDead))
         {
+            Debug.Log("All enemies defeated! Player wins!");
             this.Emit<string>(BattleEventType.Win, "Player wins!");
         }
     }
