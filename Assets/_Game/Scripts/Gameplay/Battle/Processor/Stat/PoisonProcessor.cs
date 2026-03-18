@@ -1,4 +1,5 @@
 
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PoisonProcessor : BaseStatProcessor, IPostAttack
@@ -8,7 +9,7 @@ public class PoisonProcessor : BaseStatProcessor, IPostAttack
 
     }
 
-    public void ProcessPostAttack(BaseEntity source, BaseEntity target)
+    public void ProcessPostAttack(BaseEntity source, BaseEntity target, List<BaseEntity> allAliveEnemies = null)
     {
         // Không cần xử lý gì trong giai đoạn này
         var poison = target.GetEffect<PoisonEffect>();

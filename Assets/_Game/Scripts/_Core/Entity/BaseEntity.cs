@@ -25,7 +25,7 @@ public abstract class BaseEntity : MonoBehaviour, ICombatant
     public float currentHp;
     public float lastDamageDealt;
     /// <summary>Giáp hiện tại (có thể bị bào mòn theo từng đòn đánh). Reset về Stats.def sau mỗi combat.</summary>
-    public float currentDef;
+    public float armor;
 
     public bool luckyDropBonus;
 
@@ -40,7 +40,7 @@ public abstract class BaseEntity : MonoBehaviour, ICombatant
     {
         this.originalColor = new Color(visual.color.r, visual.color.g, visual.color.b, visual.color.a);
         this.currentHp = Stats.hp;
-        this.currentDef = Stats.def;
+        this.armor = Stats.armor;
     }
 
     public virtual void OnUpdateStat()
@@ -75,7 +75,7 @@ public abstract class BaseEntity : MonoBehaviour, ICombatant
     /// <summary>Hồi giáp về đầy (gọi sau khi kết thúc mỗi combat).</summary>
     public virtual void RestoreDefense()
     {
-        currentDef = Stats.def;
+        armor = Stats.armor;
     }
 
     // Các hành động trong Combat

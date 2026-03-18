@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -7,7 +8,7 @@ public class StunProcessor : BaseStatProcessor, IPostAttack, IProcEffect
     {
 
     }
-    public void ProcessPostAttack(BaseEntity source, BaseEntity target)
+    public void ProcessPostAttack(BaseEntity source, BaseEntity target, List<BaseEntity> allAliveEnemies = null)
     {
         this.TryApplyEffect(source, target);
     }

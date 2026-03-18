@@ -28,7 +28,7 @@ public class StatProcessSystem
         // 7. Hút máu (flat, dùng Stats.lifeSteal)
         statProcessors.Add(new LifeStealEffect());
         // 8. Hút máu % sát thương (dùng Stats.suckBlood)
-        statProcessors.Add(new SuckBloodProcessor());
+        // statProcessors.Add(new SuckBloodProcessor());
         // 9. Độc
         statProcessors.Add(new PoisonProcessor());
         // 10. Phản đòn: target phản % sát thương nhận vào

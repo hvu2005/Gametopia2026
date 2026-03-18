@@ -18,10 +18,11 @@ MonoBehaviour:
   type: 1
   rarity: 0
   slotType: 0
+  itemClass: 0000000000000000
   stats:
     hp: 0
     physicalDamage: 3
-    def: 0
+    armor: 0
     criticalChance: 0
     criticalDamage: 0
     lifeSteal: 0

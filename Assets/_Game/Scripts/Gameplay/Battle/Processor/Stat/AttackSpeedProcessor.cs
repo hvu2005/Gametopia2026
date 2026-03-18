@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -7,7 +8,7 @@ using UnityEngine;
 /// </summary>
 public class AttackSpeedProcessor : BaseStatProcessor, IPostAttack
 {
-    public void ProcessPostAttack(BaseEntity source, BaseEntity target)
+    public void ProcessPostAttack(BaseEntity source, BaseEntity target, List<BaseEntity> allAliveEnemies = null)
     {
         if (source.Stats.speed <= 0) return;
         if (target.IsDead) return;

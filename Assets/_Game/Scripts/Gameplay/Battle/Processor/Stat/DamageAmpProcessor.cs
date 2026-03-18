@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -9,7 +10,7 @@ public class DamageAmpProcessor : BaseStatProcessor, IPreAttack, IPostAttack
 {
     private float originalPhysicalDamage;
 
-    public void ProcessPreAttack(BaseEntity source, BaseEntity target)
+    public void ProcessPreAttack(BaseEntity source, BaseEntity target, List<BaseEntity> allAliveEnemies = null)
     {
         if (source.Stats.increaseDamage > 0)
         {
@@ -19,7 +20,7 @@ public class DamageAmpProcessor : BaseStatProcessor, IPreAttack, IPostAttack
         }
     }
 
-    public void ProcessPostAttack(BaseEntity source, BaseEntity target)
+    public void ProcessPostAttack(BaseEntity source, BaseEntity target, List<BaseEntity> allAliveEnemies = null)
     {
         if (originalPhysicalDamage != 0)
         {

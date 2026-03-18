@@ -20,8 +20,6 @@ public struct Stats
     public float dodgeChance;
     public float speed;
 
-    public float suckBlood;
-
     public static Stats operator +(Stats a, Stats b)
     {
         return new Stats
@@ -41,7 +39,6 @@ public struct Stats
             increaseDamage = a.increaseDamage + b.increaseDamage,
             counterAttackChance = a.counterAttackChance + b.counterAttackChance,
             dodgeChance = a.dodgeChance + b.dodgeChance,
-            suckBlood = a.suckBlood + b.suckBlood
         };
     }
 
@@ -64,7 +61,6 @@ public struct Stats
             increaseDamage = a.increaseDamage - b.increaseDamage,
             counterAttackChance = a.counterAttackChance - b.counterAttackChance,
             dodgeChance = a.dodgeChance - b.dodgeChance,
-            suckBlood = a.suckBlood - b.suckBlood
         };
     }
 
@@ -87,7 +83,6 @@ public struct Stats
             increaseDamage = a.increaseDamage * multiplier,
             counterAttackChance = a.counterAttackChance * multiplier,
             dodgeChance = a.dodgeChance * multiplier,
-            suckBlood = a.suckBlood * multiplier
         };
     }
 
@@ -110,7 +105,6 @@ public struct Stats
             increaseDamage = a.increaseDamage / divisor,
             counterAttackChance = a.counterAttackChance / divisor,
             dodgeChance = a.dodgeChance / divisor,
-            suckBlood = a.suckBlood / divisor
 
         };
     }

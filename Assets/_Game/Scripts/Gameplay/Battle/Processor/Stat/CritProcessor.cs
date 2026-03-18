@@ -1,10 +1,11 @@
 
+using System.Collections.Generic;
 using UnityEngine;
 
 public class CritProcessor : BaseStatProcessor, IPreAttack, IPostAttack
 {
     public float originalPhysicalDamage;
-    public void ProcessPreAttack(BaseEntity source, BaseEntity target)
+    public void ProcessPreAttack(BaseEntity source, BaseEntity target, List<BaseEntity> allAliveEnemies = null)
     {
         if (source.Stats.criticalChance > 0)
         {
@@ -18,7 +19,7 @@ public class CritProcessor : BaseStatProcessor, IPreAttack, IPostAttack
         }
     }
 
-    public void ProcessPostAttack(BaseEntity source, BaseEntity target)
+    public void ProcessPostAttack(BaseEntity source, BaseEntity target, List<BaseEntity> allAliveEnemies = null)
     {
         if (originalPhysicalDamage != 0)
         {

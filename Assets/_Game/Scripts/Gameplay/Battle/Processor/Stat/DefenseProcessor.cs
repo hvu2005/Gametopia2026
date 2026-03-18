@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -12,32 +13,32 @@ public class DefenseProcessor : BaseStatProcessor, IPreAttack, IPostAttack
 {
     private float originalPhysicalDamage;
 
-    public void ProcessPreAttack(BaseEntity source, BaseEntity target)
+    public void ProcessPreAttack(BaseEntity source, BaseEntity target, List<BaseEntity> allAliveEnemies = null)
     {
         // Không có giáp → bỏ qua
-        if (target.currentDef <= 0) return;
+        if (target.armor <= 0) return;
 
         originalPhysicalDamage = source.Stats.physicalDamage;
         float damage = source.Stats.physicalDamage;
 
-        if (damage <= target.currentDef)
+        if (damage <= target.armor)
         {
             // Giáp hấp thụ toàn bộ, HP không bị trừ
-            target.currentDef -= damage;
+            target.armor -= damage;
             source.Stats.physicalDamage = 0;
-            Debug.Log($"[Defense] {target.name} giáp hấp thụ {damage} sát thương → còn {target.currentDef} giáp");
+            Debug.Log($"[Defense] {target.name} giáp hấp thụ {damage} sát thương → còn {target.armor} giáp");
         }
         else
         {
             // Giáp bị bào mòn hết, phần dư vào HP
-            float overflow = damage - target.currentDef;
+            float overflow = damage - target.armor;
             Debug.Log($"[Defense] {target.name} giáp bị phá! Còn lại {overflow} sát thương xuyên vào HP");
-            target.currentDef = 0;
+            target.armor = 0;
             source.Stats.physicalDamage = overflow;
         }
     }
 
-    public void ProcessPostAttack(BaseEntity source, BaseEntity target)
+    public void ProcessPostAttack(BaseEntity source, BaseEntity target, List<BaseEntity> allAliveEnemies = null)
     {
         if (originalPhysicalDamage != 0)
         {
