@@ -11,8 +11,16 @@ public struct Stats
     public float lifeSteal;
     public float fortune;
     public float magicDamage;
-    public float poisonous; 
+    public float poisonous;
     public float stunChance;
+    public float lucky;
+    public float increaseDamage;
+
+    public float counterAttackChance;
+    public float dodgeChance;
+    public float speed;
+
+    public float suckBlood;
 
     public static Stats operator +(Stats a, Stats b)
     {
@@ -27,7 +35,13 @@ public struct Stats
             fortune = a.fortune + b.fortune,
             magicDamage = a.magicDamage + b.magicDamage,
             poisonous = a.poisonous + b.poisonous,
-            stunChance = a.stunChance + b.stunChance
+            stunChance = a.stunChance + b.stunChance,
+            lucky = a.lucky + b.lucky,
+            speed = a.speed + b.speed,
+            increaseDamage = a.increaseDamage + b.increaseDamage,
+            counterAttackChance = a.counterAttackChance + b.counterAttackChance,
+            dodgeChance = a.dodgeChance + b.dodgeChance,
+            suckBlood = a.suckBlood + b.suckBlood
         };
     }
 
@@ -44,7 +58,13 @@ public struct Stats
             fortune = a.fortune - b.fortune,
             magicDamage = a.magicDamage - b.magicDamage,
             poisonous = a.poisonous - b.poisonous,
-            stunChance = a.stunChance - b.stunChance
+            stunChance = a.stunChance - b.stunChance,
+            lucky = a.lucky - b.lucky,
+            speed = a.speed - b.speed,
+            increaseDamage = a.increaseDamage - b.increaseDamage,
+            counterAttackChance = a.counterAttackChance - b.counterAttackChance,
+            dodgeChance = a.dodgeChance - b.dodgeChance,
+            suckBlood = a.suckBlood - b.suckBlood
         };
     }
 
@@ -61,7 +81,13 @@ public struct Stats
             fortune = a.fortune * multiplier,
             magicDamage = a.magicDamage * multiplier,
             poisonous = a.poisonous * multiplier,
-            stunChance = a.stunChance * multiplier
+            stunChance = a.stunChance * multiplier,
+            lucky = a.lucky * multiplier,
+            speed = a.speed * multiplier,
+            increaseDamage = a.increaseDamage * multiplier,
+            counterAttackChance = a.counterAttackChance * multiplier,
+            dodgeChance = a.dodgeChance * multiplier,
+            suckBlood = a.suckBlood * multiplier
         };
     }
 
@@ -78,7 +104,14 @@ public struct Stats
             fortune = a.fortune / divisor,
             magicDamage = a.magicDamage / divisor,
             poisonous = a.poisonous / divisor,
-            stunChance = a.stunChance / divisor
+            stunChance = a.stunChance / divisor,
+            lucky = a.lucky / divisor,
+            speed = a.speed / divisor,
+            increaseDamage = a.increaseDamage / divisor,
+            counterAttackChance = a.counterAttackChance / divisor,
+            dodgeChance = a.dodgeChance / divisor,
+            suckBlood = a.suckBlood / divisor
+
         };
     }
 }

@@ -10,5 +10,6 @@ public class PhysicalDamageProcessor : BaseStatProcessor, IOnAttack
         Debug.Log("Processing Physical Damage" + source.Stats.physicalDamage);
         var damage = source.Stats.physicalDamage;
         target.currentHp -= damage;
+        source.lastDamageDealt = damage; // ghi lại để SuckBlood, CounterAttack dùng
     }
 }
