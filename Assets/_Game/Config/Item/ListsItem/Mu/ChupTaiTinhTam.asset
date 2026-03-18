@@ -10,22 +10,30 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 345aba2d7927d4141ab04703e773eceb, type: 3}
-  m_Name: NamChamDoatTai
+  m_Name: ChupTaiTinhTam
   m_EditorClassIdentifier: 
-  itemId: 0
-  itemName: "Nam Ch\xE2m \u0110o\u1EA1t T\xE0i"
-  sprite: {fileID: 21300000, guid: f185abc3821a40140a729c759bbd668f, type: 3}
-  type: 1
+  itemId: 5
+  itemName: "Ch\u1EE5p Tai T\u0129nh T\xE2m"
+  sprite: {fileID: 21300000, guid: 4385a3a75b15c204aba15d5dcf02c012, type: 3}
+  type: 6
   rarity: 0
-  slotType: 0
+  slotType: 2
+  itemClass: 0200000007000000
   stats:
     hp: 0
-    physicalDamage: 3
-    def: 0
-    criticalChance: 0
+    physicalDamage: 0
+    armor: 2
+    criticalChance: 3
     criticalDamage: 0
     lifeSteal: 0
     fortune: 0
     magicDamage: 0
     poisonous: 0
     stunChance: 0
+    lucky: 0
+    increaseDamage: 0
+    counterAttackChance: 0
+    dodgeChance: 0
+    speed: 0
+    rage: 0
+    regeneration: 0

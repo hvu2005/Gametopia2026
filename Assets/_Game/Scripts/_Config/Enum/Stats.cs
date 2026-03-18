@@ -19,6 +19,10 @@ public struct Stats
     public float counterAttackChance;
     public float dodgeChance;
     public float speed;
+    public float rage;
+    public float regeneration;
+    
+    
 
     public static Stats operator +(Stats a, Stats b)
     {
@@ -39,6 +43,8 @@ public struct Stats
             increaseDamage = a.increaseDamage + b.increaseDamage,
             counterAttackChance = a.counterAttackChance + b.counterAttackChance,
             dodgeChance = a.dodgeChance + b.dodgeChance,
+            rage = a.rage + b.rage,
+            regeneration = a.rage + b.regeneration,
         };
     }
 
@@ -61,6 +67,8 @@ public struct Stats
             increaseDamage = a.increaseDamage - b.increaseDamage,
             counterAttackChance = a.counterAttackChance - b.counterAttackChance,
             dodgeChance = a.dodgeChance - b.dodgeChance,
+            rage = a.rage - b.rage,
+            regeneration = a.rage - b.regeneration,
         };
     }
 
@@ -83,6 +91,8 @@ public struct Stats
             increaseDamage = a.increaseDamage * multiplier,
             counterAttackChance = a.counterAttackChance * multiplier,
             dodgeChance = a.dodgeChance * multiplier,
+            rage = a.rage * multiplier,
+            regeneration = a.regeneration * multiplier,
         };
     }
 
@@ -105,6 +115,8 @@ public struct Stats
             increaseDamage = a.increaseDamage / divisor,
             counterAttackChance = a.counterAttackChance / divisor,
             dodgeChance = a.dodgeChance / divisor,
+            rage = a.rage / divisor,
+            regeneration = a.regeneration / divisor,
 
         };
     }

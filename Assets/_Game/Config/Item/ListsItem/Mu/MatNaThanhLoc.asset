@@ -10,18 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 345aba2d7927d4141ab04703e773eceb, type: 3}
-  m_Name: BoDamCoiAm
+  m_Name: MatNaThanhLoc
   m_EditorClassIdentifier: 
-  itemId: 0
-  itemName: "B\u1ED9 \u0110\xE0m C\xF5i \xC2m"
-  sprite: {fileID: 21300000, guid: 58e429761477ed24cbd776ac830c9fd4, type: 3}
-  type: 1
+  itemId: 4
+  itemName: "M\u1EB7t N\u1EA1 Thanh L\u1ECDc"
+  sprite: {fileID: 21300000, guid: 1a2cb789c9304904cbdedd8af416011f, type: 3}
+  type: 6
   rarity: 0
-  slotType: 0
+  slotType: 2
+  itemClass: 0200000006000000
   stats:
     hp: 0
-    physicalDamage: 3
-    def: 0
+    physicalDamage: 0
+    armor: 1
     criticalChance: 0
     criticalDamage: 0
     lifeSteal: 0
@@ -29,3 +30,10 @@ MonoBehaviour:
     magicDamage: 0
     poisonous: 0
     stunChance: 0
+    lucky: 0
+    increaseDamage: 2
+    counterAttackChance: 0
+    dodgeChance: 0
+    speed: 0
+    rage: 0
+    regeneration: 0
