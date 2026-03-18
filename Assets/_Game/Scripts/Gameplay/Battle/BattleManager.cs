@@ -70,6 +70,8 @@ public class BattleManager : EventEmitter
 
         _statProcessSystem.ProcessPostAttack(attacker, target);
 
+        _statProcessSystem.ProcessBeAttacked(attacker, target);
+
         attacker.IsAttacked = true;
 
         attacker.OnUpdateStat();
