@@ -1,6 +1,7 @@
 
 
 
+using System;
 using System.Text;
 using DG.Tweening;
 using TMPro;
@@ -49,6 +50,11 @@ public class ItemPanelUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         }
 
         return desc.ToString();
+    }
+
+    public void OnDisable()
+    {
+        this.rect.localPosition = originalPos;
     }
 
     public void OnPointerEnter(PointerEventData eventData)

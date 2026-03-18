@@ -27,6 +27,9 @@ public class ItemManager : EventEmitter
             var rectItem = spawnedItem.GetComponent<RectTransform>();
             var rectSlot = itemSlot.GetComponent<RectTransform>();
 
+            itemSlot.currentItem = spawnedItem;
+            spawnedItem.currentSlot = itemSlot;
+
             rectItem.position = rectSlot.position;
 
             break;

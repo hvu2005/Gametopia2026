@@ -7,7 +7,7 @@ using UnityEngine;
 [System.Serializable]
 public class EnemyManager
 {
-    [SerializeField] private Transform enemyContainer;
+    [SerializeField] private List<Transform> rectSlotList;
     public List<BaseEnemy> enemiesInBattle = new();
     public BaseEnemy CreateEnemy(BaseEnemy enemyPrefab, Transform parent)
     {
@@ -23,9 +23,11 @@ public class EnemyManager
     public void LoadLevelData(LevelSO level)
     {
         enemiesInBattle.Clear();
-        foreach (var enemyPrefab in level.enemies)
+        for (int i = 0; i < level.enemies.Length; i++)
         {
-            var newEnemy = CreateEnemy(enemyPrefab, enemyContainer);
+            var enemyPrefab = level.enemies[i];
+
+            var newEnemy = CreateEnemy(enemyPrefab, rectSlotList[i]);
             enemiesInBattle.Add(newEnemy);
         }
     }

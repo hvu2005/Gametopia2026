@@ -1,44 +1,48 @@
-
-
-
-
-
 using DG.Tweening;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 
 public class Item : MonoBehaviour
 {
+    public string itemName;
     public Stats stats;
     public Slot currentSlot;
 
     public Slot nextSlot;
 
+    public Item mergeItem;
+
     public Image itemImage;
 
     public RectTransform rectTransform;
+
+    public RectTransform starsParent;
+    public GameObject star;
+    public int rank = 1;
 
     public bool canSelect = true;
 
     public void Init(ItemDataSO itemData)
     {
+        itemName = itemData.ItemName;
         itemImage.sprite = itemData.Sprite;
         this.stats = new Stats() + itemData.Stats;
     }
 
     void OnMouseDown()
     {
-
+        rectTransform.SetAsLastSibling();
     }
 
     void OnMouseDrag()
     {
         if (!canSelect) return;
 
-        Vector3 mousePosition = Input.mousePosition;
+        var mousePosition = Input.mousePosition;
         mousePosition.z = 10f;
         transform.position = Camera.main.ScreenToWorldPoint(mousePosition);
     }
@@ -47,21 +51,37 @@ public class Item : MonoBehaviour
     {
         canSelect = false;
 
-        rectTransform.DOMove(
-            nextSlot.GetComponent<RectTransform>().position,
-            0.2f
-        )
-        .SetEase(Ease.OutBack)
-        .OnComplete(() =>
+        if (mergeItem != null)
         {
-            canSelect = true;
-            if (currentSlot != null)
+            mergeItem.OnUpgradeRank(this);
+            Destroy(this.gameObject);
+        }
+
+        var slotToMove = nextSlot ?? currentSlot;
+        rectTransform.DOMove(
+                slotToMove.GetComponent<RectTransform>().position,
+                0.2f
+            )
+            .SetEase(Ease.OutBack)
+            .OnComplete(() =>
             {
-                currentSlot.RemoveItem();
-            }
-            currentSlot = nextSlot;
-            currentSlot.PlaceItem(this);
-        });
+                canSelect = true;
+
+                if (!nextSlot) return;
+                if (currentSlot != null)
+                {
+                    currentSlot.RemoveItem();
+                }
+
+                if (nextSlot != null)
+                    currentSlot = nextSlot;
+                currentSlot.PlaceItem(this);
+            });
+    }
+
+    public void OnUpgradeRank(Item item)
+    {
+        UnityEngine.Object.Instantiate(star, starsParent);
     }
 
 
@@ -70,10 +90,37 @@ public class Item : MonoBehaviour
         if (other.CompareTag("Slot"))
         {
             Slot slot = other.GetComponent<Slot>();
-            if (slot != null && slot.IsEmpty())
+            if (slot != null)
             {
-                nextSlot = slot;
+                if (slot.IsEmpty())
+                {
+                    nextSlot = slot;
+                }
+                else
+                {
+                    if (slot.currentItem.itemName.Equals(itemName) &&
+                        rank == slot.currentItem.rank &&
+                        slot.currentItem != this && rank < 3
+                       )
+                    {
+                        mergeItem = slot.currentItem;
+                    }
+                }
             }
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Slot"))
+        {
+            Slot slot = other.GetComponent<Slot>();
+            if (slot.currentItem == mergeItem)
+            {
+                mergeItem = null;
+            }
+
+            nextSlot = null;
         }
     }
 }

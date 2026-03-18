@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Item_", menuName = "Game/Item Data")]
@@ -11,7 +12,7 @@ public class ItemDataSO : ScriptableObject
     [SerializeField] private ItemType type;
     [SerializeField] private RarityType rarity;
     [SerializeField] private EquipmentSlotType slotType;
-
+    [SerializeField] private List<ItemClass> itemClass;
     [SerializeField] private Stats stats;
 
     // Getters
@@ -21,5 +22,7 @@ public class ItemDataSO : ScriptableObject
     public ItemType Type => type;
     public RarityType Rarity => rarity;
     public EquipmentSlotType SlotType => slotType;
+    public List<ItemClass> ItemClass => itemClass;
     public Stats Stats => stats;
+
 }
