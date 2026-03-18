@@ -9,7 +9,8 @@ using UnityEngine.EventSystems;
 
 public class BaseEnemy : BaseEntity
 {
-    private bool canSelect = true;
+    public bool canSelect = true;
+    public bool isHoving = false;
 
     private Vector3 originScale;
 
@@ -48,12 +49,21 @@ public class BaseEnemy : BaseEntity
         if(!canSelect) return;
 
         this.visual.transform.DOScale(this.originScale*1.2f, 0.2f);
+        this.isHoving = true;
+    }
+
+    public void OnMouseOver()
+    {
+        if(canSelect && !isHoving) return;
+
+        this.visual.transform.DOScale(this.originScale*1.2f, 0.2f);
+        this.isHoving = true;
     }
 
     public void OnMouseExit()
     {
-        
         this.visual.transform.DOScale(this.originScale, 0.2f);
-
+        this.isHoving = false;
     }
+
 }

@@ -21,6 +21,20 @@ public class BattleManager : EventEmitter
     {
         var originPos = player.transform.localPosition;
 
+        for (int i = 0; i < enemiesInBattle.Count; i++)
+        {
+            var enemy = enemiesInBattle[i];
+
+            if (enemy.IsDead)
+            {
+                Debug.Log($"{enemy.name} is dead and cannot take a turn.");
+                continue;
+            }
+
+            enemy.isHoving = false;
+            enemy.canSelect = false;
+        }
+
         // tiến lên
         await player.transform
             .DOLocalMoveX(originPos.x + 0.75f, 0.25f)
@@ -34,16 +48,20 @@ public class BattleManager : EventEmitter
             .DOLocalMoveX(originPos.x, 0.25f)
             .AsyncWaitForCompletion();
 
-        // ===== Enemy turn =====
+        int total = 0;
+        int completed = 0;
+
+        // đếm enemy sống
+        foreach (var e in enemiesInBattle)
+        {
+            if (!e.IsDead) total++;
+        }
+
         for (int i = 0; i < enemiesInBattle.Count; i++)
         {
             var enemy = enemiesInBattle[i];
 
-            if (enemy.IsDead)
-            {
-                Debug.Log($"{enemy.name} is dead and cannot take a turn.");
-                continue;
-            }
+            if (enemy.IsDead) continue;
 
             float delay = i * 0.15f;
 
@@ -54,12 +72,33 @@ public class BattleManager : EventEmitter
                 Sequence seq = DOTween.Sequence();
 
                 seq.Append(enemy.transform.DOLocalMoveX(originPosEnemy.x - 0.75f, 0.25f));
+
                 seq.AppendCallback(() => _ = ExecuteEnemyTurn(enemy, player));
+
                 seq.Append(enemy.transform.DOLocalMoveX(originPosEnemy.x, 0.25f));
+
+                // 👉 Khi enemy này xong
+                seq.OnComplete(() =>
+                {
+                    completed++;
+
+                    if (completed >= total)
+                    {
+                        // tất cả enemy xong
+                        foreach (var e in enemiesInBattle)
+                        {
+                            if (!e.IsDead)
+                                e.canSelect = true;
+                        }
+
+                        CheckEnemies(enemiesInBattle);
+                    }
+                });
             });
         }
 
         CheckEnemies(enemiesInBattle);
+
     }
 
     public async Task ExecuteEnemyTurn(BaseEntity attacker, BaseEntity target)
@@ -106,7 +145,7 @@ public class BattleManager : EventEmitter
         attacker.OnUpdateStat();
         target.OnUpdateStat();
 
-
+        CameraShake.Instance.Shake(0.1f, 0.05f, 20);
     }
 
     public void CheckEnemies(List<BaseEnemy> enemiesInBattle)

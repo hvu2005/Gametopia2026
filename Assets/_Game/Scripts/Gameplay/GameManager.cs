@@ -83,17 +83,17 @@ public class GameManager : Singleton<GameManager>
         LoadLevel(currentLevel);
     }
 
-    public void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            var aliveEnemies = enemyManager.GetAliveEnemies();
-            if (aliveEnemies.Count > 0)
-            {
-                StartBattle(aliveEnemies[0]);
-            }
-        }
-    }
+    // public void Update()
+    // {
+    //     if (Input.GetKeyDown(KeyCode.Space))
+    //     {
+    //         var aliveEnemies = enemyManager.GetAliveEnemies();
+    //         if (aliveEnemies.Count > 0)
+    //         {
+    //             StartBattle(aliveEnemies[0]);
+    //         }
+    //     }
+    // }
 
     public void StartBattle(BaseEnemy enemy)
     {
