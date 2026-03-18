@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 345aba2d7927d4141ab04703e773eceb, type: 3}
+  m_Name: "Gi\xE0y Thi\xEAn Th\u1EA1ch"
+  m_EditorClassIdentifier: 
+  itemId: 19
+  itemName: "Gi\xE0y Thi\xEAn Th\u1EA1ch"
+  sprite: {fileID: 21300000, guid: d427240060b310848a1522a75a2a94d7, type: 3}
+  type: 8
+  rarity: 2
+  slotType: 4
+  itemClass: 0200000007000000
+  stats:
+    hp: 0
+    physicalDamage: 0
+    armor: 6
+    criticalChance: 8
+    criticalDamage: 0
+    lifeSteal: 0
+    fortune: 0
+    magicDamage: 0
+    poisonous: 0
+    stunChance: 0
+    lucky: 0
+    increaseDamage: 0
+    counterAttackChance: 0
+    dodgeChance: 3
+    speed: 0
+    rage: 0
+    regeneration: 0

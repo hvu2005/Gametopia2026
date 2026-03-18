@@ -1,8 +1,9 @@
 public enum EquipmentSlotType
 {
     Weapon,
-    Head,
-    Chest,
-    Legs,
-    Accessory
+    Accessory,
+    Helmet,
+    Armor,
+    Boots, 
+    
 }
