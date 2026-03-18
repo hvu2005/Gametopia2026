@@ -20,6 +20,7 @@ public class GameManager : Singleton<GameManager>
     void Start()
     {
         LoadLevel(currentLevel);
+        uiManager.SetUIStats(playerManager.player.Stats);
 
         this.RegistEvents();
     }
@@ -50,6 +51,8 @@ public class GameManager : Singleton<GameManager>
         {
            StartBattle(enemy); 
         });
+
+        uiManager.On<Stats>(PlayerEventType.UpdateStats, uiManager.SetUIStats);
     }
 
     public void LoadLevel(int levelIndex)

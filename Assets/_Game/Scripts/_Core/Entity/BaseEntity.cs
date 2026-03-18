@@ -35,11 +35,16 @@ public abstract class BaseEntity : MonoBehaviour, ICombatant
 
     public List<BaseEffect> ActiveEffects = new();
 
-    public void Awake()
+    public virtual void Awake()
     {
         this.originalColor = new Color(visual.color.r, visual.color.g, visual.color.b, visual.color.a);
         this.currentHp = Stats.hp;
         this.currentArmor = Stats.armor;
+    }
+
+    public virtual void Start()
+    {
+        this.OnUpdateStat();
     }
 
     public virtual void OnUpdateStat()

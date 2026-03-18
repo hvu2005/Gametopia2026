@@ -12,14 +12,14 @@ public class LuckyProcessor : BaseStatProcessor, IPostAttack
 {
     public void ProcessPostAttack(BaseEntity source, BaseEntity target, List<BaseEntity> allAliveEnemies = null)
     {
-        if (source.Stats.lucky <= 0) return;
+        if (source.Stats.luck <= 0) return;
         if (!target.IsDead) return;
 
         float luckyRoll = Random.Range(0f, 1f) * 100f;
-        if (luckyRoll <= source.Stats.lucky)
+        if (luckyRoll <= source.Stats.luck)
         {
             target.luckyDropBonus = true;
-            Debug.Log($"[Lucky] {source.name} kích hoạt may mắn! (roll {luckyRoll:F1} ≤ {source.Stats.lucky}) → loot của {target.name} sẽ có bậc cao hơn");
+            Debug.Log($"[Lucky] {source.name} kích hoạt may mắn! (roll {luckyRoll:F1} ≤ {source.Stats.luck}) → loot của {target.name} sẽ có bậc cao hơn");
         }
     }
 }

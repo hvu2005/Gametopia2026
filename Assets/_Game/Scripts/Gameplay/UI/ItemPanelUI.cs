@@ -14,6 +14,8 @@ public class ItemPanelUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 {
     public TextMeshProUGUI itemName;
     public TextMeshProUGUI description;
+    public TextMeshProUGUI descriptionValue;
+
     public Image itemImage;
     public Image halo;
     public RectTransform rect;
@@ -39,7 +41,7 @@ public class ItemPanelUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         currentItemData = itemData;
         itemName.text = itemData.ItemName;
         itemImage.sprite = itemData.Sprite;
-        description.text = GetDescription(itemData.Stats);
+        this.SetDescription(itemData.Stats);
         this.ChangeFrameColor(itemData.Rarity);
     }
 
@@ -58,6 +60,64 @@ public class ItemPanelUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         }
 
         return new Color32(r, g, b, a);
+    }
+
+    public void SetDescription(Stats stats)
+    {
+        StringBuilder desc = new();
+        StringBuilder descValue = new();
+
+        var fields = typeof(Stats).GetFields();
+
+        foreach (var field in fields)
+        {
+            if (field.GetValue(stats) is float value && value > 0f)
+            {
+                string statName = GetStatDisplayName(field.Name);
+
+                desc.AppendLine($"{statName}:");
+                descValue.AppendLine($"{FormatStatValue(field.Name, value)}");
+            }
+        }
+        
+        descriptionValue.text = descValue.ToString();
+        description.text = desc.ToString();
+
+    }
+
+    private string FormatStatValue(string fieldName, float value)
+    {
+        bool isPercent =
+            fieldName.Contains("Chance") ||
+            fieldName.Contains("increase");
+
+        return isPercent
+            ? $"{value:0.##}%"
+            : $"{value:0.##}";
+    }
+
+    private string GetStatDisplayName(string fieldName)
+    {
+        return fieldName switch
+        {
+            nameof(Stats.physicalDamage) => "Sát Thương Vật Lý",
+            nameof(Stats.armor) => "Giáp",
+            nameof(Stats.criticalChance) => "Tỉ Lệ Bạo Kích",
+            nameof(Stats.criticalDamage) => "Sát Thương Bạo Kích",
+            nameof(Stats.lifeSteal) => "Hút Máu",
+            nameof(Stats.magicDamage) => "Sát Thương Phép",
+            nameof(Stats.poisonous) => "Kích Điện",
+            nameof(Stats.stunChance) => "Gây Choáng",
+            nameof(Stats.luck) => "May Mắn",
+            nameof(Stats.increaseDamage) => "Khuếch Đại ST Vật Lý",
+            nameof(Stats.increaseMagic) => "Khuếch Đại ST Phép",
+            nameof(Stats.counterAttackChance) => "Phản Đòn",
+            nameof(Stats.dodgeChance) => "Né Đòn",
+            nameof(Stats.speed) => "Linh Hoạt",
+            nameof(Stats.rage) => "Cuồng Nộ",
+            nameof(Stats.regeneration) => "Hồi Phục",
+            _ => fieldName
+        };
     }
 
     public void ChangeFrameColor(RarityType rarity)
@@ -80,25 +140,6 @@ public class ItemPanelUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
                 halo.color = HexToColor("#FF8000");
                 break;
         }
-    }
-
-    public string GetDescription(Stats stats)
-    {
-        StringBuilder desc = new();
-
-        var fields = typeof(Stats).GetFields();
-
-        foreach (var field in fields)
-        {
-            var value = field.GetValue(stats);
-
-            if (value is float va && va != 0)
-            {
-                desc.AppendLine($"{field.Name}: +{va}");
-            }
-        }
-
-        return desc.ToString();
     }
 
     public void OnDisable()

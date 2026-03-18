@@ -9,7 +9,7 @@ using UnityEngine;
 /// Hoạt động bằng cách chỉnh physicalDamage của attacker thành phần dư (overflow) ở PreAttack,
 /// để PhysicalDamageProcessor áp dụng đúng lượng damage lên HP. PostAttack khôi phục lại.
 /// </summary>
-public class DefenseProcessor : BaseStatProcessor, IPreAttack, IPostAttack
+public class ArmorProcessor : BaseStatProcessor, IPreAttack, IPostAttack
 {
     private float originalPhysicalDamage;
 

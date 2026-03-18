@@ -14,8 +14,9 @@ public class BaseEnemy : BaseEntity
 
     private Vector3 originScale;
 
-    void Start()
+    public override void Start()
     {
+        base.Start();
         this.originScale = this.visual.transform.localScale;
     }
 

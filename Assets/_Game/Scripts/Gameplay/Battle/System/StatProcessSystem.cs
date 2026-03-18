@@ -16,7 +16,7 @@ public class StatProcessSystem
         // 3. Khuếch đại sát thương: nhân thêm % sau khi crit đã tính
         statProcessors.Add(new DamageAmpProcessor());
         // 4. Giáp: trừ def của mục tiêu ra khỏi physicalDamage
-        statProcessors.Add(new DefenseProcessor());
+        statProcessors.Add(new ArmorProcessor());
 
         // --- OnAttack phase ---
         // 5. Gây sát thương vật lý thực sự
@@ -26,7 +26,7 @@ public class StatProcessSystem
         // 6. Choáng
         statProcessors.Add(new StunProcessor());
         // 7. Hút máu (flat, dùng Stats.lifeSteal)
-        statProcessors.Add(new LifeStealEffect());
+        statProcessors.Add(new LifeStealProcessor());
         // 8. Hút máu % sát thương (dùng Stats.suckBlood)
         // statProcessors.Add(new SuckBloodProcessor());
         // 9. Độc

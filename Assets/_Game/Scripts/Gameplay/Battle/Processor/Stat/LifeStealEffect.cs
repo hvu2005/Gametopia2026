@@ -3,9 +3,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LifeStealEffect : BaseStatProcessor, IPostAttack
+public class LifeStealProcessor : BaseStatProcessor, IPostAttack
 {
-    public LifeStealEffect()
+    public LifeStealProcessor()
     {
 
     }
