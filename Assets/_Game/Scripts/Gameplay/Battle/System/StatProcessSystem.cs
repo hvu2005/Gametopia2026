@@ -65,4 +65,13 @@ public class StatProcessSystem
                 stage.ProcessPostAttack(source, target);
         }
     }
+
+    public void ProcessBeAttacked(BaseEntity attacker, BaseEntity target)
+    {
+        foreach (var p in statProcessors)
+        {
+            if (p is IBeAttacked stage)
+                stage.ProcessBeAttacked(attacker, target);
+        }
+    }
 }

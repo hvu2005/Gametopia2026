@@ -18,6 +18,8 @@ public class Item : MonoBehaviour
 
     public Image itemImage;
 
+    public Image itemFrame;
+
     public RectTransform rectTransform;
 
     public RectTransform starsParent;
@@ -32,6 +34,22 @@ public class Item : MonoBehaviour
         itemImage.sprite = itemData.Sprite;
         this.stats = new Stats() + itemData.Stats;
     }
+    
+    public void ChangeFrameColor(RarityType rarity)
+    {
+        switch(rarity)
+        {
+            case RarityType.Normal:
+                // itemFrame.color = new Color(0x000000);
+                break;
+            case RarityType.Rare:
+                break;
+            case RarityType.Epic:
+                break;
+            case RarityType.Legendary:
+                break;
+        }
+    } 
 
     void OnMouseDown()
     {

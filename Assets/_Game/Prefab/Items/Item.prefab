@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 8369756431610231984, guid: 4447b658c044c66419999cf338ee86e5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -132,7 +132,7 @@ MonoBehaviour:
   stats:
     hp: 100
     physicalDamage: 0
-    def: 0
+    armor: 0
     criticalChance: 0
     criticalDamage: 0
     lifeSteal: 0
@@ -140,6 +140,11 @@ MonoBehaviour:
     magicDamage: 0
     poisonous: 0
     stunChance: 0
+    lucky: 0
+    increaseDamage: 0
+    counterAttackChance: 0
+    dodgeChance: 0
+    speed: 0
   currentSlot: {fileID: 0}
   nextSlot: {fileID: 0}
   mergeItem: {fileID: 0}
