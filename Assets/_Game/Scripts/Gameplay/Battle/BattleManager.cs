@@ -1,6 +1,7 @@
 
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using DG.Tweening;
 using UnityEngine;
 
 public enum BattleEventType
@@ -18,25 +19,53 @@ public class BattleManager : EventEmitter
 
     public async Task StartBattle(BaseEntity player, BaseEnemy target, List<BaseEnemy> enemiesInBattle)
     {
+        var originPos = player.transform.localPosition;
+
+        // tiến lên
+        await player.transform
+            .DOLocalMoveX(originPos.x + 0.75f, 0.25f)
+            .AsyncWaitForCompletion();
+
+        // attack
         await ExecutePlayerTurn(player, target);
 
-        foreach (var enemy in enemiesInBattle)
+        // lùi về
+        await player.transform
+            .DOLocalMoveX(originPos.x, 0.25f)
+            .AsyncWaitForCompletion();
+
+        // ===== Enemy turn =====
+        for (int i = 0; i < enemiesInBattle.Count; i++)
         {
+            var enemy = enemiesInBattle[i];
+
             if (enemy.IsDead)
             {
                 Debug.Log($"{enemy.name} is dead and cannot take a turn.");
                 continue;
             }
-            await ExecuteEnemyTurn(enemy, player);
+
+            float delay = i * 0.15f;
+
+            DOVirtual.DelayedCall(delay, () =>
+            {
+                var originPosEnemy = enemy.transform.localPosition;
+
+                Sequence seq = DOTween.Sequence();
+
+                seq.Append(enemy.transform.DOLocalMoveX(originPosEnemy.x - 0.75f, 0.25f));
+                seq.AppendCallback(() => _ = ExecuteEnemyTurn(enemy, player));
+                seq.Append(enemy.transform.DOLocalMoveX(originPosEnemy.x, 0.25f));
+            });
         }
 
-        this.CheckEnemies(enemiesInBattle);
+        CheckEnemies(enemiesInBattle);
     }
 
     public async Task ExecuteEnemyTurn(BaseEntity attacker, BaseEntity target)
     {
         attacker.SetActiveTurn(true);
-        await Task.Delay(250);
+        // await Task.Delay(250);
 
         ExecuteTurn(attacker, target);
         await Task.Delay(250);
@@ -94,7 +123,7 @@ public class BattleManager : EventEmitter
     /// </summary>
     public void RestoreAllDefense(BaseEntity player, List<BaseEnemy> enemiesInBattle)
     {
-        player.RestoreDefense();
+        player.RestoreArmor();
         Debug.Log("[Defense] Giáp của nhân vật đã hồi về đầy sau combat.");
     }
 }

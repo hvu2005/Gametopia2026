@@ -45,6 +45,11 @@ public class GameManager : Singleton<GameManager>
 
             _ = NextLevel();
         });
+
+        battleManager.On<BaseEnemy>(EnemyEventType.Select, (enemy) =>
+        {
+           StartBattle(enemy); 
+        });
     }
 
     public void LoadLevel(int levelIndex)

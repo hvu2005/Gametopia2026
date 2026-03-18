@@ -15,6 +15,7 @@ public class ItemPanelUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     public TextMeshProUGUI itemName;
     public TextMeshProUGUI description;
     public Image itemImage;
+    public Image halo;
     public RectTransform rect;
     private Vector3 originalPos;
 
@@ -25,12 +26,60 @@ public class ItemPanelUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         originalPos = rect.localPosition;
     }
 
+    void Start()
+    {
+        halo.transform
+        .DORotate(new Vector3(0, 0, 360f), 40f, RotateMode.FastBeyond360)
+        .SetLoops(-1, LoopType.Restart)
+        .SetEase(Ease.Linear);
+    }
+
     public void SetInfoFromItem(ItemDataSO itemData)
     {
         currentItemData = itemData;
         itemName.text = itemData.ItemName;
         itemImage.sprite = itemData.Sprite;
         description.text = GetDescription(itemData.Stats);
+        this.ChangeFrameColor(itemData.Rarity);
+    }
+
+    public static Color HexToColor(string hex)
+    {
+        hex = hex.Replace("#", "");
+
+        byte r = byte.Parse(hex.Substring(0, 2), System.Globalization.NumberStyles.HexNumber);
+        byte g = byte.Parse(hex.Substring(2, 2), System.Globalization.NumberStyles.HexNumber);
+        byte b = byte.Parse(hex.Substring(4, 2), System.Globalization.NumberStyles.HexNumber);
+
+        byte a = 255;
+        if (hex.Length == 8)
+        {
+            a = byte.Parse(hex.Substring(6, 2), System.Globalization.NumberStyles.HexNumber);
+        }
+
+        return new Color32(r, g, b, a);
+    }
+
+    public void ChangeFrameColor(RarityType rarity)
+    {
+        switch (rarity)
+        {
+            case RarityType.Normal:
+                halo.color = HexToColor("#FFFFFF");
+                break;
+
+            case RarityType.Rare:
+                halo.color = HexToColor("#0070FF");
+                break;
+
+            case RarityType.Epic:
+                halo.color = HexToColor("#A335EE");
+                break;
+
+            case RarityType.Legendary:
+                halo.color = HexToColor("#FF8000");
+                break;
+        }
     }
 
     public string GetDescription(Stats stats)
@@ -45,7 +94,7 @@ public class ItemPanelUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
             if (value is float va && va != 0)
             {
-                desc.AppendLine($"{field.Name}: +{va}\n");
+                desc.AppendLine($"{field.Name}: +{va}");
             }
         }
 

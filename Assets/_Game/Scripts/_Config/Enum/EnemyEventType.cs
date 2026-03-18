@@ -1,0 +1,7 @@
+
+
+
+public enum EnemyEventType
+{
+    Select,
+}

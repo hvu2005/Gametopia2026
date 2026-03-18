@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 23
   itemName: "Qu\u1EA7n Y\u1EBFm Sinh Tr\u01B0\u1EDFng"
-  sprite: {fileID: 21300000, guid: f185abc3821a40140a729c759bbd668f, type: 3}
+  sprite: {fileID: 21300000, guid: 74852b94fb5a6ea4ab3a899635758178, type: 3}
   type: 8
   rarity: 2
   slotType: 4

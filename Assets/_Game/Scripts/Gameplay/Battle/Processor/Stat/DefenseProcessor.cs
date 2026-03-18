@@ -16,24 +16,24 @@ public class DefenseProcessor : BaseStatProcessor, IPreAttack, IPostAttack
     public void ProcessPreAttack(BaseEntity source, BaseEntity target, List<BaseEntity> allAliveEnemies = null)
     {
         // Không có giáp → bỏ qua
-        if (target.armor <= 0) return;
+        if (target.currentArmor <= 0) return;
 
         originalPhysicalDamage = source.Stats.physicalDamage;
         float damage = source.Stats.physicalDamage;
 
-        if (damage <= target.armor)
+        if (damage <= target.currentArmor)
         {
             // Giáp hấp thụ toàn bộ, HP không bị trừ
-            target.armor -= damage;
+            target.currentArmor -= damage;
             source.Stats.physicalDamage = 0;
-            Debug.Log($"[Defense] {target.name} giáp hấp thụ {damage} sát thương → còn {target.armor} giáp");
+            Debug.Log($"[Defense] {target.name} giáp hấp thụ {damage} sát thương → còn {target.currentArmor} giáp");
         }
         else
         {
             // Giáp bị bào mòn hết, phần dư vào HP
-            float overflow = damage - target.armor;
+            float overflow = damage - target.currentArmor;
             Debug.Log($"[Defense] {target.name} giáp bị phá! Còn lại {overflow} sát thương xuyên vào HP");
-            target.armor = 0;
+            target.currentArmor = 0;
             source.Stats.physicalDamage = overflow;
         }
     }
