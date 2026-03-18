@@ -1,4 +1,4 @@
-﻿public enum ItemClass
+﻿public enum ItemClassType
 {
     DienNang,
     TaDien,

@@ -1,7 +1,7 @@
 
 public class EquipeSlot : Slot
 {
-
+    public EquipmentSlotType equipmentSlotType;
     public override void OnPlaceItem(Item item)
     {
         base.OnPlaceItem(item);

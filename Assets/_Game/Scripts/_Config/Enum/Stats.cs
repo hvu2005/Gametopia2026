@@ -1,9 +1,11 @@
+using UnityEngine.Serialization;
+
 [System.Serializable]
 public struct Stats
 {
     public float hp;
     public float physicalDamage;
-    public float def;
+    public float armor;
     public float criticalChance;
     public float criticalDamage;
     public float lifeSteal;
@@ -18,7 +20,7 @@ public struct Stats
         {
             hp = a.hp + b.hp,
             physicalDamage = a.physicalDamage + b.physicalDamage,
-            def = a.def + b.def,
+            armor = a.armor + b.armor,
             criticalChance = a.criticalChance + b.criticalChance,
             criticalDamage = a.criticalDamage + b.criticalDamage,
             lifeSteal = a.lifeSteal + b.lifeSteal,
@@ -35,7 +37,7 @@ public struct Stats
         {
             hp = a.hp - b.hp,
             physicalDamage = a.physicalDamage - b.physicalDamage,
-            def = a.def - b.def,
+            armor = a.armor - b.armor,
             criticalChance = a.criticalChance - b.criticalChance,
             criticalDamage = a.criticalDamage - b.criticalDamage,
             lifeSteal = a.lifeSteal - b.lifeSteal,
@@ -52,7 +54,7 @@ public struct Stats
         {
             hp = a.hp * multiplier,
             physicalDamage = a.physicalDamage * multiplier,
-            def = a.def * multiplier,
+            armor = a.armor * multiplier,
             criticalChance = a.criticalChance * multiplier,
             criticalDamage = a.criticalDamage * multiplier,
             lifeSteal = a.lifeSteal * multiplier,
@@ -69,7 +71,7 @@ public struct Stats
         {
             hp = a.hp / divisor,
             physicalDamage = a.physicalDamage / divisor,
-            def = a.def / divisor,
+            armor = a.armor / divisor,
             criticalChance = a.criticalChance / divisor,
             criticalDamage = a.criticalDamage / divisor,
             lifeSteal = a.lifeSteal / divisor,
