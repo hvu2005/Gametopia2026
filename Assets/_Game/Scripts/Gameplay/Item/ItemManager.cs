@@ -44,19 +44,4 @@ public class ItemManager : EventEmitter
             .Take(count)
             .ToList();
     }
-
-    public void OnUpgradeRarity(Item item1, Item item2)
-    {
-        
-    }
-
-    public void OnMergeItems(Item item1, Item item2)
-    {
-        
-    }
-
-    public void OnMoveItemToSlot(Item item, int slotIndex)
-    {
-        
-    }
 }

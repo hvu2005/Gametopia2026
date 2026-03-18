@@ -1,8 +1,7 @@
 using DG.Tweening;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.Serialization;
+
 using UnityEngine.UI;
 
 
@@ -33,23 +32,47 @@ public class Item : MonoBehaviour
         itemName = itemData.ItemName;
         itemImage.sprite = itemData.Sprite;
         this.stats = new Stats() + itemData.Stats;
+        this.ChangeFrameColor(itemData.Rarity);
     }
-    
+
+    public static Color HexToColor(string hex)
+    {
+        hex = hex.Replace("#", "");
+
+        byte r = byte.Parse(hex.Substring(0, 2), System.Globalization.NumberStyles.HexNumber);
+        byte g = byte.Parse(hex.Substring(2, 2), System.Globalization.NumberStyles.HexNumber);
+        byte b = byte.Parse(hex.Substring(4, 2), System.Globalization.NumberStyles.HexNumber);
+
+        byte a = 255;
+        if (hex.Length == 8)
+        {
+            a = byte.Parse(hex.Substring(6, 2), System.Globalization.NumberStyles.HexNumber);
+        }
+
+        return new Color32(r, g, b, a);
+    }
+
     public void ChangeFrameColor(RarityType rarity)
     {
-        switch(rarity)
+        switch (rarity)
         {
             case RarityType.Normal:
-                // itemFrame.color = new Color(0x000000);
+                itemFrame.color = HexToColor("#FFFFFF");
                 break;
+
             case RarityType.Rare:
+                itemFrame.color = HexToColor("#0070FF");
                 break;
+
             case RarityType.Epic:
+                itemFrame.color = HexToColor("#A335EE");
                 break;
+
             case RarityType.Legendary:
+                itemFrame.color = HexToColor("#FF8000");
                 break;
         }
-    } 
+    }
 
     void OnMouseDown()
     {

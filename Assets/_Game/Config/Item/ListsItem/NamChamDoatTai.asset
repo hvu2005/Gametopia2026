@@ -16,12 +16,13 @@ MonoBehaviour:
   itemName: "Nam Ch\xE2m \u0110o\u1EA1t T\xE0i"
   sprite: {fileID: 21300000, guid: f185abc3821a40140a729c759bbd668f, type: 3}
   type: 1
-  rarity: 0
+  rarity: 2
   slotType: 0
+  itemClass: 
   stats:
     hp: 0
     physicalDamage: 3
-    def: 0
+    armor: 0
     criticalChance: 0
     criticalDamage: 0
     lifeSteal: 0
@@ -29,3 +30,8 @@ MonoBehaviour:
     magicDamage: 0
     poisonous: 0
     stunChance: 0
+    lucky: 0
+    increaseDamage: 0
+    counterAttackChance: 0
+    dodgeChance: 0
+    speed: 0

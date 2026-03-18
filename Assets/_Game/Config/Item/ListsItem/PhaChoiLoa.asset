@@ -16,7 +16,7 @@ MonoBehaviour:
   itemName: "Pha Ch\xF3i Lo\xE1"
   sprite: {fileID: 21300000, guid: 109e67bd7c2a67e42a3400fbb4fee136, type: 3}
   type: 1
-  rarity: 0
+  rarity: 1
   slotType: 0
   itemClass: 0000000000000000
   stats:
@@ -30,3 +30,8 @@ MonoBehaviour:
     magicDamage: 0
     poisonous: 0
     stunChance: 0
+    lucky: 0
+    increaseDamage: 0
+    counterAttackChance: 0
+    dodgeChance: 0
+    speed: 0

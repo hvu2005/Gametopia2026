@@ -35,7 +35,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 60, y: 60}
+  m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7194304035587029401
 CanvasRenderer:
@@ -149,6 +149,7 @@ MonoBehaviour:
   nextSlot: {fileID: 0}
   mergeItem: {fileID: 0}
   itemImage: {fileID: 694967286681843677}
+  itemFrame: {fileID: 6150100915163845056}
   rectTransform: {fileID: 639462323749957445}
   starsParent: {fileID: 7624888443119507446}
   star: {fileID: 8769351144262494903}
@@ -390,7 +391,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 7624888443119507446}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
