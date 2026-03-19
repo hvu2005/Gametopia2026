@@ -2,7 +2,7 @@
 
 
 
-public class XayDungArmorEffect : BaseEffect
+public class XayDungArmorEffect : BaseEffect, IPreEffect
 {
     int count = 0;
     public override void ApplyEffect(BaseEntity target)
@@ -11,5 +11,10 @@ public class XayDungArmorEffect : BaseEffect
         {
             target.currentArmor += 5;
         }
+    }
+
+    public void ApplyPreEffect(BaseEntity target)
+    {
+        this.ApplyEffect(target);
     }
 }

@@ -1540,20 +1540,20 @@ MonoBehaviour:
     xayDung: 0
   Stats:
     hp: 10
-    physicalDamage: 5
+    physicalDamage: 2
     armor: 0
     criticalChance: 50
     criticalDamage: 150
     lifeSteal: 5
-    magicDamage: 6
+    magicDamage: 1
     poisonous: 7
     stunChance: 50
     luck: 0
     increaseDamage: 0
     increaseMagic: 0
-    counterAttackChance: 0
+    thorn: 0
     dodgeChance: 50
-    speed: 0
+    speed: 100
     rage: 0
     regeneration: 0
   currentHp: 0
@@ -1562,6 +1562,9 @@ MonoBehaviour:
   luckyDropBonus: 0
   hpBar: {fileID: 172722640}
   visual: {fileID: 1024973926}
+  tempBonusDamage: 0
+  tempBonusMagic: 0
+  hasExtraAttacked: 0
   statusUIController: {fileID: 8135372264766584376}
   statManager: {fileID: 420690999}
 --- !u!114 &420690999
@@ -1589,7 +1592,7 @@ MonoBehaviour:
     luck: 0
     increaseDamage: 0
     increaseMagic: 0
-    counterAttackChance: 0
+    thorn: 0
     dodgeChance: 0
     speed: 0
     rage: 0
@@ -3887,7 +3890,7 @@ MonoBehaviour:
     - {fileID: 802569696}
     enemiesInBattle: []
   battleManager:
-    BattleSpeed: 1
+    BattleSpeed: 4
   mapManager:
     currentBg: {fileID: 159374662}
     transitionPanel: {fileID: 1132237641}

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class StunProcessor : BaseStatProcessor, IPostAttack, IProcEffect
 {
+    
     public StunProcessor()
     {
 

@@ -10,18 +10,32 @@ public class CoKhiProcessor : ItemClassProcessor
 
     }
 
-    public override void OnMilestoneUp()
+    public override void OnMilestoneUp(BaseEntity target)
     {
-        base.OnMilestoneUp();
-        if(this.currentMilestone == 1)
+        base.OnMilestoneUp(target);
+        if (this.currentMilestone == 1)
         {
-            
+            target.Stats.speed += 15;
+        }
+        if (this.currentMilestone == 2)
+        {
+            target.hiddenStats.coKhi = 1;
         }
     }
 
-    public override void OnMilestoneDown()
+    public override void OnMilestoneDown(BaseEntity target)
     {
-        base.OnMilestoneDown();
+        base.OnMilestoneDown(target);
+        if (this.currentMilestone == 0)
+        {
+            target.Stats.speed -= 15;
+
+        }
+        if (this.currentMilestone == 1)
+        {
+            target.hiddenStats.coKhi = 0;
+
+        }
     }
 
 

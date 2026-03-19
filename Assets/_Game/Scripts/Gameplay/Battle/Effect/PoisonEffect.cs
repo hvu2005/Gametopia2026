@@ -1,9 +1,10 @@
 
 
 
+using System;
 using UnityEngine;
 
-public class PoisonEffect : BaseEffect
+public class PoisonEffect : BaseEffect, IPostEffect
 {
     public int count = 0;
     public int penalty = 6;
@@ -11,7 +12,7 @@ public class PoisonEffect : BaseEffect
     {
         if (count <= 0) return;
 
-        target.currentHp -= count;
+        target.TakeDamage(count);
         Debug.Log($"{target.name} took {count} poison damage! Remaining stacks: {count - 1}");
 
         EventBus.Emit(BattleEventType.SpawnFloatingText, new FloatingTextEventData
@@ -22,12 +23,14 @@ public class PoisonEffect : BaseEffect
             OffsetBuffer = Vector2.zero
         });
 
-        count -= 1;
+        target.OnTakeDamage();
 
-        if (target.currentHp <= 0)
-        {
-            target.Die();
-        }
+        count -= Math.Min(count, penalty);
+    }
+
+    public void ApplyPostEffect(BaseEntity target)
+    {
+        this.ApplyEffect(target);
     }
 
     public override void TryRemoveEffect(BaseEntity target)

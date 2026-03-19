@@ -10,18 +10,32 @@ public class XayDungProcessor : ItemClassProcessor
 
     }
 
-    public override void OnMilestoneUp()
+    public override void OnMilestoneUp(BaseEntity target)
     {
-        base.OnMilestoneUp();
-        if(this.currentMilestone == 1)
+        base.OnMilestoneUp(target);
+        if (this.currentMilestone == 1)
         {
-            
+            target.Stats.thorn += 20;
+        }
+        else if (this.currentMilestone == 2)
+        {
+            target.hiddenStats.xayDung = 1;
         }
     }
 
-    public override void OnMilestoneDown()
+    public override void OnMilestoneDown(BaseEntity target)
     {
-        base.OnMilestoneDown();
+        base.OnMilestoneDown(target);
+        if (this.currentMilestone == 0)
+        {
+            target.Stats.thorn -= 20;
+
+        }
+        else if (this.currentMilestone == 1)
+        {
+            target.hiddenStats.xayDung = 0;
+
+        }
     }
 
 

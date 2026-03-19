@@ -17,7 +17,7 @@ public struct Stats
 
     public float increaseMagic;
 
-    public float counterAttackChance;
+    public float thorn;
     public float dodgeChance;
     public float speed;
     public float rage;
@@ -43,7 +43,7 @@ public struct Stats
             increaseDamage = a.increaseDamage + b.increaseDamage,
             increaseMagic = a.increaseMagic + b.increaseMagic,
 
-            counterAttackChance = a.counterAttackChance + b.counterAttackChance,
+            thorn = a.thorn + b.thorn,
             dodgeChance = a.dodgeChance + b.dodgeChance,
             rage = a.rage + b.rage,
             regeneration = a.regeneration + b.regeneration,
@@ -68,7 +68,7 @@ public struct Stats
             increaseDamage = a.increaseDamage - b.increaseDamage,
             increaseMagic = a.increaseMagic - b.increaseMagic,
 
-            counterAttackChance = a.counterAttackChance - b.counterAttackChance,
+            thorn = a.thorn - b.thorn,
             dodgeChance = a.dodgeChance - b.dodgeChance,
             rage = a.rage - b.rage,
             regeneration = a.regeneration - b.regeneration,
@@ -93,7 +93,7 @@ public struct Stats
             increaseDamage = a.increaseDamage * multiplier,
             increaseMagic = a.increaseMagic* multiplier,
 
-            counterAttackChance = a.counterAttackChance * multiplier,
+            thorn = a.thorn * multiplier,
             dodgeChance = a.dodgeChance * multiplier,
             rage = a.rage * multiplier,
             regeneration = a.regeneration * multiplier,
@@ -118,7 +118,7 @@ public struct Stats
             increaseDamage = a.increaseDamage / divisor,
             increaseMagic = a.increaseMagic / divisor,
             
-            counterAttackChance = a.counterAttackChance / divisor,
+            thorn = a.thorn / divisor,
             dodgeChance = a.dodgeChance / divisor,
             rage = a.rage / divisor,
             regeneration = a.regeneration / divisor,

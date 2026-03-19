@@ -111,7 +111,7 @@ public class ItemPanelUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             nameof(Stats.luck) => "May Mắn",
             nameof(Stats.increaseDamage) => "Khuếch Đại ST Vật Lý",
             nameof(Stats.increaseMagic) => "Khuếch Đại ST Phép",
-            nameof(Stats.counterAttackChance) => "Phản Đòn",
+            nameof(Stats.thorn) => "Phản Đòn",
             nameof(Stats.dodgeChance) => "Né Đòn",
             nameof(Stats.speed) => "Linh Hoạt",
             nameof(Stats.rage) => "Cuồng Nộ",

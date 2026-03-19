@@ -4,7 +4,7 @@ using UnityEngine;
 /// HiddenStat - Cơ khí: áp dụng choáng lên mục tiêu.
 /// Việc "đòn đánh thứ 3" được xử lý ở Processor, effect này chỉ chịu trách nhiệm gắn choáng.
 /// </summary>
-public class CoKhiStunEffect : BaseEffect
+public class CoKhiStunEffect : BaseEffect, IPreEffect
 {
     public int count = 0;
     public override void ApplyEffect(BaseEntity target)
@@ -23,6 +23,11 @@ public class CoKhiStunEffect : BaseEffect
 
             Debug.Log($"[Effect:CoKhi] {target.name} bị choáng (StunEffect)");
         }
+    }
+
+    public void ApplyPreEffect(BaseEntity target)
+    {
+        this.ApplyEffect(target);
     }
 
     public override void TryRemoveEffect(BaseEntity target)

@@ -2,20 +2,24 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Phản đòn (counterAttackChance): phản lại % sát thương mà mục tiêu nhận vào về phía kẻ tấn công.
-/// Ví dụ: counterAttackChance = 25 → mục tiêu nhận 100 sát thương → kẻ tấn công nhận lại 25 sát thương.
-/// Đọc lastDamageDealt (đã được set bởi PhysicalDamageProcessor) để biết sát thương thực tế nhận vào.
+/// counterAttackChance: % cơ hội phản đòn (ví dụ 25 = 25% chance)
+/// Khi kích hoạt → phản lại toàn bộ sát thương vừa nhận (có thể chỉnh % nếu muốn)
 /// </summary>
-public class CounterAttackProcessor : BaseStatProcessor, IPostAttack
+public class CounterAttackProcessor : BaseStatProcessor, IBeAttacked
 {
-    public void ProcessPostAttack(BaseEntity source, BaseEntity target, List<BaseEntity> allAliveEnemies = null)
+
+    public void ProcessBeAttacked(BaseEntity source, BaseEntity target, List<BaseEntity> allAliveEnemies = null)
     {
-        if (target.Stats.counterAttackChance <= 0) return;
-        if (target.lastDamageDealt <= 0) return;
+        if (target.Stats.thorn <= 0) return;
+        // if (target.lastDamageDealt <= 0) return;
         if (target.IsDead) return;
 
-        float reflectDamage = target.lastDamageDealt * (target.Stats.counterAttackChance / 100f);
-        source.currentHp -= reflectDamage;
-        Debug.Log($"[CounterAttack] {target.name} phản lại {reflectDamage:F1} sát thương ({target.Stats.counterAttackChance}% của {source.lastDamageDealt:F1}) về {source.name}");
+        int roll = Random.Range(0, 100);
+        if (roll >= target.Stats.thorn) return;
+
+        source.TakeDamage(source.lastDamageDealt* target.Stats.thorn);
+
+        // source.IsAttacked = false;
+        
     }
 }

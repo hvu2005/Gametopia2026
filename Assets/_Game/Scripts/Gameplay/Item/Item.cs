@@ -96,7 +96,9 @@ public class Item : MonoBehaviour
     void OnMouseUp()
     {
         
+        if(!canSelect) return;
         canSelect = false;
+
         if (mergeItem != null)
         {
             mergeItem.OnUpgradeRank(this);
@@ -149,7 +151,7 @@ public class Item : MonoBehaviour
             Slot slot = other.GetComponent<Slot>();
             if (slot != null)
             {
-                if (slot.IsEmpty())
+                if (slot.IsEmpty() && !(GameManager.Instance.isStartBattle && slot is EquipeSlot))
                 {
                     nextSlot = slot;
                 }

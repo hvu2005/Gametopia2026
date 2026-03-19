@@ -11,39 +11,39 @@ using UnityEngine;
 /// </summary>
 public class ArmorProcessor : BaseStatProcessor, IPreAttack, IPostAttack
 {
-    private float originalPhysicalDamage;
+    // private float originalPhysicalDamage;
 
     public void ProcessPreAttack(BaseEntity source, BaseEntity target, List<BaseEntity> allAliveEnemies = null)
     {
-        // Không có giáp → bỏ qua
-        if (target.currentArmor <= 0) return;
+        // // Không có giáp → bỏ qua
+        // if (target.currentArmor <= 0) return;
 
-        originalPhysicalDamage = source.Stats.physicalDamage;
-        float damage = source.Stats.physicalDamage;
+        // originalPhysicalDamage = source.Stats.physicalDamage;
+        // float damage = source.Stats.physicalDamage;
 
-        if (damage <= target.currentArmor)
-        {
-            // Giáp hấp thụ toàn bộ, HP không bị trừ
-            target.currentArmor -= damage;
-            source.Stats.physicalDamage = 0;
-            Debug.Log($"[Defense] {target.name} giáp hấp thụ {damage} sát thương → còn {target.currentArmor} giáp");
-        }
-        else
-        {
-            // Giáp bị bào mòn hết, phần dư vào HP
-            float overflow = damage - target.currentArmor;
-            Debug.Log($"[Defense] {target.name} giáp bị phá! Còn lại {overflow} sát thương xuyên vào HP");
-            target.currentArmor = 0;
-            source.Stats.physicalDamage = overflow;
-        }
+        // if (damage <= target.currentArmor)
+        // {
+        //     // Giáp hấp thụ toàn bộ, HP không bị trừ
+        //     target.TakeDamage(damage);
+        //     source.Stats.physicalDamage = 0;
+        //     Debug.Log($"[Defense] {target.name} giáp hấp thụ {damage} sát thương → còn {target.currentArmor} giáp");
+        // }
+        // else
+        // {
+        //     // Giáp bị bào mòn hết, phần dư vào HP
+        //     float overflow = damage - target.currentArmor;
+        //     Debug.Log($"[Defense] {target.name} giáp bị phá! Còn lại {overflow} sát thương xuyên vào HP");
+        //     target.currentArmor = 0;
+        //     source.Stats.physicalDamage = overflow;
+        // }
     }
 
     public void ProcessPostAttack(BaseEntity source, BaseEntity target, List<BaseEntity> allAliveEnemies = null)
     {
-        if (originalPhysicalDamage != 0)
-        {
-            source.Stats.physicalDamage = originalPhysicalDamage;
-            originalPhysicalDamage = 0;
-        }
+        // if (originalPhysicalDamage != 0)
+        // {
+        //     source.Stats.physicalDamage = originalPhysicalDamage;
+        //     originalPhysicalDamage = 0;
+        // }
     }
 }

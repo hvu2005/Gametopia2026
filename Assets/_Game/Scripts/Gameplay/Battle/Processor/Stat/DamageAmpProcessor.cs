@@ -2,30 +2,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Khuếch đại sát thương (increaseDamage): nhân physicalDamage thêm % trước khi đánh.
-/// Ví dụ: increaseDamage = 50 → physicalDamage × 1.5
-/// Pattern giống CritProcessor: lưu physicalDamage gốc ở PreAttack, hoàn trả ở PostAttack.
+/// increaseDamage: % tăng thêm damage (ví dụ 50 = +50%)
 /// </summary>
-public class DamageAmpProcessor : BaseStatProcessor, IPreAttack, IPostAttack
+public class DamageAmpProcessor : BaseStatProcessor, IPreAttack
 {
-    private float originalPhysicalDamage;
-
     public void ProcessPreAttack(BaseEntity source, BaseEntity target, List<BaseEntity> allAliveEnemies = null)
     {
-        if (source.Stats.increaseDamage > 0)
-        {
-            originalPhysicalDamage = source.Stats.physicalDamage;
-            source.Stats.physicalDamage *= 1f + source.Stats.increaseDamage / 100f;
-            Debug.Log($"[DamageAmp] {source.name} +{source.Stats.increaseDamage}% → damage: {originalPhysicalDamage} → {source.Stats.physicalDamage}");
-        }
-    }
+        if (source.Stats.increaseDamage <= 0) return;
 
-    public void ProcessPostAttack(BaseEntity source, BaseEntity target, List<BaseEntity> allAliveEnemies = null)
-    {
-        if (originalPhysicalDamage != 0)
-        {
-            source.Stats.physicalDamage = originalPhysicalDamage;
-            originalPhysicalDamage = 0;
-        }
+        int bonusDamage = Mathf.RoundToInt(
+            source.Stats.physicalDamage * (source.Stats.increaseDamage / 100f)
+        );
+
+        source.tempBonusDamage += bonusDamage;
+
+        Debug.Log($"[DamageAmp] {source.name} +{source.Stats.increaseDamage}% → +{bonusDamage} damage");
     }
 }

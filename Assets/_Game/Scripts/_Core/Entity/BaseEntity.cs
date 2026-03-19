@@ -36,8 +36,16 @@ public abstract class BaseEntity : MonoBehaviour, ICombatant
     public SpriteRenderer visual;
     private Color originalColor;
 
+    public float tempBonusDamage;
+    public float tempBonusMagic;
+
+    public bool hasExtraAttacked;
+
+
     public List<BaseEffect> ActiveEffects = new();
-    
+
+    // public List<BaseEffect> PassiveEffects = new();
+
     public StatusUIController statusUIController;
 
     public virtual void Awake()
@@ -93,7 +101,7 @@ public abstract class BaseEntity : MonoBehaviour, ICombatant
     public virtual void Heal(float amount)
     {
         float actualHeal = Mathf.Min(amount, Stats.hp - currentHp);
-        
+
         if (actualHeal > 0)
         {
             currentHp += actualHeal;
@@ -137,6 +145,20 @@ public abstract class BaseEntity : MonoBehaviour, ICombatant
     {
         this.Stats -= stats;
         this.OnUpdateStat();
+
+    }
+
+    public void TakeDamage(float amount)
+    {
+        if (currentArmor < amount)
+        {
+            currentHp -= amount - currentArmor;
+            currentArmor = 0;
+        }
+        else
+        {
+            currentArmor -= amount;
+        }
 
     }
 

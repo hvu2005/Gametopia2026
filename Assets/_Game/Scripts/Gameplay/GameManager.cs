@@ -44,12 +44,12 @@ public class GameManager : Singleton<GameManager>
 
         itemManager.On<Item>(ItemEventType.Equipe, (item) =>
         {
-            itemManager.UpdateAddItemClasses(item);
+            itemManager.UpdateAddItemClasses(item, playerManager.player);
         });
 
         itemManager.On<Item>(ItemEventType.Unequipe, (item) =>
         {
-            itemManager.UpdateRemoveItemClasses(item);
+            itemManager.UpdateRemoveItemClasses(item, playerManager.player);
         });
 
         uiManager.On<ItemDataSO>(ItemEventType.Select, (itemData) =>
@@ -113,9 +113,18 @@ public class GameManager : Singleton<GameManager>
 
     public void StartBattle(BaseEnemy enemy)
     {
-        isStartBattle = true;
-        EventBus.Emit<bool>(BattleEventType.Start, true);
-        _ = battleManager.StartBattle(
+        if (!isStartBattle)
+        {
+            isStartBattle = true;
+            battleManager.StartBattle(
+                playerManager.player,
+                enemy,
+                enemyManager.GetAliveEnemies()
+            );
+        }
+
+
+        _ = battleManager.StartPhase(
             playerManager.player,
             enemy,
             enemyManager.GetAliveEnemies()
@@ -125,7 +134,6 @@ public class GameManager : Singleton<GameManager>
     public void SpawnItemWhenWin()
     {
         isStartBattle = false;
-        EventBus.Emit<bool>(BattleEventType.End, true);
 
         var spawnedItems = itemManager.GetRandomItemDataList();
         uiManager.ShowItemSelection(spawnedItems);

@@ -1,31 +1,25 @@
-
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CritProcessor : BaseStatProcessor, IPreAttack, IPostAttack
+public class CritProcessor : BaseStatProcessor, IPreAttack
 {
-    public float originalPhysicalDamage;
     public void ProcessPreAttack(BaseEntity source, BaseEntity target, List<BaseEntity> allAliveEnemies = null)
     {
-        if (source.Stats.criticalChance > 0)
-        {
-            float critRoll = Random.Range(0f, 1f)*100f;
-            if (critRoll <= source.Stats.criticalChance)
-            {
-                originalPhysicalDamage = source.Stats.physicalDamage;
-                source.Stats.physicalDamage *= source.Stats.criticalDamage / 100f;
-                // Đăng ký entity đã nhảy crit vào hệ thống quản lý
-                StatProcessSystem.currentCritEntities.Add(source);
-            }
-        }
-    }
+        if (source.Stats.criticalChance <= 0) return;
 
-    public void ProcessPostAttack(BaseEntity source, BaseEntity target, List<BaseEntity> allAliveEnemies = null)
-    {
-        if (originalPhysicalDamage != 0)
-        {
-            source.Stats.physicalDamage = originalPhysicalDamage;
-            originalPhysicalDamage = 0;
-        }
+        // 🎲 roll crit (0-99)
+        int roll = Random.Range(0, 100);
+        if (roll >= source.Stats.criticalChance) return;
+
+        // 💥 tính damage crit (int)
+        int bonusDamage = Mathf.RoundToInt(
+            source.Stats.physicalDamage * (source.Stats.criticalDamage / 100f)
+        );
+
+        source.tempBonusDamage += bonusDamage; // cần biến tạm trong entity
+
+        // đánh dấu crit (nếu bạn vẫn cần UI/effect)
+        StatProcessSystem.currentCritEntities.Add(source);
+
     }
 }

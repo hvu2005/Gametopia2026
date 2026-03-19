@@ -4,13 +4,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class PhysicalDamageProcessor : BaseStatProcessor, IOnAttack
+public class PhysicalDamageProcessor : BaseStatProcessor, IOnAttack, IPostAttack
 {
     public void ProcessOnAttack(BaseEntity source, BaseEntity target, List<BaseEntity> allAliveEnemies = null)
     {
         Debug.Log("Processing Physical Damage" + source.Stats.physicalDamage);
-        var damage = source.Stats.physicalDamage;
-        target.currentHp -= damage;
+        var damage = source.Stats.physicalDamage + source.tempBonusDamage;
+        target.TakeDamage(damage);
         source.lastDamageDealt = damage; // ghi lại để SuckBlood, CounterAttack dùng
 
         FloatingTextType damageType = FloatingTextType.PhysicalDamage;
@@ -32,5 +32,10 @@ public class PhysicalDamageProcessor : BaseStatProcessor, IOnAttack
                 OffsetBuffer = Vector2.zero
             });
         }
+    }
+
+    public void ProcessPostAttack(BaseEntity source, BaseEntity target, List<BaseEntity> allAliveEnemies = null)
+    {
+        source.tempBonusDamage = 0;
     }
 }

@@ -62,7 +62,7 @@ public class UIManager : EventEmitter
             $"May Mắn: {stats.luck}\n" +
             $"Khuếch Đại ST Vật Lý: {stats.increaseDamage}%\n" +
             $"Khuếch Đại ST Phép: {stats.increaseMagic}%\n" +
-            $"Phản Đòn: {stats.counterAttackChance}%\n" +
+            $"Phản Đòn: {stats.thorn}%\n" +
             $"Né Đòn: {stats.dodgeChance}%\n" +
             $"Linh Hoạt: {stats.speed}\n" +
             $"Cuồng Nộ: {stats.rage}\n" +
@@ -104,7 +104,7 @@ public class UIManager : EventEmitter
             $"{stats.luck}\n" +
             $"{stats.increaseDamage}%\n" +
             $"{stats.increaseMagic}%\n" +
-            $"{stats.counterAttackChance}%\n" +
+            $"{stats.thorn}%\n" +
             $"{stats.dodgeChance}%\n" +
             $"{stats.speed}\n" +
             $"{stats.rage}\n" +

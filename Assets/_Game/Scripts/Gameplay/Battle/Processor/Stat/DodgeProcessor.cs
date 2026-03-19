@@ -2,43 +2,33 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Né đòn (dodgeChance): tỉ lệ % né tránh toàn bộ đòn đánh của kẻ tấn công.
-/// Nếu né thành công → set physicalDamage của attacker = 0 để PhysicalDamageProcessor gây 0 sát thương.
-/// Pattern giống CritProcessor: lưu physicalDamage gốc ở PreAttack, hoàn trả ở PostAttack.
+/// dodgeChance: % né đòn
+/// Nếu né → giảm damage attacker xuống 0 bằng bonus âm cực lớn
 /// </summary>
-public class DodgeProcessor : BaseStatProcessor, IPreAttack, IPostAttack
+public class DodgeProcessor : BaseStatProcessor, IPreAttack
 {
-    private float originalPhysicalDamage;
+    private const int DODGE_NEGATE = -99999999;
 
     public void ProcessPreAttack(BaseEntity source, BaseEntity target, List<BaseEntity> allAliveEnemies = null)
     {
-        if (target.Stats.dodgeChance > 0)
-        {
-            float dodgeRoll = Random.Range(0f, 1f) * 100f;
-            if (dodgeRoll <= target.Stats.dodgeChance)
-            {
-                originalPhysicalDamage = source.Stats.physicalDamage;
-                source.Stats.physicalDamage = 0;
-                Debug.Log($"[Dodge] {target.name} né thành công đòn đánh của {source.name}! (roll {dodgeRoll:F1} ≤ {target.Stats.dodgeChance})");
+        if (target.Stats.dodgeChance <= 0) return;
 
-                EventBus.Emit(BattleEventType.SpawnFloatingText, new FloatingTextEventData
-                {
-                    Target = target,
-                    Value = 0,
-                    Type = FloatingTextType.Dodge,
-                    OffsetBuffer = Vector2.zero,
-                    customText = "Né!"
-                });
-            }
-        }
-    }
+        // 🎲 roll
+        int roll = Random.Range(0, 100);
+        if (roll >= target.Stats.dodgeChance) return;
 
-    public void ProcessPostAttack(BaseEntity source, BaseEntity target, List<BaseEntity> allAliveEnemies = null)
-    {
-        if (originalPhysicalDamage != 0)
+        // 💨 né → triệt tiêu damage
+        source.tempBonusDamage += DODGE_NEGATE;
+
+        Debug.Log($"[Dodge] {target.name} né thành công đòn của {source.name}! ({target.Stats.dodgeChance}% chance)");
+
+        EventBus.Emit(BattleEventType.SpawnFloatingText, new FloatingTextEventData
         {
-            source.Stats.physicalDamage = originalPhysicalDamage;
-            originalPhysicalDamage = 0;
-        }
+            Target = target,
+            Value = 0,
+            Type = FloatingTextType.Dodge,
+            OffsetBuffer = Vector2.zero,
+            customText = "Né"
+        });
     }
 }

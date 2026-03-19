@@ -18,7 +18,54 @@ public class ItemManager : EventEmitter
     public List<ItemClass> itemClasses;
     public Item itemPrefab;
 
+    private List<ItemDataSO> itemNormalList;
+    private List<ItemDataSO> itemRareList;
+    private List<ItemDataSO> itemEpicList;
+    private List<ItemDataSO> itemLegendaryList;
+
+
+
     public ItemClassSystem itemClassSystem;
+
+    public ItemManager()
+    {
+        this.InitRarityLists();
+    }
+
+    private void InitRarityLists()
+    {
+        itemNormalList = new List<ItemDataSO>();
+        itemRareList = new List<ItemDataSO>();
+        itemEpicList = new List<ItemDataSO>();
+        itemLegendaryList = new List<ItemDataSO>();
+
+        foreach (var item in itemDataList)
+        {
+            switch (item.Rarity)
+            {
+                case RarityType.Normal:
+                    itemNormalList.Add(item);
+                    break;
+
+                case RarityType.Rare:
+                    itemRareList.Add(item);
+                    break;
+
+                case RarityType.Epic:
+                    itemEpicList.Add(item);
+                    break;
+
+                case RarityType.Legendary:
+                    itemLegendaryList.Add(item);
+                    break;
+            }
+        }
+    }
+
+    public void CheckMilestoneFor(ItemClassType itemClass, BaseEntity target)
+    {
+        itemClassSystem.itemClassProcessorDict[itemClass].CheckMilestone(target);
+    }
 
     public void AddItemClass(Item item)
     {
@@ -49,28 +96,31 @@ public class ItemManager : EventEmitter
         for (int i = 0; i < sorted.Count; i++)
         {
             sorted[i].transform.SetSiblingIndex(i);
-            var count = itemClassSystem.itemClassProcessorDict[sorted[i].itemClassType].count ;
+            var count = itemClassSystem.itemClassProcessorDict[sorted[i].itemClassType].count;
             float amount = count > 0f ? 1f : 0.3f;
             sorted[i].SetOpacity(amount);
             sorted[i].countText.text = count + "";
         }
     }
 
-    public void UpdateAddItemClasses(Item item)
+    public void UpdateAddItemClasses(Item item, BaseEntity player)
     {
         foreach (var itemClass in item.itemClassTypes)
         {
             itemClassSystem.AddItemClass(itemClass);
-        }
+            this.CheckMilestoneFor(itemClass, player);
 
+        }
         this.UpdateItemClasses();
     }
 
-    public void UpdateRemoveItemClasses(Item item)
+    public void UpdateRemoveItemClasses(Item item, BaseEntity player)
     {
         foreach (var itemClass in item.itemClassTypes)
         {
             itemClassSystem.RemoveItemClass(itemClass);
+            this.CheckMilestoneFor(itemClass, player);
+
         }
 
         this.UpdateItemClasses();

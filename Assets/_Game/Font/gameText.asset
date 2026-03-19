@@ -6,7 +6,7 @@ Texture2D:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: SVN-Determination Sans SDF Atlas
+  m_Name: gameText Atlas
   m_ImageContentsHash:
     serializedVersion: 2
     Hash: 00000000000000000000000000000000
@@ -118,7 +118,7 @@ Material:
     - _OutlineSoftness: 0
     - _OutlineUVSpeedX: 0
     - _OutlineUVSpeedY: 0
-    - _OutlineWidth: 0.39
+    - _OutlineWidth: 0
     - _PerspectiveFilter: 0.875
     - _Reflectivity: 10
     - _ScaleRatioA: 0.8333333
@@ -166,11 +166,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
-  m_Name: SVN-Determination Sans SDF
+  m_Name: gameText
   m_EditorClassIdentifier: 
-  hashCode: -372721107
+  hashCode: 1195740211
   material: {fileID: -8376544078633822960}
-  materialHashCode: -443633427
+  materialHashCode: 2125771315
   m_Version: 1.1.0
   m_SourceFontFileGUID: 893a54f20c9fc184ab26acfe7db305e6
   m_SourceFontFile_EditorRef: {fileID: 12800000, guid: 893a54f20c9fc184ab26acfe7db305e6, type: 3}

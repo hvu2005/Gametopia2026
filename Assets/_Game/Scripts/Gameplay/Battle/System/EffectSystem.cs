@@ -10,25 +10,47 @@ public class EffectSystem
 
     }
 
-    public void ApplyEffect(BaseEffect effect, BaseEntity target)
-    {
-        effect.ApplyEffect(target);
-    }
+    // public void ApplyEffect(BaseEffect effect, BaseEntity target)
+    // {
+    //     effect.ApplyEffect(target);
+    // }
 
     public void TryRemoveEffect(BaseEffect effect, BaseEntity target)
     {
         effect.TryRemoveEffect(target);
     }
 
-    public void ApplyEffects(BaseEntity target)
+    public void ApplyPreEffects(BaseEntity target)
     {
-        // Iterate over a snapshot to avoid collection-modified issues
-        // (some effects may remove themselves in TryRemoveEffect, or other code).
         foreach (var effect in new List<BaseEffect>(target.ActiveEffects))
         {
-            ApplyEffect(effect, target);
+            if (effect is IPreEffect preEffect)
+            {
+                preEffect.ApplyPreEffect(target);
+            }
         }
     }
+
+    public void ApplyPostEffects(BaseEntity target)
+    {
+        foreach (var effect in new List<BaseEffect>(target.ActiveEffects))
+        {
+            if (effect is IPostEffect postEffect)
+            {
+                postEffect.ApplyPostEffect(target);
+            }
+        }
+    }
+
+    // public void ApplyEffects(BaseEntity target)
+    // {
+    //     // Iterate over a snapshot to avoid collection-modified issues
+    //     // (some effects may remove themselves in TryRemoveEffect, or other code).
+    //     foreach (var effect in new List<BaseEffect>(target.ActiveEffects))
+    //     {
+    //         ApplyEffect(effect, target);
+    //     }
+    // }
 
     public void TryRemoveEffects(BaseEntity target)
     {

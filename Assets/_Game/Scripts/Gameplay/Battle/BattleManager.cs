@@ -25,9 +25,24 @@ public class BattleManager : EventEmitter
 
     float t(float duration) => duration / (float)BattleSpeed;
 
-    public async Task StartBattle(BaseEntity player, BaseEnemy target, List<BaseEnemy> enemiesInBattle)
+    public void StartBattle(BaseEntity player, BaseEnemy target, List<BaseEnemy> enemiesInBattle)
     {
-        var originPos = player.transform.localPosition;
+        player.currentArmor = player.Stats.armor;
+        foreach (var enemy in enemiesInBattle)
+        {
+            enemy.currentArmor = enemy.Stats.armor;
+        }
+        EventBus.Emit<bool>(BattleEventType.Start, true);
+    }
+
+    public async Task StartPhase(BaseEntity player, BaseEnemy target, List<BaseEnemy> enemiesInBattle)
+    {
+        // var originPos = player.transform.localPosition;
+        player.hasExtraAttacked = false;
+        enemiesInBattle.ForEach(enemy =>
+        {
+           enemy.hasExtraAttacked = false; 
+        });
 
         for (int i = 0; i < enemiesInBattle.Count; i++)
         {
@@ -43,27 +58,22 @@ public class BattleManager : EventEmitter
             enemy.canSelect = false;
         }
 
-        // tiến lên
-        await player.transform
-            .DOLocalMoveX(originPos.x + 0.75f, t(0.25f))
-            .AsyncWaitForCompletion();
+        // // tiến lên
+        // await player.transform
+        //     .DOLocalMoveX(originPos.x + 0.75f, t(0.25f))
+        //     .AsyncWaitForCompletion();
 
-        // attack
+        // // attack
         await ExecutePlayerTurn(player, target);
 
-        // lùi về
-        await player.transform
-            .DOLocalMoveX(originPos.x, t(0.25f))
-            .AsyncWaitForCompletion();
+        // await Task.Delay((int)t(250));
 
-        int total = 0;
-        int completed = 0;
+        // // lùi về
+        // await player.transform
+        //     .DOLocalMoveX(originPos.x, t(0.25f))
+        //     .AsyncWaitForCompletion();
 
-        // đếm enemy sống
-        foreach (var e in enemiesInBattle)
-        {
-            if (!e.IsDead) total++;
-        }
+        List<Task> enemyTasks = new List<Task>();
 
         for (int i = 0; i < enemiesInBattle.Count; i++)
         {
@@ -73,65 +83,48 @@ public class BattleManager : EventEmitter
 
             float delay = i * t(0.15f);
 
-            DOVirtual.DelayedCall(delay, () =>
-            {
-                var originPosEnemy = enemy.transform.localPosition;
+            enemyTasks.Add(ExecuteEnemyTurn(enemy, player, (int)(delay * 1000)));
+        }
 
-                Sequence seq = DOTween.Sequence();
+        // 👉 chờ tất cả enemy đánh xong
+        await Task.WhenAll(enemyTasks);
 
-                seq.Append(enemy.transform.DOLocalMoveX(originPosEnemy.x - 0.75f, t(0.25f)));
-
-                seq.AppendCallback(() => _ = ExecuteEnemyTurn(enemy, player));
-
-                seq.Append(enemy.transform.DOLocalMoveX(originPosEnemy.x, t(0.25f)));
-
-                // 👉 Khi enemy này xong
-                seq.OnComplete(() =>
-                {
-                    completed++;
-
-                    if (completed >= total)
-                    {
-                        // tất cả enemy xong
-                        foreach (var e in enemiesInBattle)
-                        {
-                            if (!e.IsDead)
-                                e.canSelect = true;
-                        }
-
-                        CheckEnemies(enemiesInBattle);
-                    }
-                });
-            });
+        // 👉 giờ mới check
+        foreach (var e in enemiesInBattle)
+        {
+            if (!e.IsDead)
+                e.canSelect = true;
         }
 
         CheckEnemies(enemiesInBattle);
 
     }
 
-    public async Task ExecuteEnemyTurn(BaseEntity attacker, BaseEntity target)
+    public async Task ExecuteEnemyTurn(BaseEntity attacker, BaseEntity target, int delay = 0)
     {
-        this.CreateSwordAnimation(attacker, target, 1);
+        await Task.Delay(delay);
+
+        // this.CreateSwordAnimation(attacker, target, 1);
 
         attacker.SetActiveTurn(true);
         // await Task.Delay(250);
-        ExecuteTurn(attacker, target);
-        await Task.Delay((int)(250 / BattleSpeed));
+        await ExecuteTurn(attacker, target, -1);
+        // await Task.Delay((int)(250 / BattleSpeed));
     }
 
     public async Task ExecutePlayerTurn(BaseEntity attacker, BaseEntity target)
     {
 
-        this.CreateSwordAnimation(attacker, target, -1);
+        // this.CreateSwordAnimation(attacker, target, -1);
 
         attacker.SetActiveTurn(true);
-        await Task.Delay((int)(250 / BattleSpeed));
+        // await Task.Delay((int)(250 / BattleSpeed));
 
-        ExecuteTurn(attacker, target);
-        await Task.Delay((int)(250 / BattleSpeed));
+        await ExecuteTurn(attacker, target, 1);
+        // await Task.Delay((int)(250 / BattleSpeed));
     }
 
-    public void CreateSwordAnimation(BaseEntity attacker, BaseEntity target, int direction = 1)
+    public async Task CreateSwordAnimation(BaseEntity attacker, BaseEntity target, int direction = 1)
     {
         var pool = PoolController.Instance.GetPool("Sword");
         var sword = pool.Get();
@@ -151,15 +144,18 @@ public class BattleManager : EventEmitter
             {
                 pool.Release(sword);
             });
+        await Task.Delay((int)t(250));
     }
 
-    public void ExecuteTurn(BaseEntity attacker, BaseEntity target)
+    public async Task ExecuteTurn(BaseEntity attacker, BaseEntity target, int direction = 1)
     {
         attacker.IsAttacked = false;
 
-        Debug.Log($"Executing turn: {attacker.name} attacks {target.name}");
 
-        _effectSystem.ApplyEffects(attacker);
+        _effectSystem.ApplyPreEffects(attacker);
+
+        attacker.OnUpdateStat();
+        target.OnUpdateStat();
 
         if (attacker.IsDead || target.IsDead)
         {
@@ -169,26 +165,47 @@ public class BattleManager : EventEmitter
 
         if (!attacker.IsAttacked)
         {
-            _statProcessSystem.ProcessPreAttack(attacker, target);
+            var originPos = attacker.transform.localPosition;
 
-            _statProcessSystem.ProcessOnAttack(attacker, target);
+            while (!attacker.IsAttacked & !target.IsDead)
+            {
 
-            _statProcessSystem.ProcessPostAttack(attacker, target);
+                attacker.IsAttacked = true;
 
-            _statProcessSystem.ProcessBeAttacked(attacker, target);
+                await attacker.transform
+                .DOLocalMoveX(originPos.x + 0.75f * direction, t(0.25f))
+                .AsyncWaitForCompletion();
 
-            target.OnTakeDamage();
+                await CreateSwordAnimation(attacker, target, -direction);
 
-            CameraShake.Instance.Shake(t(0.1f), 0.05f, 20);
 
-            attacker.IsAttacked = true;
+                _statProcessSystem.ProcessPreAttack(attacker, target);
+                _statProcessSystem.ProcessOnAttack(attacker, target);
+                _statProcessSystem.ProcessPostAttack(attacker, target);
+                _statProcessSystem.ProcessBeAttacked(attacker, target);
+
+                attacker.OnUpdateStat();
+                target.OnUpdateStat();
+
+                target.OnTakeDamage();
+                CameraShake.Instance.Shake(t(0.1f), 0.05f, 20);
+
+            }
+
+            await attacker.transform
+                .DOLocalMoveX(originPos.x, t(0.25f))
+                .AsyncWaitForCompletion();
+
         }
 
+        _effectSystem.ApplyPostEffects(attacker);
         _effectSystem.TryRemoveEffects(attacker);
 
 
         attacker.OnUpdateStat();
         target.OnUpdateStat();
+
+
     }
 
     public void CheckEnemies(List<BaseEnemy> enemiesInBattle)
@@ -196,6 +213,8 @@ public class BattleManager : EventEmitter
         if (enemiesInBattle.TrueForAll(e => e.IsDead))
         {
             Debug.Log("All enemies defeated! Player wins!");
+            EventBus.Emit<bool>(BattleEventType.End, true);
+
             this.Emit<string>(BattleEventType.Win, "Player wins!");
         }
     }

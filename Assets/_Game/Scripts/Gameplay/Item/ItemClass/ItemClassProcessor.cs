@@ -1,12 +1,13 @@
 ﻿
 
 using System.Collections.Generic;
+using UnityEngine;
 
 public class ItemClassProcessor
 {
     private int _count = 0;
 
-    public List<int> milestoneList = new List<int>();
+    public List<int> milestoneList;
 
     public int currentMilestone = 0;
 
@@ -20,29 +21,35 @@ public class ItemClassProcessor
         get { return _count; }
         set
         {
-            // if (count == milestoneList[currentMilestone])
-            // {
-            //     currentMilestone++;
-            //     this.OnMilestoneUp();
-            // }
-            // else if (count < milestoneList[currentMilestone])
-            // {
-            //     currentMilestone--;
-            //     this.OnMilestoneDown();
-            // }
-
             _count = value;
+
+
+
         }
     }
 
-    public virtual void OnMilestoneUp()
+    public void CheckMilestone(BaseEntity target)
+    {
+        if (_count == milestoneList[currentMilestone])
+        {
+            currentMilestone++;
+            this.OnMilestoneUp(target);
+        }
+        else if (currentMilestone > 0 && _count < milestoneList[currentMilestone])
+        {
+            currentMilestone--;
+            this.OnMilestoneDown(target);
+        }
+    }
+
+    public virtual void OnMilestoneUp(BaseEntity target)
     {
 
     }
 
-    public virtual void OnMilestoneDown()
+    public virtual void OnMilestoneDown(BaseEntity target)
     {
-        
+
     }
 
 }

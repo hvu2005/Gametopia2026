@@ -31,5 +31,6 @@ public class PlayerManager : EventEmitter
         player.ActiveEffects.Clear();
         player.currentArmor = player.Stats.armor;
         player.currentHp = player.Stats.hp;
+        player.OnUpdateStat();
     }
 }
