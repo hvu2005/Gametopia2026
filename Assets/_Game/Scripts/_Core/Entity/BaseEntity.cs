@@ -79,13 +79,6 @@ public abstract class BaseEntity : MonoBehaviour, ICombatant
     {
         currentHp = Mathf.Min(currentHp + amount, Stats.hp);
     }
-
-    /// <summary>Hồi giáp về đầy (gọi sau khi kết thúc mỗi combat).</summary>
-    public virtual void RestoreArmor()
-    {
-        currentArmor = Stats.armor;
-    }
-
     // Các hành động trong Combat
     public virtual void OnTakeDamage()
     {

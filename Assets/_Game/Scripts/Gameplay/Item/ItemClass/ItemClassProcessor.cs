@@ -20,16 +20,16 @@ public class ItemClassProcessor
         get { return _count; }
         set
         {
-            if (count == milestoneList[currentMilestone])
-            {
-                currentMilestone++;
-                this.OnMilestoneUp();
-            }
-            else if (count < milestoneList[currentMilestone])
-            {
-                currentMilestone--;
-                this.OnMilestoneDown();
-            }
+            // if (count == milestoneList[currentMilestone])
+            // {
+            //     currentMilestone++;
+            //     this.OnMilestoneUp();
+            // }
+            // else if (count < milestoneList[currentMilestone])
+            // {
+            //     currentMilestone--;
+            //     this.OnMilestoneDown();
+            // }
 
             _count = value;
         }

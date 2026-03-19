@@ -196,17 +196,7 @@ public class BattleManager : EventEmitter
         if (enemiesInBattle.TrueForAll(e => e.IsDead))
         {
             Debug.Log("All enemies defeated! Player wins!");
-            
             this.Emit<string>(BattleEventType.Win, "Player wins!");
         }
-    }
-
-    /// <summary>
-    /// Gọi sau khi kết thúc toàn bộ combat để hồi giáp về đầy cho player và tất cả enemy còn sống.
-    /// </summary>
-    public void RestoreAllDefense(BaseEntity player, List<BaseEnemy> enemiesInBattle)
-    {
-        player.RestoreArmor();
-        Debug.Log("[Defense] Giáp của nhân vật đã hồi về đầy sau combat.");
     }
 }

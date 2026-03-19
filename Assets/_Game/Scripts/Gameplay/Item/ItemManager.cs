@@ -6,23 +6,84 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 [Serializable]
 public class ItemManager : EventEmitter
 {
     public List<ItemDataSO> itemDataList;
-    public List<InventorySlot> itemSlots;   
+    public List<InventorySlot> itemSlots;
+    public List<EquipeSlot> equipeSlots;
+    public List<ItemClass> itemClasses;
     public Item itemPrefab;
+
+    public ItemClassSystem itemClassSystem;
+
+    public void AddItemClass(Item item)
+    {
+        foreach (var itemClass in item.itemClassTypes)
+        {
+            itemClassSystem.AddItemClass(itemClass);
+
+        }
+    }
+
+    public void RemoveItemClass(Item item)
+    {
+        foreach (var itemClass in item.itemClassTypes)
+        {
+            itemClassSystem.RemoveItemClass(itemClass);
+
+        }
+    }
+
+    public void UpdateItemClasses()
+    {
+        var sorted = itemClasses
+            .OrderByDescending(x =>
+                itemClassSystem.itemClassProcessorDict[x.itemClassType].count)
+            .ToList();
+
+        // Set lại sibling index
+        for (int i = 0; i < sorted.Count; i++)
+        {
+            sorted[i].transform.SetSiblingIndex(i);
+            var count = itemClassSystem.itemClassProcessorDict[sorted[i].itemClassType].count ;
+            float amount = count > 0f ? 1f : 0.3f;
+            sorted[i].SetOpacity(amount);
+            sorted[i].countText.text = count + "";
+        }
+    }
+
+    public void UpdateAddItemClasses(Item item)
+    {
+        foreach (var itemClass in item.itemClassTypes)
+        {
+            itemClassSystem.AddItemClass(itemClass);
+        }
+
+        this.UpdateItemClasses();
+    }
+
+    public void UpdateRemoveItemClasses(Item item)
+    {
+        foreach (var itemClass in item.itemClassTypes)
+        {
+            itemClassSystem.RemoveItemClass(itemClass);
+        }
+
+        this.UpdateItemClasses();
+    }
 
     public Item SpawnItem(ItemDataSO itemData, Transform parent)
     {
         var spawnedItem = UnityEngine.Object.Instantiate(itemPrefab, parent);
         spawnedItem.Init(itemData);
 
-        foreach(var itemSlot in itemSlots)
+        foreach (var itemSlot in itemSlots)
         {
-            if(!itemSlot.IsEmpty()) continue;
+            if (!itemSlot.IsEmpty()) continue;
 
             var rectItem = spawnedItem.GetComponent<RectTransform>();
             var rectSlot = itemSlot.GetComponent<RectTransform>();
@@ -35,7 +96,7 @@ public class ItemManager : EventEmitter
             break;
         }
 
-        return spawnedItem;    
+        return spawnedItem;
     }
     public List<ItemDataSO> GetRandomItemDataList(int count = 3)
     {
