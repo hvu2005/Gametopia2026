@@ -1235,6 +1235,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: ItemPanel (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3696131982641637154, guid: 593e73d4fd2ca2f408df6cf536f4f387, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: ed348b0dbf7310f4a8d8806390c2adf7, type: 2}
+    - target: {fileID: 3696131982641637154, guid: 593e73d4fd2ca2f408df6cf536f4f387, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -8376544078633822960, guid: ed348b0dbf7310f4a8d8806390c2adf7, type: 2}
+    - target: {fileID: 3696131982641637154, guid: 593e73d4fd2ca2f408df6cf536f4f387, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7288288963280281214, guid: 593e73d4fd2ca2f408df6cf536f4f387, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1542,21 +1554,21 @@ MonoBehaviour:
     coKhi: 0
     xayDung: 0
   Stats:
-    hp: 10
-    physicalDamage: 2
+    hp: 50
+    physicalDamage: 5
     armor: 15
-    criticalChance: 50
+    criticalChance: 5
     criticalDamage: 150
-    lifeSteal: 5
-    magicDamage: 1
-    poisonous: 7
+    lifeSteal: 0
+    magicDamage: 0
+    poisonous: 0
     stunChance: 0
-    luck: 0
+    luck: 5
     increaseDamage: 0
     increaseMagic: 0
     thorn: 0
-    dodgeChance: 50
-    speed: 100
+    dodgeChance: 0
+    speed: 0
     rage: 0
     regeneration: 0
   currentHp: 0
@@ -3979,12 +3991,15 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5da6db6d3f46e9743bead509fe44693f, type: 2}
   - {fileID: 11400000, guid: db65607419c37914b883066c3b205da6, type: 2}
   - {fileID: 11400000, guid: 6ef7a2109ab16f244955e0453e1e7797, type: 2}
-  - {fileID: 11400000, guid: 5da6db6d3f46e9743bead509fe44693f, type: 2}
-  - {fileID: 11400000, guid: 5da6db6d3f46e9743bead509fe44693f, type: 2}
-  - {fileID: 11400000, guid: 5da6db6d3f46e9743bead509fe44693f, type: 2}
-  - {fileID: 11400000, guid: 5da6db6d3f46e9743bead509fe44693f, type: 2}
-  - {fileID: 11400000, guid: 5da6db6d3f46e9743bead509fe44693f, type: 2}
-  - {fileID: 11400000, guid: 5da6db6d3f46e9743bead509fe44693f, type: 2}
+  - {fileID: 11400000, guid: 03763537b64f006468dce7e3faae5d5b, type: 2}
+  - {fileID: 11400000, guid: 94f7c6eee6213774298df7fc817322f5, type: 2}
+  - {fileID: 11400000, guid: e5b37be7d0891b341a217a4802c28616, type: 2}
+  - {fileID: 11400000, guid: 6152d7978a7a2894088e25de46c5f8e4, type: 2}
+  - {fileID: 11400000, guid: adab0d0fbbe75d248a3e5b00c9dcdc18, type: 2}
+  - {fileID: 11400000, guid: 5cdaf7ae0dd7f274fb820e5dd6a3e6b4, type: 2}
+  - {fileID: 11400000, guid: 3f77d56181999da458b8ac02535b5821, type: 2}
+  - {fileID: 11400000, guid: b61ac82d65f639140b3aa9ec13b5bee7, type: 2}
+  - {fileID: 11400000, guid: 2cd32fbe0dc03304db7900701a41d7d3, type: 2}
   gameplayCanvas: {fileID: 1382521196}
   isStartBattle: 0
   playerManager:
@@ -3995,6 +4010,7 @@ MonoBehaviour:
     - {fileID: 922169173}
     - {fileID: 802569696}
     enemiesInBattle: []
+    enemyPrefab: {fileID: 5191958684848598955, guid: 9a30b9ca270c71743b208c889210f734, type: 3}
   battleManager:
     BattleSpeed: 1
   mapManager:
@@ -5077,6 +5093,18 @@ PrefabInstance:
     - target: {fileID: 393894036750756828, guid: 593e73d4fd2ca2f408df6cf536f4f387, type: 3}
       propertyPath: m_Name
       value: ItemPanel (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3696131982641637154, guid: 593e73d4fd2ca2f408df6cf536f4f387, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: ed348b0dbf7310f4a8d8806390c2adf7, type: 2}
+    - target: {fileID: 3696131982641637154, guid: 593e73d4fd2ca2f408df6cf536f4f387, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -8376544078633822960, guid: ed348b0dbf7310f4a8d8806390c2adf7, type: 2}
+    - target: {fileID: 3696131982641637154, guid: 593e73d4fd2ca2f408df6cf536f4f387, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5753399115462334367, guid: 593e73d4fd2ca2f408df6cf536f4f387, type: 3}
       propertyPath: m_hasFontAssetChanged
@@ -7876,6 +7904,18 @@ PrefabInstance:
     - target: {fileID: 393894036750756828, guid: 593e73d4fd2ca2f408df6cf536f4f387, type: 3}
       propertyPath: m_Name
       value: ItemPanel
+      objectReference: {fileID: 0}
+    - target: {fileID: 3696131982641637154, guid: 593e73d4fd2ca2f408df6cf536f4f387, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: ed348b0dbf7310f4a8d8806390c2adf7, type: 2}
+    - target: {fileID: 3696131982641637154, guid: 593e73d4fd2ca2f408df6cf536f4f387, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -8376544078633822960, guid: ed348b0dbf7310f4a8d8806390c2adf7, type: 2}
+    - target: {fileID: 3696131982641637154, guid: 593e73d4fd2ca2f408df6cf536f4f387, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5753399115462334367, guid: 593e73d4fd2ca2f408df6cf536f4f387, type: 3}
       propertyPath: m_hasFontAssetChanged

@@ -65,7 +65,8 @@ public abstract class BaseEntity : MonoBehaviour, ICombatant
 
     public virtual void OnUpdateStat()
     {
-        SetHpFill(currentHp / Stats.hp);
+        var d = Stats.hp == 0 ? 1 : Stats.hp;
+        SetHpFill(currentHp / d);
 
         if (statusUIController != null)
         {
@@ -94,7 +95,7 @@ public abstract class BaseEntity : MonoBehaviour, ICombatant
             var max = Math.Max(0, amount);
             hpBar.transform.localScale = new Vector3(max, 1, 1);
 
-            hpText.text = Mathf.RoundToInt(Math.Max(0,currentHp)) + "/" + Stats.hp;
+            hpText.text = $"{Math.Max(0, currentHp):0.#}/{Stats.hp:0.#}";
         }
     }
 

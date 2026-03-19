@@ -393,7 +393,7 @@ MonoBehaviour:
     speed: 0
     rage: 0
     regeneration: 0
-  currentHp: 0
+  currentHp: 10
   lastDamageDealt: 0
   currentArmor: 0
   luckyDropBonus: 0
@@ -512,7 +512,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0.28, z: 0}
-  m_LocalScale: {x: -1.49, y: 1.49, z: 1.49}
+  m_LocalScale: {x: 1.49, y: 1.49, z: 1.49}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2985276964613678112}

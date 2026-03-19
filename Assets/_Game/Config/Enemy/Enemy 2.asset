@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5df3cf59bb67a84bb093d0986d11a87, type: 3}
+  m_Name: Enemy 2
+  m_EditorClassIdentifier: 
+  stats:
+    hp: 5
+    physicalDamage: 2
+    armor: 0
+    criticalChance: 0
+    criticalDamage: 0
+    lifeSteal: 0
+    magicDamage: 0
+    poisonous: 0
+    stunChance: 0
+    luck: 0
+    increaseDamage: 0
+    increaseMagic: 0
+    thorn: 0
+    dodgeChance: 30
+    speed: 0
+    rage: 0
+    regeneration: 0
+  sprite: {fileID: 21300000, guid: 70fecb7879a2fd64d8800e2a192d2405, type: 3}
+  Direction: 1

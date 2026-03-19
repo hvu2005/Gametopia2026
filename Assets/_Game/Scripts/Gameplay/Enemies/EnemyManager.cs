@@ -9,9 +9,13 @@ public class EnemyManager
 {
     [SerializeField] private List<Transform> rectSlotList;
     public List<BaseEnemy> enemiesInBattle = new();
-    public BaseEnemy CreateEnemy(BaseEnemy enemyPrefab, Transform parent)
+    public BaseEnemy enemyPrefab;
+    public BaseEnemy CreateEnemy(EnemyDataSO enemyData, Transform parent, int level)
     {
         var newEnemy = Object.Instantiate(enemyPrefab, parent);
+        newEnemy.Init(enemyData, level);
+        var localScale = newEnemy.visual.transform.localScale;
+        newEnemy.visual.transform.localScale = new Vector3(localScale.x * enemyData.Direction, localScale.y, localScale.z);
         return newEnemy;
     }
 
@@ -25,9 +29,8 @@ public class EnemyManager
         enemiesInBattle.Clear();
         for (int i = 0; i < level.enemies.Length; i++)
         {
-            var enemyPrefab = level.enemies[i];
 
-            var newEnemy = CreateEnemy(enemyPrefab, rectSlotList[i]);
+            var newEnemy = CreateEnemy(level.enemies[i], rectSlotList[i], level.levelID);
             enemiesInBattle.Add(newEnemy);
         }
     }

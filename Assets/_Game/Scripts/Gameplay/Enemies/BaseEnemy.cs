@@ -16,15 +16,24 @@ public class BaseEnemy : BaseEntity
 
     public override void Start()
     {
-        base.Start();
+        // base.Start();
         this.originScale = this.visual.transform.localScale;
+    }
+
+    public void Init(EnemyDataSO enemyData, int level = 1)
+    {
+        this.Stats = enemyData.Stats * (1f + level / 5f);
+        this.visual.sprite = enemyData.Sprite;
+        this.currentHp = Stats.hp;
+        this.currentArmor = Stats.armor;
+        this.OnUpdateStat();
     }
 
     public override void OnUpdateStat()
     {
         base.OnUpdateStat();
 
-        if (currentHp < 1)
+        if (currentHp <= 0)
         {
             Die();
         }
@@ -44,24 +53,24 @@ public class BaseEnemy : BaseEntity
 
     public void OnMouseDown()
     {
-        if(!canSelect) return;
+        if (!canSelect) return;
 
         EventBus.Emit<BaseEnemy>(EnemyEventType.Select, this);
     }
 
     public void OnMouseEnter()
     {
-        if(!canSelect) return;
+        if (!canSelect) return;
 
-        this.visual.transform.DOScale(this.originScale*1.2f, 0.2f);
+        this.visual.transform.DOScale(this.originScale * 1.2f, 0.2f);
         this.isHoving = true;
     }
 
     public void OnMouseOver()
     {
-        if(canSelect && !isHoving) return;
+        if (canSelect && !isHoving) return;
 
-        this.visual.transform.DOScale(this.originScale*1.2f, 0.2f);
+        this.visual.transform.DOScale(this.originScale * 1.2f, 0.2f);
         this.isHoving = true;
     }
 

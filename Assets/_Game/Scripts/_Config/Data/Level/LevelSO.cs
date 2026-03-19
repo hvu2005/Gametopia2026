@@ -7,5 +7,5 @@ using UnityEngine;
 public class LevelSO : BaseLevelSO
 {
     public Sprite background;
-    public BaseEnemy[] enemies;
+    public EnemyDataSO[] enemies;
 }
