@@ -25,6 +25,10 @@ public class StatProcessSystem
         // --- PostAttack phase ---
         // 6. Choáng
         statProcessors.Add(new StunProcessor());
+        // --- HiddenStat: Cơ khí (đòn 3 choáng) ---
+        statProcessors.Add(new CoKhiStatProcessor());
+        // --- HiddenStat: Tá điền (hồi HP theo đòn) ---
+        statProcessors.Add(new TadienStatProcessor());
         // 7. Hút máu (flat, dùng Stats.lifeSteal)
         statProcessors.Add(new LifeStealProcessor());
         // 8. Hút máu % sát thương (dùng Stats.suckBlood)
@@ -37,6 +41,10 @@ public class StatProcessSystem
         statProcessors.Add(new AttackSpeedProcessor());
         // 12. May mắn: tăng bậc rarity loot khi kẻ địch chết
         statProcessors.Add(new LuckyProcessor());
+
+        // --- BeAttacked phase ---
+        // HiddenStat: Xây dựng (+giáp khi bị đánh, tối đa stack)
+        statProcessors.Add(new XayDungStatProcessor());
     }
 
     public void ProcessPreAttack(BaseEntity source, BaseEntity target)
