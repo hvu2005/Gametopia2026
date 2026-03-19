@@ -34,8 +34,12 @@ public class BaseEnemy : BaseEntity
     {
         base.Die();
         Debug.Log($"{name} has died.");
-        this.gameObject.SetActive(false);
-        // Destroy(this.gameObject);   
+
+        visual.DOFade(0f, 0.25f)
+            .OnComplete(() =>
+            {
+                gameObject.SetActive(false);
+            });
     }
 
     public void OnMouseDown()

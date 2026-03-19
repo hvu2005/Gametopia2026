@@ -138,12 +138,12 @@ MonoBehaviour:
     criticalChance: 0
     criticalDamage: 0
     lifeSteal: 0
-    fortune: 0
     magicDamage: 0
     poisonous: 2
     stunChance: 0
-    lucky: 0
+    luck: 0
     increaseDamage: 0
+    increaseMagic: 0
     counterAttackChance: 0
     dodgeChance: 0
     speed: 0
@@ -155,6 +155,8 @@ MonoBehaviour:
   luckyDropBonus: 0
   hpBar: {fileID: 5583225899739228384}
   visual: {fileID: 2404271364644731835}
+  canSelect: 1
+  isHoving: 0
 --- !u!61 &6487448013949646815
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -286,7 +288,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: d4237f4843ccb944cb361b9fd7538e0e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

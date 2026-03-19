@@ -9,6 +9,8 @@ public class GameManager : Singleton<GameManager>
 
     [SerializeField] private Canvas gameplayCanvas;
 
+    public bool isStartBattle = false;
+
     [Header("Managers")]
     public PlayerManager playerManager;
     public EnemyManager enemyManager;
@@ -100,6 +102,8 @@ public class GameManager : Singleton<GameManager>
 
     public void StartBattle(BaseEnemy enemy)
     {
+        isStartBattle = true;
+        EventBus.Emit<bool>(BattleEventType.Start, true);
         _ = battleManager.StartBattle(
             playerManager.player,
             enemy,
@@ -109,6 +113,9 @@ public class GameManager : Singleton<GameManager>
 
     public void SpawnItemWhenWin()
     {
+        isStartBattle = false;
+        EventBus.Emit<bool>(BattleEventType.End, true);
+        
         var spawnedItems = itemManager.GetRandomItemDataList();
         uiManager.ShowItemSelection(spawnedItems);
     }

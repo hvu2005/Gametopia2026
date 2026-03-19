@@ -1,10 +1,12 @@
+using System;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 // Interface cho các hành động chiến đấu cơ bản
 public interface ICombatant
 {
-    void TakeDamage(float amount, bool isCritical);
+    void OnTakeDamage();
     void PerformBasicAttack(BaseEntity target);
 }
 
@@ -62,7 +64,8 @@ public abstract class BaseEntity : MonoBehaviour, ICombatant
     {
         if (hpBar)
         {
-            hpBar.transform.localScale = new Vector3(amount, 1, 1);
+            var max = Math.Max(0, amount);
+            hpBar.transform.localScale = new Vector3(max, 1, 1);
         }
     }
 
@@ -83,9 +86,15 @@ public abstract class BaseEntity : MonoBehaviour, ICombatant
     }
 
     // Các hành động trong Combat
-    public virtual void TakeDamage(float amount, bool isCritical)
+    public virtual void OnTakeDamage()
     {
-        // Stats.hp -= amount;
+        var mat = visual.material;
+
+        mat.DOFloat(0.7f, "_FloatAmount", 0.1f)
+            .OnComplete(() =>
+            {
+                mat.DOFloat(0f, "_FloatAmount", 0.05f);
+            });
     }
     public virtual void PerformBasicAttack(BaseEntity target)
     {
