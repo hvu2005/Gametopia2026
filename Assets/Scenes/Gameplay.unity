@@ -212,6 +212,7 @@ GameObject:
   - component: {fileID: 63319022}
   - component: {fileID: 63319024}
   - component: {fileID: 63319023}
+  - component: {fileID: 63319025}
   m_Layer: 5
   m_Name: Class - Ta Dien
   m_TagString: Untagged
@@ -277,6 +278,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 63319021}
   m_CullTransparentMesh: 1
+--- !u!114 &63319025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 63319021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4bf866998c65d84baf5dd7cd55f8623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemClassType: 1
+  count: 0
+  countText: {fileID: 463611118}
+  icon: {fileID: 63319023}
 --- !u!1 &72778743
 GameObject:
   m_ObjectHideFlags: 0
@@ -3716,6 +3733,7 @@ GameObject:
   - component: {fileID: 966658633}
   - component: {fileID: 966658635}
   - component: {fileID: 966658634}
+  - component: {fileID: 966658636}
   m_Layer: 5
   m_Name: Class - Nhiet Nang
   m_TagString: Untagged
@@ -3781,6 +3799,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 966658632}
   m_CullTransparentMesh: 1
+--- !u!114 &966658636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 966658632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4bf866998c65d84baf5dd7cd55f8623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemClassType: 6
+  count: 0
+  countText: {fileID: 1750794557}
+  icon: {fileID: 966658634}
 --- !u!1 &970220658
 GameObject:
   m_ObjectHideFlags: 0
@@ -3933,6 +3967,17 @@ MonoBehaviour:
     - {fileID: 1725984322}
     - {fileID: 1660412501}
     - {fileID: 1426630383}
+    equipeSlots: []
+    itemClasses:
+    - {fileID: 1820871863}
+    - {fileID: 1439538006}
+    - {fileID: 966658636}
+    - {fileID: 1940342961}
+    - {fileID: 1258509054}
+    - {fileID: 63319025}
+    - {fileID: 1090982691}
+    - {fileID: 1580783753}
+    - {fileID: 1988639770}
     itemPrefab: {fileID: 840598921868991952, guid: 7efe11b6c0edc7646a2c6e10226e7e61, type: 3}
   uiManager:
     itemPanelUIList:
@@ -4307,6 +4352,7 @@ GameObject:
   - component: {fileID: 1090982688}
   - component: {fileID: 1090982690}
   - component: {fileID: 1090982689}
+  - component: {fileID: 1090982691}
   m_Layer: 5
   m_Name: Class - Xay Dung
   m_TagString: Untagged
@@ -4372,6 +4418,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1090982687}
   m_CullTransparentMesh: 1
+--- !u!114 &1090982691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1090982687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4bf866998c65d84baf5dd7cd55f8623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemClassType: 4
+  count: 0
+  countText: {fileID: 1985542480}
+  icon: {fileID: 1090982689}
 --- !u!1 &1099733554
 GameObject:
   m_ObjectHideFlags: 0
@@ -5088,6 +5150,7 @@ GameObject:
   - component: {fileID: 1258509051}
   - component: {fileID: 1258509053}
   - component: {fileID: 1258509052}
+  - component: {fileID: 1258509054}
   m_Layer: 5
   m_Name: Class - Sac Lem
   m_TagString: Untagged
@@ -5153,6 +5216,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1258509050}
   m_CullTransparentMesh: 1
+--- !u!114 &1258509054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1258509050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4bf866998c65d84baf5dd7cd55f8623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemClassType: 8
+  count: 0
+  countText: {fileID: 853876820}
+  icon: {fileID: 1258509052}
 --- !u!1 &1382521193
 GameObject:
   m_ObjectHideFlags: 0
@@ -5486,6 +5565,7 @@ GameObject:
   - component: {fileID: 1439538003}
   - component: {fileID: 1439538005}
   - component: {fileID: 1439538004}
+  - component: {fileID: 1439538006}
   m_Layer: 5
   m_Name: Class - CoKhi
   m_TagString: Untagged
@@ -5551,6 +5631,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1439538002}
   m_CullTransparentMesh: 1
+--- !u!114 &1439538006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1439538002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4bf866998c65d84baf5dd7cd55f8623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemClassType: 3
+  count: 0
+  countText: {fileID: 484854341}
+  icon: {fileID: 1439538004}
 --- !u!1 &1452639346
 GameObject:
   m_ObjectHideFlags: 0
@@ -5631,6 +5727,7 @@ GameObject:
   - component: {fileID: 1580783750}
   - component: {fileID: 1580783752}
   - component: {fileID: 1580783751}
+  - component: {fileID: 1580783753}
   m_Layer: 5
   m_Name: Class - Dien Nang
   m_TagString: Untagged
@@ -5696,6 +5793,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1580783749}
   m_CullTransparentMesh: 1
+--- !u!114 &1580783753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1580783749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4bf866998c65d84baf5dd7cd55f8623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemClassType: 0
+  count: 0
+  countText: {fileID: 541022229}
+  icon: {fileID: 1580783751}
 --- !u!1 &1600439891
 GameObject:
   m_ObjectHideFlags: 0
@@ -6905,6 +7018,7 @@ GameObject:
   - component: {fileID: 1820871860}
   - component: {fileID: 1820871862}
   - component: {fileID: 1820871861}
+  - component: {fileID: 1820871863}
   m_Layer: 5
   m_Name: Class - BaoHo
   m_TagString: Untagged
@@ -6970,6 +7084,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1820871859}
   m_CullTransparentMesh: 1
+--- !u!114 &1820871863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1820871859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4bf866998c65d84baf5dd7cd55f8623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemClassType: 2
+  count: 0
+  countText: {fileID: 792690068}
+  icon: {fileID: 1820871861}
 --- !u!1 &1893405294
 GameObject:
   m_ObjectHideFlags: 0
@@ -7183,6 +7313,7 @@ GameObject:
   - component: {fileID: 1940342958}
   - component: {fileID: 1940342960}
   - component: {fileID: 1940342959}
+  - component: {fileID: 1940342961}
   m_Layer: 5
   m_Name: Class - Nang Do
   m_TagString: Untagged
@@ -7248,6 +7379,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1940342957}
   m_CullTransparentMesh: 1
+--- !u!114 &1940342961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1940342957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4bf866998c65d84baf5dd7cd55f8623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemClassType: 7
+  count: 0
+  countText: {fileID: 1099733556}
+  icon: {fileID: 1940342959}
 --- !u!1 &1985542478
 GameObject:
   m_ObjectHideFlags: 0
@@ -7393,6 +7540,7 @@ GameObject:
   - component: {fileID: 1988639767}
   - component: {fileID: 1988639769}
   - component: {fileID: 1988639768}
+  - component: {fileID: 1988639770}
   m_Layer: 5
   m_Name: Class - Do Dac
   m_TagString: Untagged
@@ -7458,6 +7606,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1988639766}
   m_CullTransparentMesh: 1
+--- !u!114 &1988639770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1988639766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4bf866998c65d84baf5dd7cd55f8623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemClassType: 0
+  count: 0
+  countText: {fileID: 1893405296}
+  icon: {fileID: 1988639768}
 --- !u!1001 &3110487266672126546
 PrefabInstance:
   m_ObjectHideFlags: 0

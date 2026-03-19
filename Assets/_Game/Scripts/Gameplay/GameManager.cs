@@ -44,13 +44,11 @@ public class GameManager : Singleton<GameManager>
 
         itemManager.On<Item>(ItemEventType.Equipe, (item) =>
         {
-            itemManager.AddItemClass(item);
             itemManager.UpdateAddItemClasses(item);
         });
 
         itemManager.On<Item>(ItemEventType.Unequipe, (item) =>
         {
-            itemManager.RemoveItemClass(item);
             itemManager.UpdateRemoveItemClasses(item);
         });
 
