@@ -15,6 +15,8 @@ public class StatProcessSystem
         statProcessors.Add(new DodgeProcessor());
         // 2. Crit: nhân physicalDamage nếu chí mạng
         statProcessors.Add(new CritProcessor());
+        // Regeneration: hồi HP trước khi đánh
+        statProcessors.Add(new RegenerationProcessor());
         // 3. Khuếch đại sát thương: nhân thêm % sau khi crit đã tính
         statProcessors.Add(new DamageAmpProcessor());
         // MagicDamageAmp: nhân magicDamage trước khi tung đòn phép
