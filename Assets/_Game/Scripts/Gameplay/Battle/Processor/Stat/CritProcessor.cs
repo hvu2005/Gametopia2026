@@ -14,7 +14,8 @@ public class CritProcessor : BaseStatProcessor, IPreAttack, IPostAttack
             {
                 originalPhysicalDamage = source.Stats.physicalDamage;
                 source.Stats.physicalDamage *= source.Stats.criticalDamage / 100f;
-
+                // Đăng ký entity đã nhảy crit vào hệ thống quản lý
+                StatProcessSystem.currentCritEntities.Add(source);
             }
         }
     }

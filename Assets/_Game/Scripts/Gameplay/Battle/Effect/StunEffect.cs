@@ -10,4 +10,9 @@ public class StunEffect : BaseEffect
         Debug.Log($"{target.name} is stunned!");
         target.IsAttacked = true;
     }
+    public override void TryRemoveEffect(BaseEntity target)
+    {
+        if (target == null) return;
+        target.ActiveEffects.Remove(this);
+    }
 }

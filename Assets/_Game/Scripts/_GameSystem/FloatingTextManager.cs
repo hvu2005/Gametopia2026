@@ -8,9 +8,8 @@ public struct FloatingTextPrefabData
 {
     public FloatingTextType Type;
     public FloatingTextController Prefab;
-    
-    [Header("Settings Override")]
-    public bool overrideSettings;
+
+    [Header("Settings Override")] public bool overrideSettings;
     public float defaultOffsetX;
     public float defaultOffsetY;
     public float randomizeOffsetX;
@@ -20,20 +19,19 @@ public class FloatingTextManager : MonoBehaviour
 {
     public static FloatingTextManager Instance { get; private set; }
 
-    [Header("Global Settings")]
-    public float defaultOffsetX = 0f;
+    [Header("Global Settings")] public float defaultOffsetX = 0f;
     public float defaultOffsetY = 1.5f;
+
     [Tooltip("Thêm một khoảng chênh lệch ngẫu nhiên trên trục X để các text không đè lên nhau.")]
     public float randomizeOffsetX = 0.5f;
 
     [Tooltip("Thời gian chờ (giây) giữa các lần spawn text liên tiếp trên cùng 1 đối tượng.")]
     public float delayBetweenSpawns = 0.2f;
 
-    [Header("Prefab Mapping")]
-    public List<FloatingTextPrefabData> prefabs;
+    [Header("Prefab Mapping")] public List<FloatingTextPrefabData> prefabs;
 
     private Dictionary<FloatingTextType, FloatingTextController> prefabMap;
-    
+
     // Quản lý hàng đợi spawn cho từng Entity để tránh đè chập
     private Dictionary<BaseEntity, Queue<FloatingTextEventData>> entityQueues = new();
     private HashSet<BaseEntity> activeCoroutines = new();
@@ -74,7 +72,6 @@ public class FloatingTextManager : MonoBehaviour
 
         entityQueues[data.Target].Enqueue(data);
 
-        // Nếu coroutine này chưa được chạy thì bật lên
         if (!activeCoroutines.Contains(data.Target))
         {
             StartCoroutine(ProcessQueue(data.Target));
@@ -98,8 +95,6 @@ public class FloatingTextManager : MonoBehaviour
             FloatingTextEventData data = queue.Dequeue();
             SpawnActualText(data);
 
-            // Bắt buộc phải chờ delay ngay cả khi queue có vẻ đang rỗng 
-            // vì trong 1 frame có thể nhiều logic processor cùng ném event vào
             yield return new WaitForSeconds(delayBetweenSpawns);
         }
 
@@ -135,7 +130,7 @@ public class FloatingTextManager : MonoBehaviour
 
         if (PoolController.Instance != null)
         {
-            try 
+            try
             {
                 var pool = PoolController.Instance.GetPool(autoPoolName);
                 instanceObj = pool.Get();
@@ -143,11 +138,11 @@ public class FloatingTextManager : MonoBehaviour
             catch (KeyNotFoundException)
             {
                 // Tự động khởi tạo Pool nếu chưa có trong cấu hình của PoolController
-                PoolItem newItem = new PoolItem 
-                { 
-                    name = autoPoolName, 
-                    prefab = prefabData.Prefab.gameObject, 
-                    initialSize = 5 
+                PoolItem newItem = new PoolItem
+                {
+                    name = autoPoolName,
+                    prefab = prefabData.Prefab.gameObject,
+                    initialSize = 5
                 };
                 PoolController.Instance.CreatePool(newItem);
                 instanceObj = PoolController.Instance.GetPool(autoPoolName).Get();
@@ -159,7 +154,7 @@ public class FloatingTextManager : MonoBehaviour
         }
 
         instanceObj.transform.position = spawnPos;
-        
+
         FloatingTextController controller = instanceObj.GetComponent<FloatingTextController>();
         if (controller != null)
         {

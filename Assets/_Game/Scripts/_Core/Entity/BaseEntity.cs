@@ -37,6 +37,8 @@ public abstract class BaseEntity : MonoBehaviour, ICombatant
     private Color originalColor;
 
     public List<BaseEffect> ActiveEffects = new();
+    
+    public StatusUIController statusUIController;
 
     public virtual void Awake()
     {
@@ -53,6 +55,19 @@ public abstract class BaseEntity : MonoBehaviour, ICombatant
     public virtual void OnUpdateStat()
     {
         SetHpFill(currentHp / Stats.hp);
+
+        if (statusUIController != null)
+        {
+            var poison = GetEffect<PoisonEffect>();
+            if (poison != null && poison.count > 0)
+            {
+                statusUIController.UpdatePoisonStack(poison.count);
+            }
+            else
+            {
+                statusUIController.UpdatePoisonStack(0);
+            }
+        }
     }
 
     public virtual void Die()
@@ -77,7 +92,22 @@ public abstract class BaseEntity : MonoBehaviour, ICombatant
 
     public virtual void Heal(float amount)
     {
-        currentHp = Mathf.Min(currentHp + amount, Stats.hp);
+        float actualHeal = Mathf.Min(amount, Stats.hp - currentHp);
+        
+        if (actualHeal > 0)
+        {
+            currentHp += actualHeal;
+
+            EventBus.Emit(BattleEventType.SpawnFloatingText, new FloatingTextEventData
+            {
+                Target = this,
+                Value = actualHeal,
+                Type = FloatingTextType.Heal,
+                OffsetBuffer = Vector2.zero
+            });
+
+            this.OnUpdateStat(); // Cập nhật lại UI thanh máu lập tức
+        }
     }
     // Các hành động trong Combat
     public virtual void OnTakeDamage()

@@ -11,10 +11,10 @@ public class CounterAttackProcessor : BaseStatProcessor, IPostAttack
     public void ProcessPostAttack(BaseEntity source, BaseEntity target, List<BaseEntity> allAliveEnemies = null)
     {
         if (target.Stats.counterAttackChance <= 0) return;
-        if (source.lastDamageDealt <= 0) return;
-        if (source.IsDead) return;
+        if (target.lastDamageDealt <= 0) return;
+        if (target.IsDead) return;
 
-        float reflectDamage = source.lastDamageDealt * (target.Stats.counterAttackChance / 100f);
+        float reflectDamage = target.lastDamageDealt * (target.Stats.counterAttackChance / 100f);
         source.currentHp -= reflectDamage;
         Debug.Log($"[CounterAttack] {target.name} phản lại {reflectDamage:F1} sát thương ({target.Stats.counterAttackChance}% của {source.lastDamageDealt:F1}) về {source.name}");
     }

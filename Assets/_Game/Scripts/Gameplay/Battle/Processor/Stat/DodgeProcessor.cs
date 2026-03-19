@@ -20,6 +20,15 @@ public class DodgeProcessor : BaseStatProcessor, IPreAttack, IPostAttack
                 originalPhysicalDamage = source.Stats.physicalDamage;
                 source.Stats.physicalDamage = 0;
                 Debug.Log($"[Dodge] {target.name} né thành công đòn đánh của {source.name}! (roll {dodgeRoll:F1} ≤ {target.Stats.dodgeChance})");
+
+                EventBus.Emit(BattleEventType.SpawnFloatingText, new FloatingTextEventData
+                {
+                    Target = target,
+                    Value = 0,
+                    Type = FloatingTextType.Dodge,
+                    OffsetBuffer = Vector2.zero,
+                    customText = "Né!"
+                });
             }
         }
     }

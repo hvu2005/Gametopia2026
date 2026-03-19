@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 828689863279633418}
   - component: {fileID: 6994775893050845099}
   m_Layer: 0
-  m_Name: TxtHeal
+  m_Name: TxtDodge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -100,7 +100,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 123
+  m_text: "N\xE9"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ed348b0dbf7310f4a8d8806390c2adf7, type: 2}
   m_sharedMaterial: {fileID: -8376544078633822960, guid: ed348b0dbf7310f4a8d8806390c2adf7, type: 2}
@@ -109,8 +109,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278255405
-  m_fontColor: {r: 0.17558396, g: 1, b: 0, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

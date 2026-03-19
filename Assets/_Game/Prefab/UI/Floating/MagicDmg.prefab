@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 828689863279633418}
   - component: {fileID: 6994775893050845099}
   m_Layer: 0
-  m_Name: TxtHeal
+  m_Name: MagicDmg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -109,8 +109,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278255405
-  m_fontColor: {r: 0.17558396, g: 1, b: 0, a: 1}
+    rgba: 4294914304
+  m_fontColor: {r: 0, g: 0.19136429, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
