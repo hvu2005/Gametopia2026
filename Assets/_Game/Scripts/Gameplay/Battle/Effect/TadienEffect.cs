@@ -3,11 +3,11 @@ using UnityEngine;
 /// <summary>
 /// HiddenStat - Tá điền: hồi 10% HP tối đa mỗi lượt đánh (khi được gọi).
 /// </summary>
-public class TadienEffect : BaseEffect
+public class TaDienEffect : BaseEffect
 {
     private readonly float _healPercent;
 
-    public TadienEffect(float healPercent = 0.10f)
+    public TaDienEffect(float healPercent = 0.10f)
     {
         _healPercent = healPercent;
     }

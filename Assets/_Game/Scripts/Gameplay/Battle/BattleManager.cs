@@ -17,14 +17,14 @@ public enum BattleEventType
 [System.Serializable]
 public class BattleManager : EventEmitter
 {
-    
+
     [Range(1f, 4f)] public int BattleSpeed = 1;
     private EffectSystem _effectSystem = new();
     private StatProcessSystem _statProcessSystem = new();
 
-    
+
     float t(float duration) => duration / (float)BattleSpeed;
-    
+
     public async Task StartBattle(BaseEntity player, BaseEnemy target, List<BaseEnemy> enemiesInBattle)
     {
         var originPos = player.transform.localPosition;
@@ -112,7 +112,7 @@ public class BattleManager : EventEmitter
     public async Task ExecuteEnemyTurn(BaseEntity attacker, BaseEntity target)
     {
         this.CreateSwordAnimation(attacker, target, 1);
-        
+
         attacker.SetActiveTurn(true);
         // await Task.Delay(250);
         ExecuteTurn(attacker, target);
@@ -121,12 +121,12 @@ public class BattleManager : EventEmitter
 
     public async Task ExecutePlayerTurn(BaseEntity attacker, BaseEntity target)
     {
-        
+
         this.CreateSwordAnimation(attacker, target, -1);
-        
+
         attacker.SetActiveTurn(true);
         await Task.Delay((int)(250 / BattleSpeed));
-        
+
         ExecuteTurn(attacker, target);
         await Task.Delay((int)(250 / BattleSpeed));
     }
@@ -145,11 +145,11 @@ public class BattleManager : EventEmitter
         DOTween.Sequence()
             .Append(
                 sword.transform.DOMove(endPos, t(0.25f))
-                    .SetEase(Ease.InExpo) 
+                    .SetEase(Ease.InExpo)
             )
             .OnComplete(() =>
             {
-                pool.Release(sword); 
+                pool.Release(sword);
             });
     }
 
@@ -161,28 +161,34 @@ public class BattleManager : EventEmitter
 
         _effectSystem.ApplyEffects(attacker);
 
-        if (attacker.IsDead || target.IsDead || attacker.IsAttacked)
+        if (attacker.IsDead || target.IsDead)
         {
             Debug.Log("Turn ended early due to death or attack interruption.");
             return;
         }
 
-        _statProcessSystem.ProcessPreAttack(attacker, target);
+        if (!attacker.IsAttacked)
+        {
+            _statProcessSystem.ProcessPreAttack(attacker, target);
 
-        _statProcessSystem.ProcessOnAttack(attacker, target);
+            _statProcessSystem.ProcessOnAttack(attacker, target);
 
-        _statProcessSystem.ProcessPostAttack(attacker, target);
+            _statProcessSystem.ProcessPostAttack(attacker, target);
 
-        _statProcessSystem.ProcessBeAttacked(attacker, target);
+            _statProcessSystem.ProcessBeAttacked(attacker, target);
 
-        attacker.IsAttacked = true;
-        
-        target.OnTakeDamage();
+            target.OnTakeDamage();
+
+            CameraShake.Instance.Shake(t(0.1f), 0.05f, 20);
+
+            attacker.IsAttacked = true;
+        }
+
+        _effectSystem.TryRemoveEffects(attacker);
+
 
         attacker.OnUpdateStat();
         target.OnUpdateStat();
-
-        CameraShake.Instance.Shake(t(0.1f), 0.05f, 20);
     }
 
     public void CheckEnemies(List<BaseEnemy> enemiesInBattle)
@@ -190,6 +196,7 @@ public class BattleManager : EventEmitter
         if (enemiesInBattle.TrueForAll(e => e.IsDead))
         {
             Debug.Log("All enemies defeated! Player wins!");
+            
             this.Emit<string>(BattleEventType.Win, "Player wins!");
         }
     }

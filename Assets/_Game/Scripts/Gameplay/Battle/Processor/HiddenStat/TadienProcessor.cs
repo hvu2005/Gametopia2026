@@ -13,6 +13,10 @@ public class TadienStatProcessor : BaseStatProcessor, IPostAttack
         if (source == null || source.IsDead) return;
 
         // HiddenStat Tá điền: chỉ cần gọi effect tương ứng
-        new TadienEffect().ApplyEffect(source);
+        
+        if(target.GetEffect<TaDienEffect>() == null)
+        {
+            target.ActiveEffects.Add(new TaDienEffect());
+        }
     }
 }

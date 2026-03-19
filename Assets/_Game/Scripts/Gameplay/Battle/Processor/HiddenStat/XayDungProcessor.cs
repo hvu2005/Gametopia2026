@@ -12,7 +12,6 @@ public class XayDungStatProcessor : BaseStatProcessor, IBeAttacked
     {
         if (defender == null || defender.IsDead) return;
 
-        // HiddenStat Xây dựng: chỉ cần gọi effect tương ứng
-        new XayDungArmorEffect().ApplyEffect(defender);
+        
     }
 }

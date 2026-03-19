@@ -25,4 +25,11 @@ public class PlayerManager : EventEmitter
     {
         DecreasePlayerStats(item.stats);
     }
+
+    public void ResetPlayer()
+    {
+        player.ActiveEffects.Clear();
+        player.currentArmor = player.Stats.armor;
+        player.currentHp = player.Stats.hp;
+    }
 }

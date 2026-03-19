@@ -20,6 +20,7 @@ public interface ITurnBased
 
 public abstract class BaseEntity : MonoBehaviour, ICombatant
 {
+    public HiddenStats hiddenStats;
     public Stats Stats;
     public bool IsDead => currentHp <= 0;
     public bool IsAttacked { get; set; } = false;
