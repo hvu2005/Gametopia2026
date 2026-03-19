@@ -26,6 +26,7 @@ public class Item : MonoBehaviour
     public int rank = 1;
 
     public bool canSelect = true;
+    
 
     public void Init(ItemDataSO itemData)
     {
@@ -90,12 +91,14 @@ public class Item : MonoBehaviour
 
     void OnMouseUp()
     {
+        
         canSelect = false;
-
         if (mergeItem != null)
         {
             mergeItem.OnUpgradeRank(this);
             Destroy(this.gameObject);
+            
+            return;
         }
 
         var slotToMove = nextSlot ?? currentSlot;
@@ -115,7 +118,9 @@ public class Item : MonoBehaviour
                 }
 
                 if (nextSlot != null)
+                {
                     currentSlot = nextSlot;
+                }
                 currentSlot.PlaceItem(this);
             });
     }
@@ -123,6 +128,13 @@ public class Item : MonoBehaviour
     public void OnUpgradeRank(Item item)
     {
         UnityEngine.Object.Instantiate(star, starsParent);
+
+        EventBus.Emit<Item>(ItemEventType.Unequipe, this);
+
+        this.stats *= 1.5f;
+        
+        EventBus.Emit<Item>(ItemEventType.Equipe, this);
+        
     }
 
 

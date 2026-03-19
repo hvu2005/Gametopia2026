@@ -8,16 +8,23 @@ public enum BattleEventType
 {
     Win,
     Lose,
-    SpawnFloatingText
+    SpawnFloatingText,
+    Start,
+    End
+
 }
 
 [System.Serializable]
 public class BattleManager : EventEmitter
 {
-
+    
+    [Range(1f, 4f)] public int BattleSpeed = 1;
     private EffectSystem _effectSystem = new();
     private StatProcessSystem _statProcessSystem = new();
 
+    
+    float t(float duration) => duration / (float)BattleSpeed;
+    
     public async Task StartBattle(BaseEntity player, BaseEnemy target, List<BaseEnemy> enemiesInBattle)
     {
         var originPos = player.transform.localPosition;
@@ -38,7 +45,7 @@ public class BattleManager : EventEmitter
 
         // tiến lên
         await player.transform
-            .DOLocalMoveX(originPos.x + 0.75f, 0.25f)
+            .DOLocalMoveX(originPos.x + 0.75f, t(0.25f))
             .AsyncWaitForCompletion();
 
         // attack
@@ -46,7 +53,7 @@ public class BattleManager : EventEmitter
 
         // lùi về
         await player.transform
-            .DOLocalMoveX(originPos.x, 0.25f)
+            .DOLocalMoveX(originPos.x, t(0.25f))
             .AsyncWaitForCompletion();
 
         int total = 0;
@@ -64,7 +71,7 @@ public class BattleManager : EventEmitter
 
             if (enemy.IsDead) continue;
 
-            float delay = i * 0.15f;
+            float delay = i * t(0.15f);
 
             DOVirtual.DelayedCall(delay, () =>
             {
@@ -72,11 +79,11 @@ public class BattleManager : EventEmitter
 
                 Sequence seq = DOTween.Sequence();
 
-                seq.Append(enemy.transform.DOLocalMoveX(originPosEnemy.x - 0.75f, 0.25f));
+                seq.Append(enemy.transform.DOLocalMoveX(originPosEnemy.x - 0.75f, t(0.25f)));
 
                 seq.AppendCallback(() => _ = ExecuteEnemyTurn(enemy, player));
 
-                seq.Append(enemy.transform.DOLocalMoveX(originPosEnemy.x, 0.25f));
+                seq.Append(enemy.transform.DOLocalMoveX(originPosEnemy.x, t(0.25f)));
 
                 // 👉 Khi enemy này xong
                 seq.OnComplete(() =>
@@ -104,19 +111,46 @@ public class BattleManager : EventEmitter
 
     public async Task ExecuteEnemyTurn(BaseEntity attacker, BaseEntity target)
     {
+        this.CreateSwordAnimation(attacker, target, 1);
+        
         attacker.SetActiveTurn(true);
         // await Task.Delay(250);
-
         ExecuteTurn(attacker, target);
-        await Task.Delay(250);
+        await Task.Delay((int)(250 / BattleSpeed));
     }
 
     public async Task ExecutePlayerTurn(BaseEntity attacker, BaseEntity target)
     {
+        
+        this.CreateSwordAnimation(attacker, target, -1);
+        
         attacker.SetActiveTurn(true);
-        await Task.Delay(250);
+        await Task.Delay((int)(250 / BattleSpeed));
+        
         ExecuteTurn(attacker, target);
-        await Task.Delay(250);
+        await Task.Delay((int)(250 / BattleSpeed));
+    }
+
+    public void CreateSwordAnimation(BaseEntity attacker, BaseEntity target, int direction = 1)
+    {
+        var pool = PoolController.Instance.GetPool("Sword");
+        var sword = pool.Get();
+
+        Vector3 startPos = target.transform.position + new Vector3(direction * 2f, 0f, 0f);
+        Vector3 endPos = target.transform.position + new Vector3(direction * 0.3f, 0f, 0f);
+
+        sword.transform.position = startPos;
+        sword.transform.localScale = new Vector3(1f, direction, 1f);
+
+        DOTween.Sequence()
+            .Append(
+                sword.transform.DOMove(endPos, t(0.25f))
+                    .SetEase(Ease.InExpo) 
+            )
+            .OnComplete(() =>
+            {
+                pool.Release(sword); 
+            });
     }
 
     public void ExecuteTurn(BaseEntity attacker, BaseEntity target)
@@ -142,11 +176,13 @@ public class BattleManager : EventEmitter
         _statProcessSystem.ProcessBeAttacked(attacker, target);
 
         attacker.IsAttacked = true;
+        
+        target.OnTakeDamage();
 
         attacker.OnUpdateStat();
         target.OnUpdateStat();
 
-        CameraShake.Instance.Shake(0.1f, 0.05f, 20);
+        CameraShake.Instance.Shake(t(0.1f), 0.05f, 20);
     }
 
     public void CheckEnemies(List<BaseEnemy> enemiesInBattle)
