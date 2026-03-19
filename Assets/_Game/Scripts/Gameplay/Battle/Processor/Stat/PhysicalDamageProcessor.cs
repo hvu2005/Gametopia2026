@@ -22,12 +22,15 @@ public class PhysicalDamageProcessor : BaseStatProcessor, IOnAttack
             StatProcessSystem.currentCritEntities.Remove(source); // Dọn dẹp trạng thái sau khi sử dụng
         }
 
-        EventBus.Emit(BattleEventType.SpawnFloatingText, new FloatingTextEventData
+        if (damage > 0)
         {
-            Target = target,
-            Value = damage,
-            Type = damageType,
-            OffsetBuffer = Vector2.zero
-        });
+            EventBus.Emit(BattleEventType.SpawnFloatingText, new FloatingTextEventData
+            {
+                Target = target,
+                Value = damage,
+                Type = damageType,
+                OffsetBuffer = Vector2.zero
+            });
+        }
     }
 }

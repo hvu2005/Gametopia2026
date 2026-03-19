@@ -11,12 +11,15 @@ public class MagicDamageProcessor : BaseStatProcessor, IOnAttack
         target.currentHp -= damage;
         source.lastDamageDealt = damage;
 
-        EventBus.Emit(BattleEventType.SpawnFloatingText, new FloatingTextEventData
+        if (damage > 0)
         {
-            Target = target,
-            Value = damage,
-            Type = FloatingTextType.MagicDamage,
-            OffsetBuffer = Vector2.zero
-        });
+            EventBus.Emit(BattleEventType.SpawnFloatingText, new FloatingTextEventData
+            {
+                Target = target,
+                Value = damage,
+                Type = FloatingTextType.MagicDamage,
+                OffsetBuffer = Vector2.zero
+            });
+        }
     }
 }
