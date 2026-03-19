@@ -186,7 +186,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textMesh: {fileID: 828689863279633418}
   iconRenderer: {fileID: 0}
-  floatDistance: 1.5
+  floatDistance: 0
   floatDuration: 0.8
   easeType: 18
   poolName: 

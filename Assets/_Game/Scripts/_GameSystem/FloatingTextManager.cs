@@ -8,13 +8,20 @@ public struct FloatingTextPrefabData
 {
     public FloatingTextType Type;
     public FloatingTextController Prefab;
+    
+    [Header("Settings Override")]
+    public bool overrideSettings;
+    public float defaultOffsetX;
+    public float defaultOffsetY;
+    public float randomizeOffsetX;
 }
 
 public class FloatingTextManager : MonoBehaviour
 {
     public static FloatingTextManager Instance { get; private set; }
 
-    [Header("Settings")]
+    [Header("Global Settings")]
+    public float defaultOffsetX = 0f;
     public float defaultOffsetY = 1.5f;
     [Tooltip("Thêm một khoảng chênh lệch ngẫu nhiên trên trục X để các text không đè lên nhau.")]
     public float randomizeOffsetX = 0.5f;
@@ -109,14 +116,18 @@ public class FloatingTextManager : MonoBehaviour
             return;
         }
 
-        Vector3 spawnPos = data.Target.transform.position + Vector3.up * defaultOffsetY;
+        float offsetX = prefabData.overrideSettings ? prefabData.defaultOffsetX : defaultOffsetX;
+        float offsetY = prefabData.overrideSettings ? prefabData.defaultOffsetY : defaultOffsetY;
+        float randOffsetX = prefabData.overrideSettings ? prefabData.randomizeOffsetX : randomizeOffsetX;
+
+        Vector3 spawnPos = data.Target.transform.position + new Vector3(offsetX, offsetY, 0);
         spawnPos.x += data.OffsetBuffer.x;
         spawnPos.y += data.OffsetBuffer.y;
 
         // Thêm khoảng random X để tránh text đè lấp lên nhau
-        if (randomizeOffsetX > 0)
+        if (randOffsetX > 0)
         {
-            spawnPos.x += UnityEngine.Random.Range(-randomizeOffsetX, randomizeOffsetX);
+            spawnPos.x += UnityEngine.Random.Range(-randOffsetX, randOffsetX);
         }
 
         GameObject instanceObj;
