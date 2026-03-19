@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 828689863279633418}
   - component: {fileID: 6994775893050845099}
   m_Layer: 0
-  m_Name: TxtPoison 2
+  m_Name: MagicDmg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -109,8 +109,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294902004
-  m_fontColor: {r: 0.9584193, g: 0, b: 1, a: 1}
+    rgba: 4294914304
+  m_fontColor: {r: 0, g: 0.19136429, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -186,7 +186,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textMesh: {fileID: 828689863279633418}
   iconRenderer: {fileID: 0}
-  floatDistance: 0
+  floatDistance: 1.5
   floatDuration: 0.8
   easeType: 18
   poolName: 

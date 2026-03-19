@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 828689863279633418}
   - component: {fileID: 6994775893050845099}
   m_Layer: 0
-  m_Name: TxtDodge
+  m_Name: TxtDmgStun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -100,7 +100,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "N\xE9"
+  m_text: "Cho\xE1ng !"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ed348b0dbf7310f4a8d8806390c2adf7, type: 2}
   m_sharedMaterial: {fileID: -8376544078633822960, guid: ed348b0dbf7310f4a8d8806390c2adf7, type: 2}

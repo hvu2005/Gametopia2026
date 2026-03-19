@@ -435,30 +435,36 @@ MonoBehaviour:
     defaultOffsetY: 0
     randomizeOffsetX: 0
   - Type: 1
-    Prefab: {fileID: 6994775893050845099, guid: 196f393718750d94dad0debe519c9ebf, type: 3}
+    Prefab: {fileID: 6994775893050845099, guid: 556dcdf32fdc7564aa6295656b29c459, type: 3}
     overrideSettings: 0
     defaultOffsetX: 0
     defaultOffsetY: 0
     randomizeOffsetX: 0
   - Type: 2
-    Prefab: {fileID: 6994775893050845099, guid: 533af419e4d04374581de933d467c34a, type: 3}
+    Prefab: {fileID: 6994775893050845099, guid: 196f393718750d94dad0debe519c9ebf, type: 3}
     overrideSettings: 0
     defaultOffsetX: 0
     defaultOffsetY: 0
     randomizeOffsetX: 0
   - Type: 3
-    Prefab: {fileID: 3156526200658940428, guid: 304dd1b29d5ec6545b435b66545b57c1, type: 3}
+    Prefab: {fileID: 6994775893050845099, guid: 533af419e4d04374581de933d467c34a, type: 3}
     overrideSettings: 0
     defaultOffsetX: 0
     defaultOffsetY: 0
     randomizeOffsetX: 0
   - Type: 4
-    Prefab: {fileID: 6994775893050845099, guid: 2c44a6c4239fdb14ca7cca69dff86585, type: 3}
+    Prefab: {fileID: 3156526200658940428, guid: 304dd1b29d5ec6545b435b66545b57c1, type: 3}
     overrideSettings: 0
     defaultOffsetX: 0
     defaultOffsetY: 0
     randomizeOffsetX: 0
   - Type: 5
+    Prefab: {fileID: 6994775893050845099, guid: 2c44a6c4239fdb14ca7cca69dff86585, type: 3}
+    overrideSettings: 0
+    defaultOffsetX: 0
+    defaultOffsetY: 0
+    randomizeOffsetX: 0
+  - Type: 6
     Prefab: {fileID: 6994775893050845099, guid: 101984d40180a7a4cb5ebb07fdf50df3, type: 3}
     overrideSettings: 0
     defaultOffsetX: 0
@@ -1519,17 +1525,17 @@ MonoBehaviour:
     hp: 10
     physicalDamage: 5
     armor: 0
-    criticalChance: 0
+    criticalChance: 50
     criticalDamage: 150
     lifeSteal: 5
-    magicDamage: 0
-    poisonous: 5
-    stunChance: 0
+    magicDamage: 6
+    poisonous: 7
+    stunChance: 50
     luck: 0
     increaseDamage: 0
     increaseMagic: 0
     counterAttackChance: 0
-    dodgeChance: 0
+    dodgeChance: 50
     speed: 0
     rage: 0
     regeneration: 0
