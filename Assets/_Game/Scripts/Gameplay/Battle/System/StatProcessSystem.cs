@@ -17,12 +17,15 @@ public class StatProcessSystem
         statProcessors.Add(new CritProcessor());
         // 3. Khuếch đại sát thương: nhân thêm % sau khi crit đã tính
         statProcessors.Add(new DamageAmpProcessor());
+        // MagicDamageAmp: nhân magicDamage trước khi tung đòn phép
+        statProcessors.Add(new MagicDamageAmpProcessor());
         // 4. Giáp: trừ def của mục tiêu ra khỏi physicalDamage
         statProcessors.Add(new ArmorProcessor());
 
         // --- OnAttack phase ---
         // 5. Gây sát thương vật lý thực sự
         statProcessors.Add(new PhysicalDamageProcessor());
+        statProcessors.Add(new MagicDamageProcessor());
 
         // --- PostAttack phase ---
         // 6. Choáng
