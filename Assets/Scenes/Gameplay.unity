@@ -424,7 +424,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultOffsetX: 0
-  defaultOffsetY: 1.5
+  defaultOffsetY: 0.5
   randomizeOffsetX: 0.5
   delayBetweenSpawns: 0.1
   prefabs:
