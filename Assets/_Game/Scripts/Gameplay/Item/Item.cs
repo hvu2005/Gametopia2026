@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using DG.Tweening;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -25,6 +26,8 @@ public class Item : MonoBehaviour
     public GameObject star;
     public int rank = 1;
 
+    public List<ItemClassType> itemClassTypes;
+
     public bool canSelect = true;
     
 
@@ -32,6 +35,7 @@ public class Item : MonoBehaviour
     {
         itemName = itemData.ItemName;
         itemImage.sprite = itemData.Sprite;
+        itemClassTypes = itemData.ItemClass;
         this.stats = new Stats() + itemData.Stats;
         this.ChangeFrameColor(itemData.Rarity);
     }

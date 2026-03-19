@@ -23,6 +23,7 @@ public class GameManager : Singleton<GameManager>
     {
         LoadLevel(currentLevel);
         uiManager.SetUIStats(playerManager.player.Stats);
+        itemManager.UpdateItemClasses();
 
         this.RegistEvents();
     }
@@ -41,17 +42,29 @@ public class GameManager : Singleton<GameManager>
             playerManager.UnequipItem(item);
         });
 
+        itemManager.On<Item>(ItemEventType.Equipe, (item) =>
+        {
+            itemManager.AddItemClass(item);
+            itemManager.UpdateAddItemClasses(item);
+        });
+
+        itemManager.On<Item>(ItemEventType.Unequipe, (item) =>
+        {
+            itemManager.RemoveItemClass(item);
+            itemManager.UpdateRemoveItemClasses(item);
+        });
+
         uiManager.On<ItemDataSO>(ItemEventType.Select, (itemData) =>
         {
             uiManager.CloseItemPanel();
-            itemManager.SpawnItem(itemData, this.gameplayCanvas.transform); 
+            itemManager.SpawnItem(itemData, this.gameplayCanvas.transform);
 
             _ = NextLevel();
         });
 
         battleManager.On<BaseEnemy>(EnemyEventType.Select, (enemy) =>
         {
-           StartBattle(enemy); 
+            StartBattle(enemy);
         });
 
         uiManager.On<Stats>(PlayerEventType.UpdateStats, uiManager.SetUIStats);
@@ -115,9 +128,11 @@ public class GameManager : Singleton<GameManager>
     {
         isStartBattle = false;
         EventBus.Emit<bool>(BattleEventType.End, true);
-        
+
         var spawnedItems = itemManager.GetRandomItemDataList();
         uiManager.ShowItemSelection(spawnedItems);
+
+        playerManager.ResetPlayer();
     }
 
     public void OnWinBattle(string message)

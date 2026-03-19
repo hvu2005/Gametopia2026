@@ -14,9 +14,10 @@ public class TadienStatProcessor : BaseStatProcessor, IPostAttack
 
         // HiddenStat Tá điền: chỉ cần gọi effect tương ứng
         
-        if(target.GetEffect<TaDienEffect>() == null)
+        if(source.hiddenStats.taDien > 0)
         {
-            target.ActiveEffects.Add(new TaDienEffect());
+            var hp = source.Stats.hp;
+            source.Heal(hp/10);
         }
     }
 }

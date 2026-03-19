@@ -109,13 +109,6 @@ public abstract class BaseEntity : MonoBehaviour, ICombatant
             this.OnUpdateStat(); // Cập nhật lại UI thanh máu lập tức
         }
     }
-
-    /// <summary>Hồi giáp về đầy (gọi sau khi kết thúc mỗi combat).</summary>
-    public virtual void RestoreArmor()
-    {
-        currentArmor = Stats.armor;
-    }
-
     // Các hành động trong Combat
     public virtual void OnTakeDamage()
     {
