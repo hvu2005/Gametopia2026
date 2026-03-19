@@ -22,6 +22,14 @@ public class StunProcessor : BaseStatProcessor, IPostAttack, IProcEffect
             {
                 stun = new();
                 target.ActiveEffects.Add(stun);
+                
+                EventBus.Emit(BattleEventType.SpawnFloatingText, new FloatingTextEventData
+                {
+                    Target = target,
+                    Value = 0,
+                    Type = FloatingTextType.Stun,
+                    OffsetBuffer = Vector2.zero
+                });
             }
         }
     }

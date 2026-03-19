@@ -8,6 +8,7 @@ public enum BattleEventType
 {
     Win,
     Lose,
+    SpawnFloatingText
 }
 
 [System.Serializable]

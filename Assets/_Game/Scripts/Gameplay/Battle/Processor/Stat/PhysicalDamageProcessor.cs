@@ -12,5 +12,13 @@ public class PhysicalDamageProcessor : BaseStatProcessor, IOnAttack
         var damage = source.Stats.physicalDamage;
         target.currentHp -= damage;
         source.lastDamageDealt = damage; // ghi lại để SuckBlood, CounterAttack dùng
+
+        EventBus.Emit(BattleEventType.SpawnFloatingText, new FloatingTextEventData
+        {
+            Target = target,
+            Value = damage,
+            Type = FloatingTextType.PhysicalDamage,
+            OffsetBuffer = Vector2.zero
+        });
     }
 }
