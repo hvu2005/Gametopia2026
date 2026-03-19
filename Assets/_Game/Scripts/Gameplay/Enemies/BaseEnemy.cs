@@ -24,7 +24,7 @@ public class BaseEnemy : BaseEntity
     {
         base.OnUpdateStat();
 
-        if (currentHp <= 0)
+        if (currentHp < 1)
         {
             Die();
         }

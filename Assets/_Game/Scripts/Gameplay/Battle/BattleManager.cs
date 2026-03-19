@@ -41,7 +41,7 @@ public class BattleManager : EventEmitter
         player.hasExtraAttacked = false;
         enemiesInBattle.ForEach(enemy =>
         {
-           enemy.hasExtraAttacked = false; 
+            enemy.hasExtraAttacked = false;
         });
 
         for (int i = 0; i < enemiesInBattle.Count; i++)
@@ -182,7 +182,6 @@ public class BattleManager : EventEmitter
                 _statProcessSystem.ProcessPreAttack(attacker, target);
                 _statProcessSystem.ProcessOnAttack(attacker, target);
                 _statProcessSystem.ProcessPostAttack(attacker, target);
-                _statProcessSystem.ProcessBeAttacked(attacker, target);
 
                 attacker.OnUpdateStat();
                 target.OnUpdateStat();
@@ -191,6 +190,7 @@ public class BattleManager : EventEmitter
                 CameraShake.Instance.Shake(t(0.1f), 0.05f, 20);
 
             }
+            _statProcessSystem.ProcessBeAttacked(attacker, target);
 
             await attacker.transform
                 .DOLocalMoveX(originPos.x, t(0.25f))

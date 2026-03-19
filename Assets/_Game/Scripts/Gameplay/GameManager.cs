@@ -21,6 +21,8 @@ public class GameManager : Singleton<GameManager>
 
     void Start()
     {
+        itemManager.Init();
+
         LoadLevel(currentLevel);
         uiManager.SetUIStats(playerManager.player.Stats);
         itemManager.UpdateItemClasses();
@@ -92,6 +94,7 @@ public class GameManager : Singleton<GameManager>
             return;
         }
 
+        playerManager.player.hiddenStats.rarityWeight+=2;
 
         _ = mapManager.ShowLeftTransition();
         await Task.Delay(500);
@@ -135,7 +138,7 @@ public class GameManager : Singleton<GameManager>
     {
         isStartBattle = false;
 
-        var spawnedItems = itemManager.GetRandomItemDataList();
+        var spawnedItems = itemManager.GetRandomItemDataList(playerManager.player);
         uiManager.ShowItemSelection(spawnedItems);
 
         playerManager.ResetPlayer();

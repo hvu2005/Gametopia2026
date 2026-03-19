@@ -155,7 +155,7 @@ public class Item : MonoBehaviour
                 {
                     nextSlot = slot;
                 }
-                else
+                else if(slot.currentItem)
                 {
                     if (slot.currentItem.itemName.Equals(itemName) &&
                         rank == slot.currentItem.rank &&

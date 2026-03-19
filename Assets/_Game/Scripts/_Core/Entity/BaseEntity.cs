@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using DG.Tweening;
+using TMPro;
 using UnityEngine;
 
 // Interface cho các hành động chiến đấu cơ bản
@@ -40,6 +41,8 @@ public abstract class BaseEntity : MonoBehaviour, ICombatant
     public float tempBonusMagic;
 
     public bool hasExtraAttacked;
+
+    public TextMeshProUGUI hpText;
 
 
     public List<BaseEffect> ActiveEffects = new();
@@ -90,6 +93,8 @@ public abstract class BaseEntity : MonoBehaviour, ICombatant
         {
             var max = Math.Max(0, amount);
             hpBar.transform.localScale = new Vector3(max, 1, 1);
+
+            hpText.text = Mathf.RoundToInt(Math.Max(0,currentHp)) + "/" + Stats.hp;
         }
     }
 
@@ -150,14 +155,15 @@ public abstract class BaseEntity : MonoBehaviour, ICombatant
 
     public void TakeDamage(float amount)
     {
+        float value = Mathf.Max(0, amount);
         if (currentArmor < amount)
         {
-            currentHp -= amount - currentArmor;
+            currentHp -= Math.Max(0, value - currentArmor);
             currentArmor = 0;
         }
         else
         {
-            currentArmor -= amount;
+            currentArmor -= value;
         }
 
     }

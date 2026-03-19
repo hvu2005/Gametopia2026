@@ -26,13 +26,7 @@ public class ItemManager : EventEmitter
 
 
     public ItemClassSystem itemClassSystem;
-
-    public ItemManager()
-    {
-        this.InitRarityLists();
-    }
-
-    private void InitRarityLists()
+    public void Init()
     {
         itemNormalList = new List<ItemDataSO>();
         itemRareList = new List<ItemDataSO>();
@@ -148,11 +142,64 @@ public class ItemManager : EventEmitter
 
         return spawnedItem;
     }
-    public List<ItemDataSO> GetRandomItemDataList(int count = 3)
+    public List<ItemDataSO> GetRandomItemDataList(BaseEntity player, int count = 3)
     {
-        return itemDataList
-            .OrderBy(x => UnityEngine.Random.value)
-            .Take(count)
-            .ToList();
+        HashSet<ItemDataSO> result = new();
+
+        float weight = player.hiddenStats.rarityWeight;
+        float luck = player.Stats.luck;
+
+        int safety = 20; // tránh loop vô hạn
+
+        while (result.Count < count && safety-- > 0)
+        {
+            var rarity = RollRarity(weight, (int)luck, (int)player.hiddenStats.badLuck);
+            var item = GetRandomItemByRarity(rarity);
+
+            if (item != null)
+                result.Add(item); // HashSet auto chống trùng
+        }
+
+        return result.ToList();
+    }
+
+    private ItemDataSO GetRandomItemByRarity(RarityType rarity)
+    {
+        List<ItemDataSO> list = rarity switch
+        {
+            RarityType.Normal => itemNormalList,
+            RarityType.Rare => itemRareList,
+            RarityType.Epic => itemEpicList,
+            RarityType.Legendary => itemLegendaryList,
+            _ => itemNormalList
+        };
+
+        if (list == null || list.Count == 0)
+            return null;
+
+        return list[UnityEngine.Random.Range(0, list.Count)];
+    }
+
+
+    private RarityType RollRarity(float weight, int luck, int badLuck = 0)
+    {
+        int bonus = 0;
+
+        if (luck > 0 && UnityEngine.Random.Range(0, 100) < luck) bonus++;
+        if (badLuck > 0 && UnityEngine.Random.Range(0, 100) < badLuck) bonus--;
+
+        // 🎯 base tier theo weight
+        int tier = 0;
+        if (weight >= 20) tier = 1;
+        if (weight >= 50) tier = 2;
+        if (weight >= 80) tier = 3;
+
+        // 🍀 apply lucky / badLuck
+        tier += bonus;
+
+        // 🔒 clamp (0 = Normal, 3 = Legendary)
+        tier = Mathf.Clamp(tier, 0, 3);
+
+        return (RarityType)tier;
     }
 }
