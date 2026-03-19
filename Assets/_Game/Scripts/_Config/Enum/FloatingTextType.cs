@@ -4,5 +4,6 @@ public enum FloatingTextType
     CriticalDamage,
     Heal,
     Stun,
-    Poison
+    Poison,
+    Dodge
 }

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class StatProcessSystem
 {
+    // [TECH DEBT] Global state handling crit. Re-evaluate if AoE attacks or concurrent combats are implemented.
+    public static HashSet<BaseEntity> currentCritEntities = new HashSet<BaseEntity>();
     public List<BaseStatProcessor> statProcessors = new();
 
     public StatProcessSystem()

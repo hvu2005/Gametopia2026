@@ -35,7 +35,14 @@ public class FloatingTextController : MonoBehaviour
         
         if (textMesh != null)
         {
-            textMesh.text = data.Value.ToString();
+            if (!string.IsNullOrEmpty(data.customText))
+            {
+                textMesh.text = data.customText;
+            }
+            else
+            {
+                textMesh.text = data.Value.ToString();
+            }
             startColorText = textMesh.color;
             startColorText.a = 1f;
             textMesh.color = startColorText;

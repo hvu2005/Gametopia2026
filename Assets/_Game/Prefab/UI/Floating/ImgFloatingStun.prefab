@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5679837867544339936}
   - component: {fileID: 3156526200658940428}
   m_Layer: 0
-  m_Name: ImgFloating
+  m_Name: ImgFloatingStun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

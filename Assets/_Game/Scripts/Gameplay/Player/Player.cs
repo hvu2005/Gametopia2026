@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class Player : BaseEntity
 {
-    public HiddenStats hiddenStats; 
-
     public BaseEquipmentFrame EquipmentFrame { get; protected set; }
 
     [Header("Item System")]

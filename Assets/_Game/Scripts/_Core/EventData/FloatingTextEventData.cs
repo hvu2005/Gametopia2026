@@ -6,4 +6,5 @@ public struct FloatingTextEventData
     public float Value;
     public FloatingTextType Type;
     public Vector2 OffsetBuffer; // Buffer X Y để có thể điều chỉnh vị trí tùy biến từ nơi spawn nếu muốn, hoặc mặc định 0 0
+    public string customText; // Hỗ trợ hiển thị các text đặc biệt thay vì chỉ hiện số
 }
