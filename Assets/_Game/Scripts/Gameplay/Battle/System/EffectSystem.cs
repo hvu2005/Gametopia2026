@@ -22,7 +22,9 @@ public class EffectSystem
 
     public void ApplyEffects(BaseEntity target)
     {
-        foreach (var effect in target.ActiveEffects)
+        // Iterate over a snapshot to avoid collection-modified issues
+        // (some effects may remove themselves in TryRemoveEffect, or other code).
+        foreach (var effect in new List<BaseEffect>(target.ActiveEffects))
         {
             ApplyEffect(effect, target);
         }
@@ -30,7 +32,7 @@ public class EffectSystem
 
     public void TryRemoveEffects(BaseEntity target)
     {
-        foreach (var effect in target.ActiveEffects)
+        foreach (var effect in new List<BaseEffect>(target.ActiveEffects))
         {
             TryRemoveEffect(effect, target);
         }
