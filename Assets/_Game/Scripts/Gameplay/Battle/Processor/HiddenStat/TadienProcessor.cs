@@ -16,8 +16,14 @@ public class TadienStatProcessor : BaseStatProcessor, IPostAttack
         
         if(source.hiddenStats.taDien > 0)
         {
-            var hp = source.Stats.hp;
-            source.Heal(hp/10);
+            // var hp = source.Stats.hp;
+            // source.Heal(hp/10);
+
+            if (source.GetEffect<TaDienEffect>() == null)
+            {
+                source.ActiveEffects.Add(new TaDienEffect());
+            }
         }
+        
     }
 }

@@ -11,8 +11,7 @@ public class GameManager : Singleton<GameManager>
 
     public bool isStartBattle = false;
 
-    [Header("Managers")]
-    public PlayerManager playerManager;
+    [Header("Managers")] public PlayerManager playerManager;
     public EnemyManager enemyManager;
     public BattleManager battleManager;
     public MapManager mapManager;
@@ -35,25 +34,15 @@ public class GameManager : Singleton<GameManager>
         battleManager.On<string>(BattleEventType.Win, OnWinBattle);
         battleManager.On<string>(BattleEventType.Lose, OnLoseBattle);
 
-        playerManager.On<Item>(ItemEventType.Equipe, (item) =>
-        {
-            playerManager.EquipItem(item);
-        });
+        playerManager.On<Item>(ItemEventType.Equipe, (item) => { playerManager.EquipItem(item); });
 
-        playerManager.On<Item>(ItemEventType.Unequipe, (item) =>
-        {
-            playerManager.UnequipItem(item);
-        });
+        playerManager.On<Item>(ItemEventType.Unequipe, (item) => { playerManager.UnequipItem(item); });
 
-        itemManager.On<Item>(ItemEventType.Equipe, (item) =>
-        {
-            itemManager.UpdateAddItemClasses(item, playerManager.player);
-        });
+        itemManager.On<Item>(ItemEventType.Equipe,
+            (item) => { itemManager.UpdateAddItemClasses(item, playerManager.player); });
 
-        itemManager.On<Item>(ItemEventType.Unequipe, (item) =>
-        {
-            itemManager.UpdateRemoveItemClasses(item, playerManager.player);
-        });
+        itemManager.On<Item>(ItemEventType.Unequipe,
+            (item) => { itemManager.UpdateRemoveItemClasses(item, playerManager.player); });
 
         uiManager.On<ItemDataSO>(ItemEventType.Select, (itemData) =>
         {
@@ -63,10 +52,14 @@ public class GameManager : Singleton<GameManager>
             _ = NextLevel();
         });
 
-        battleManager.On<BaseEnemy>(EnemyEventType.Select, (enemy) =>
+        uiManager.On<bool>(ItemEventType.Skip, (itemData) =>
         {
-            StartBattle(enemy);
+            uiManager.CloseItemPanel();
+  
+            _ = NextLevel();
         });
+
+        battleManager.On<BaseEnemy>(EnemyEventType.Select, (enemy) => { StartBattle(enemy); });
 
         uiManager.On<Stats>(PlayerEventType.UpdateStats, uiManager.SetUIStats);
     }
@@ -116,7 +109,7 @@ public class GameManager : Singleton<GameManager>
             return;
         }
 
-        playerManager.player.hiddenStats.rarityWeight+=2;
+        playerManager.player.hiddenStats.rarityWeight += 2;
 
         _ = mapManager.ShowLeftTransition();
         await Task.Delay(500);
