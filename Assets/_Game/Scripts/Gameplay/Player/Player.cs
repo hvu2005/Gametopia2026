@@ -34,4 +34,14 @@ public class Player : BaseEntity
         EventBus.Emit<Stats>(PlayerEventType.UpdateStats, this.Stats);
     }
 
+    public override void Die()
+    {
+        base.Die();
+
+        if (AudioController.Instance != null)
+        {
+            AudioController.Instance.PlaySfx(AudioController.AudioKeys.SfxPlayerDie);
+        }
+    }
+
 }

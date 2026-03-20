@@ -82,6 +82,22 @@ public class GameManager : Singleton<GameManager>
 
         mapManager.LoadLevelData(levelData);
         enemyManager.LoadLevelData(levelData);
+
+        if (AudioController.Instance != null)
+        {
+            AudioController.Instance.PlayBgm(GetMapBgmByLevel(levelIndex));
+        }
+    }
+
+    private static string GetMapBgmByLevel(int levelIndex)
+    {
+        int mapIndex = (levelIndex % 3) + 1;
+        return mapIndex switch
+        {
+            1 => AudioController.AudioKeys.BgmMap1,
+            2 => AudioController.AudioKeys.BgmMap2,
+            _ => AudioController.AudioKeys.BgmMap3
+        };
     }
 
     public async Task NextLevel()
@@ -119,6 +135,11 @@ public class GameManager : Singleton<GameManager>
         if (!isStartBattle)
         {
             isStartBattle = true;
+            // if (AudioController.Instance != null)
+            // {
+            //     AudioController.Instance.PlayBgm(AudioController.AudioKeys.BgmCombatBoss);
+            // }
+
             battleManager.StartBattle(
                 playerManager.player,
                 enemy,

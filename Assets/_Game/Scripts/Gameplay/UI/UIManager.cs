@@ -15,6 +15,11 @@ public class UIManager : EventEmitter
 
     public void ShowItemSelection(List<ItemDataSO> itemDataList)
     {
+        if (AudioController.Instance != null)
+        {
+            AudioController.Instance.PlaySfx(AudioController.AudioKeys.UiChestOpen);
+        }
+
         for (int i = 0; i < itemPanelUIList.Count; i++)
         {
             itemPanelUIList[i].gameObject.SetActive(true);

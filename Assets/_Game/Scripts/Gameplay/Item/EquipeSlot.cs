@@ -20,6 +20,12 @@ public class EquipeSlot : Slot
     public override void OnPlaceItem(Item item)
     {
         base.OnPlaceItem(item);
+
+        if (AudioController.Instance != null)
+        {
+            AudioController.Instance.PlaySfx(AudioController.AudioKeys.UiItemDropEquip);
+        }
+
         EventBus.Emit<Item>(ItemEventType.Equipe, item);
     }
 

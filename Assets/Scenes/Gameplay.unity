@@ -1406,6 +1406,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 96754541}
+  - {fileID: 532325165}
   m_Father: {fileID: 970220659}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &387803047
@@ -2130,6 +2131,132 @@ Canvas:
   m_SortingLayerID: -118744017
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!1 &532325164
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 532325165}
+  - component: {fileID: 532325166}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &532325165
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 532325164}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 374820940}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &532325166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 532325164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61ec85c99d5e6394c8b9e02431a1d842, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bgmItems:
+  - key: BGM_MainMenu
+    clip: {fileID: 8300000, guid: b4148581dd272c94099ed2c5978b78f4, type: 3}
+    volume: 0.7
+    loop: 1
+  - key: BGM_Combat_Boss
+    clip: {fileID: 8300000, guid: 970cd7ae51ba132488b628716fbd4dfe, type: 3}
+    volume: 0.7
+    loop: 1
+  - key: BGM_EventArea_1
+    clip: {fileID: 8300000, guid: 86894c0b5d8d9944f8240d66b5375726, type: 3}
+    volume: 0.7
+    loop: 1
+  - key: BGM_EventArea_2
+    clip: {fileID: 8300000, guid: 9a344d6c8d124ba41b9828a229544781, type: 3}
+    volume: 0.7
+    loop: 1
+  - key: BGM_EventArea_3
+    clip: {fileID: 8300000, guid: 1dde09b04f87b414f933fa7eabb384e8, type: 3}
+    volume: 0.7
+    loop: 1
+  - key: BGM_EventArea_4
+    clip: {fileID: 8300000, guid: 4d188ae8d063bff49be967fd913f31eb, type: 3}
+    volume: 0.7
+    loop: 1
+  - key: BGM_Map_1
+    clip: {fileID: 8300000, guid: 97a6c03ec4a6d47418ba32589baf1f21, type: 3}
+    volume: 0.7
+    loop: 1
+  - key: BGM_Map_2
+    clip: {fileID: 8300000, guid: f0e7d2275e7f0fb458e713f47f694eeb, type: 3}
+    volume: 0.7
+    loop: 1
+  - key: BGM_Map_3
+    clip: {fileID: 8300000, guid: 69a71a89b900bb54db4c0a8ccdfee700, type: 3}
+    volume: 0.7
+    loop: 1
+  - key: BGM_Map_3
+    clip: {fileID: 8300000, guid: 69a71a89b900bb54db4c0a8ccdfee700, type: 3}
+    volume: 0.7
+    loop: 1
+  sfxItems:
+  - key: UI_Click
+    clip: {fileID: 8300000, guid: 134f617b726b11d49864992629509585, type: 3}
+    volume: 1
+    loop: 0
+  - key: UI_Chest_Open
+    clip: {fileID: 8300000, guid: 4b35dc37e60891a44aea50b3f2c2d944, type: 3}
+    volume: 1
+    loop: 0
+  - key: UI_Item_Pickup
+    clip: {fileID: 8300000, guid: 8d94ad1bb1ccf80498f0fc2a487561a1, type: 3}
+    volume: 1
+    loop: 0
+  - key: UI_Item_Drop_Equip
+    clip: {fileID: 8300000, guid: a26aba8943af5e04db9c444a82104238, type: 3}
+    volume: 1
+    loop: 0
+  - key: UI_Item_Merge/Upgrade
+    clip: {fileID: 8300000, guid: 4c523726885dcf54c91b6d09e174038f, type: 3}
+    volume: 1
+    loop: 0
+  - key: SFX_Attack
+    clip: {fileID: 8300000, guid: a71a391f92321dd49ac022ef41064656, type: 3}
+    volume: 1
+    loop: 0
+  - key: SFX_Hit
+    clip: {fileID: 8300000, guid: 7cb88e35b574f9f45b8c454d87d5fd5d, type: 3}
+    volume: 1
+    loop: 0
+  - key: SFX_Enemy_Die
+    clip: {fileID: 8300000, guid: edfed54bc0a71cc409b209e1d89c3f6e, type: 3}
+    volume: 1
+    loop: 0
+  - key: SFX_Player_Die
+    clip: {fileID: 8300000, guid: d4e476825a421ce4bbf2d10c491d1b7f, type: 3}
+    volume: 1
+    loop: 0
+  - key: UI_Hover
+    clip: {fileID: 8300000, guid: 601b78cc67ac70d4983bcad7669196df, type: 3}
+    volume: 1
+    loop: 0
 --- !u!1 &536616957
 GameObject:
   m_ObjectHideFlags: 0

@@ -149,6 +149,11 @@ public class ItemPanelUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        if (AudioController.Instance != null)
+        {
+            AudioController.Instance.PlaySfx(AudioController.AudioKeys.UiHover);
+        }
+
         rect.DOLocalMoveY(originalPos.y + 15f, 0.15f);
     }
 
@@ -159,6 +164,11 @@ public class ItemPanelUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        if (AudioController.Instance != null)
+        {
+            AudioController.Instance.PlaySfx(AudioController.AudioKeys.UiClick);
+        }
+
         EventBus.Emit<ItemDataSO>(ItemEventType.Select, currentItemData);
     }
 }

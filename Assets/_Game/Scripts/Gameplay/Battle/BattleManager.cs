@@ -176,6 +176,11 @@ public class BattleManager : EventEmitter
                 .DOLocalMoveX(originPos.x + 0.75f * direction, t(0.25f))
                 .AsyncWaitForCompletion();
 
+                if (AudioController.Instance != null)
+                {
+                    AudioController.Instance.PlaySfx(AudioController.AudioKeys.SfxAttack);
+                }
+
                 await CreateSwordAnimation(attacker, target, -direction);
 
 
@@ -187,6 +192,10 @@ public class BattleManager : EventEmitter
                 target.OnUpdateStat();
 
                 target.OnTakeDamage();
+                if (AudioController.Instance != null)
+                {
+                    AudioController.Instance.PlaySfx(AudioController.AudioKeys.SfxHit);
+                }
                 CameraShake.Instance.Shake(t(0.1f), 0.05f, 20);
 
             }

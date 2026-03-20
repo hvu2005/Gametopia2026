@@ -42,6 +42,12 @@ public class BaseEnemy : BaseEntity
     public override void Die()
     {
         base.Die();
+
+        if (AudioController.Instance != null)
+        {
+            AudioController.Instance.PlaySfx(AudioController.AudioKeys.SfxEnemyDie);
+        }
+
         Debug.Log($"{name} has died.");
 
         visual.DOFade(0f, 0.25f)

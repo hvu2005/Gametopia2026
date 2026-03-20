@@ -82,6 +82,11 @@ public class Item : MonoBehaviour
     void OnMouseDown()
     {
         rectTransform.SetAsLastSibling();
+
+        if (AudioController.Instance != null)
+        {
+            AudioController.Instance.PlaySfx(AudioController.AudioKeys.UiItemPickup);
+        }
     }
 
     void OnMouseDrag()
@@ -134,6 +139,11 @@ public class Item : MonoBehaviour
     public void OnUpgradeRank(Item item)
     {
         UnityEngine.Object.Instantiate(star, starsParent);
+
+        if (AudioController.Instance != null)
+        {
+            AudioController.Instance.PlaySfx(AudioController.AudioKeys.UiItemMergeUpgrade);
+        }
 
         EventBus.Emit<Item>(ItemEventType.Unequipe, this);
 
