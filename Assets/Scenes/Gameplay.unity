@@ -1772,9 +1772,9 @@ MonoBehaviour:
     coKhi: 0
     xayDung: 0
   Stats:
-    hp: 50
-    physicalDamage: 7
-    armor: 15
+    hp: 1
+    physicalDamage: 1
+    armor: 0
     criticalChance: 5
     criticalDamage: 150
     lifeSteal: 0
@@ -3689,8 +3689,8 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
-  m_SortingOrder: 1000
+  m_SortingLayerID: -118744017
+  m_SortingOrder: 75
   m_TargetDisplay: 0
 --- !u!1 &792690066
 GameObject:
@@ -9019,7 +9019,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8026503254252521083, guid: e30f78459481c8f409d6b1d0d0de9e60, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0.22
+      value: -0.19
       objectReference: {fileID: 0}
     - target: {fileID: 8026503254252521083, guid: e30f78459481c8f409d6b1d0d0de9e60, type: 3}
       propertyPath: m_AnchoredPosition.y
