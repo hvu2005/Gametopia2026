@@ -45,8 +45,6 @@ public class PoolController : MonoBehaviour
         {
             CreatePool(item);
         }
-
-        DontDestroyOnLoad(this.gameObject);
     }
 
     public void CreatePool(PoolItem item)
