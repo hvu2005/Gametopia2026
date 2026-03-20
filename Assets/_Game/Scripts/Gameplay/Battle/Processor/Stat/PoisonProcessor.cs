@@ -20,7 +20,6 @@ public class PoisonProcessor : BaseStatProcessor, IPostAttack
             target.ActiveEffects.Add(poison);
             isNewPoison = true;
         }
-        // Chỉ tích luỹ độc, không hiển thị floating text tĩnh ngay lập tức
         poison.count += (int)source.Stats.poisonous;
         Debug.Log($"Applied Poison: {poison.count} stacks");
     }

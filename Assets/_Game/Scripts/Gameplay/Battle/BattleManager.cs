@@ -160,6 +160,11 @@ public class BattleManager : EventEmitter
         if (attacker.IsDead || target.IsDead)
         {
             Debug.Log("Turn ended early due to death or attack interruption.");
+            if ((attacker is Player && attacker.IsDead) || (target is Player && target.IsDead))
+            {
+                EventBus.Emit<bool>(BattleEventType.End, false);
+                this.Emit<string>(BattleEventType.Lose, "Player has died!");
+            }
             return;
         }
 
@@ -214,6 +219,11 @@ public class BattleManager : EventEmitter
         attacker.OnUpdateStat();
         target.OnUpdateStat();
 
+        if ((attacker is Player && attacker.IsDead) || (target is Player && target.IsDead))
+        {
+            EventBus.Emit<bool>(BattleEventType.End, false);
+            this.Emit<string>(BattleEventType.Lose, "Player has died!");
+        }
 
     }
 

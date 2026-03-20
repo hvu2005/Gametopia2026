@@ -33,6 +33,7 @@ public class GameManager : Singleton<GameManager>
     public void RegistEvents()
     {
         battleManager.On<string>(BattleEventType.Win, OnWinBattle);
+        battleManager.On<string>(BattleEventType.Lose, OnLoseBattle);
 
         playerManager.On<Item>(ItemEventType.Equipe, (item) =>
         {
@@ -106,6 +107,11 @@ public class GameManager : Singleton<GameManager>
         if (currentLevel >= levels.Length)
         {
             Debug.Log("All levels completed!");
+            var uiController = FindObjectOfType<UIController>();
+            if (uiController != null)
+            {
+                uiController.Show(UIType.WinPopup);
+            }
             await Task.Yield();
             return;
         }
@@ -170,6 +176,18 @@ public class GameManager : Singleton<GameManager>
         // _ = this.NextLevel();
 
         this.SpawnItemWhenWin();
+    }
+
+    public void OnLoseBattle(string message)
+    {
+        Debug.Log("Game Over: " + message);
+        isStartBattle = false;
+        
+        var uiController = FindObjectOfType<UIController>();
+        if (uiController != null)
+        {
+            uiController.Show(UIType.LosePopup);
+        }
     }
 
 }
