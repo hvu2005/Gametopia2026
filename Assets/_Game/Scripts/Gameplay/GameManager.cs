@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using Unity.VisualScripting;
 using UnityEngine;
+using TMPro;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -8,6 +9,9 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private LevelSO[] levels;
 
     [SerializeField] private Canvas gameplayCanvas;
+
+    [Header("Speed Up Settings")]
+    public TextMeshProUGUI speedUpText;
 
     public bool isStartBattle = false;
 
@@ -27,6 +31,11 @@ public class GameManager : Singleton<GameManager>
         itemManager.UpdateItemClasses();
 
         this.RegistEvents();
+
+        if (speedUpText != null)
+        {
+            speedUpText.text = "x" + battleManager.BattleSpeed;
+        }
     }
 
     public void RegistEvents()
@@ -198,4 +207,20 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
+    public void OnClickSpeedUpButton()
+    {
+        if (battleManager.BattleSpeed >= 4)
+        {
+            battleManager.BattleSpeed = 1;
+        }
+        else
+        {
+            battleManager.BattleSpeed++;
+        }
+
+        if (speedUpText != null)
+        {
+            speedUpText.text = "x" + battleManager.BattleSpeed;
+        }
+    }
 }
