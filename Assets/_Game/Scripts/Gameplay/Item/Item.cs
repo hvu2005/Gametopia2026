@@ -89,6 +89,11 @@ public class Item : MonoBehaviour
         }
     }
 
+    void OnMouseEnter()
+    {
+        EventBus.Emit<Item>(UIEvent.HoverItem, this);
+    }
+
     void OnMouseDrag()
     {
         if (!canSelect) return;

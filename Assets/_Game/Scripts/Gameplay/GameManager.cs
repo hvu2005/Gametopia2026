@@ -52,6 +52,21 @@ public class GameManager : Singleton<GameManager>
             _ = NextLevel();
         });
 
+        uiManager.On<Stats>(UIEvent.HoverStat, (stats) =>
+        {
+            uiManager.SetUIStats(stats);
+        });
+        
+        uiManager.On<string>(UIEvent.HoverDesc, (s) =>
+        {
+            uiManager.SetDescription(s);
+        });
+        
+        uiManager.On<Item>(UIEvent.HoverItem, (item) =>
+        {
+            uiManager.SetItemStats(item);
+        });
+
         uiManager.On<bool>(ItemEventType.Skip, (itemData) =>
         {
             uiManager.CloseItemPanel();
@@ -61,7 +76,7 @@ public class GameManager : Singleton<GameManager>
 
         battleManager.On<BaseEnemy>(EnemyEventType.Select, (enemy) => { StartBattle(enemy); });
 
-        uiManager.On<Stats>(PlayerEventType.UpdateStats, uiManager.SetUIStats);
+        // uiManager.On<Stats>(PlayerEventType.UpdateStats, uiManager.SetUIStats);
     }
 
     public void LoadLevel(int levelIndex)

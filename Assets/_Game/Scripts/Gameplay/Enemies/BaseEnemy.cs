@@ -57,6 +57,7 @@ public class BaseEnemy : BaseEntity
 
     public void OnMouseDown()
     {
+        
         if (!canSelect) return;
 
         EventBus.Emit<BaseEnemy>(EnemyEventType.Select, this);
@@ -64,6 +65,7 @@ public class BaseEnemy : BaseEntity
 
     public void OnMouseEnter()
     {
+        EventBus.Emit<Stats>(UIEvent.HoverStat, this.Stats);
         if (!canSelect) return;
 
         this.visual.transform.DOScale(this.originScale * 1.2f, 0.2f);

@@ -1,7 +1,5 @@
-
-
-
 using System;
+using System.Collections.Generic;
 using System.Text;
 using DG.Tweening;
 using TMPro;
@@ -15,6 +13,7 @@ public class ItemPanelUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     public TextMeshProUGUI itemName;
     public TextMeshProUGUI description;
     public TextMeshProUGUI descriptionValue;
+    public TextMeshProUGUI classText;
 
     public Image itemImage;
     public Image halo;
@@ -31,9 +30,49 @@ public class ItemPanelUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     void Start()
     {
         halo.transform
-        .DORotate(new Vector3(0, 0, 360f), 40f, RotateMode.FastBeyond360)
-        .SetLoops(-1, LoopType.Restart)
-        .SetEase(Ease.Linear);
+            .DORotate(new Vector3(0, 0, 360f), 40f, RotateMode.FastBeyond360)
+            .SetLoops(-1, LoopType.Restart)
+            .SetEase(Ease.Linear);
+    }
+
+    public void SetItemStats(ItemDataSO item)
+    {
+        List<string> classNames = new List<string>();
+        foreach (var itemClass in item.ItemClass)
+        {
+            switch (itemClass)
+            {
+                case ItemClassType.DienNang:
+                    classNames.Add("Điện Năng");
+                    break;
+                case ItemClassType.TaDien:
+                    classNames.Add("Tà Điển");
+                    break;
+                case ItemClassType.BaoHo:
+                    classNames.Add("Bảo Hộ");
+                    break;
+                case ItemClassType.CoKhi:
+                    classNames.Add("Cơ Khí");
+                    break;
+                case ItemClassType.XayDung:
+                    classNames.Add("Xây Dựng");
+                    break;
+                case ItemClassType.DoDac:
+                    classNames.Add("Đồ Đạc");
+                    break;
+                case ItemClassType.NhietNang:
+                    classNames.Add("Nhiệt Năng");
+                    break;
+                case ItemClassType.NangDo:
+                    classNames.Add("Nặng Đô");
+                    break;
+                case ItemClassType.SacLem:
+                    classNames.Add("Sắc Lẻm");
+                    break;
+            }
+        }
+
+        classText.text = "[" + string.Join(", ", classNames) + "]";
     }
 
     public void SetInfoFromItem(ItemDataSO itemData)
@@ -43,6 +82,7 @@ public class ItemPanelUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         itemImage.sprite = itemData.Sprite;
         this.SetDescription(itemData.Stats);
         this.ChangeFrameColor(itemData.Rarity);
+        this.SetItemStats(itemData);
     }
 
     public static Color HexToColor(string hex)
@@ -79,10 +119,9 @@ public class ItemPanelUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
                 descValue.AppendLine($"{FormatStatValue(field.Name, value)}");
             }
         }
-        
+
         descriptionValue.text = descValue.ToString();
         description.text = desc.ToString();
-
     }
 
     private string FormatStatValue(string fieldName, float value)

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -26,6 +27,10 @@ public class Player : BaseEntity
         // EventBus.Off<Stats>(ItemEventType.OnStatsChanged, OnStatsChanged);
     }
 
+    public void OnMouseEnter()
+    {
+        EventBus.Emit<Stats>(UIEvent.HoverStat, this.Stats);
+    }
 
     public override void OnUpdateStat()
     {
