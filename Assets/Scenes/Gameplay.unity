@@ -1568,7 +1568,7 @@ MonoBehaviour:
     xayDung: 0
   Stats:
     hp: 50
-    physicalDamage: 5
+    physicalDamage: 7
     armor: 15
     criticalChance: 5
     criticalDamage: 150

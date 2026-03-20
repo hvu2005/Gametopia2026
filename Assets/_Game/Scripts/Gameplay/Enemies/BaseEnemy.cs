@@ -22,7 +22,11 @@ public class BaseEnemy : BaseEntity
 
     public void Init(EnemyDataSO enemyData, int level = 1)
     {
-        this.Stats = enemyData.Stats * (1f + level / 5f);
+        this.Stats = enemyData.Stats;
+        this.Stats.hp *= (1f + level/6f);
+        this.Stats.physicalDamage *= (1f + level/8f);
+        this.Stats.poisonous*= (1f + level/6f);
+
         this.visual.sprite = enemyData.Sprite;
         this.currentHp = Stats.hp;
         this.currentArmor = Stats.armor;
