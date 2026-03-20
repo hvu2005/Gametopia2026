@@ -1,7 +1,4 @@
-
-
-
-
+using System;
 using DG.Tweening;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -23,9 +20,9 @@ public class BaseEnemy : BaseEntity
     public void Init(EnemyDataSO enemyData, int level = 1)
     {
         this.Stats = enemyData.Stats;
-        this.Stats.hp *= (1f + level/6f);
-        this.Stats.physicalDamage *= (1f + level/8f);
-        this.Stats.poisonous*= (1f + level/6f);
+        this.Stats.hp = (float)Math.Round(this.Stats.hp * (1f + (level - 1) / 6f), 1);
+        this.Stats.physicalDamage = (float)Math.Round(this.Stats.physicalDamage * (1f + (level - 1) / 16f), 1);
+        this.Stats.poisonous = (float)Math.Round(this.Stats.poisonous * (1f + (level - 1) / 16f), 1);
 
         this.visual.sprite = enemyData.Sprite;
         this.currentHp = Stats.hp;
@@ -55,10 +52,7 @@ public class BaseEnemy : BaseEntity
         Debug.Log($"{name} has died.");
 
         visual.DOFade(0f, 0.25f)
-            .OnComplete(() =>
-            {
-                gameObject.SetActive(false);
-            });
+            .OnComplete(() => { gameObject.SetActive(false); });
     }
 
     public void OnMouseDown()
@@ -89,5 +83,4 @@ public class BaseEnemy : BaseEntity
         this.visual.transform.DOScale(this.originScale, 0.2f);
         this.isHoving = false;
     }
-
 }

@@ -4148,6 +4148,7 @@ MonoBehaviour:
     - {fileID: 1452639347}
     - {fileID: 922169173}
     - {fileID: 802569696}
+    enemyDataList: {fileID: 11400000, guid: aa0483caa7fa7ab4b8e34306afb15b28, type: 2}
     enemiesInBattle: []
     enemyPrefab: {fileID: 5191958684848598955, guid: 9a30b9ca270c71743b208c889210f734, type: 3}
   battleManager:
