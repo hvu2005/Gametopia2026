@@ -79,6 +79,12 @@ public abstract class BaseEntity : MonoBehaviour, ICombatant
             {
                 statusUIController.UpdatePoisonStack(0);
             }
+
+            // Gọi update giáp hiện tại
+            statusUIController.UpdateArmor(currentArmor);
+            
+            // Gọi update choáng nếu đang có effect tồn tại
+            statusUIController.UpdateStun(GetEffect<StunEffect>() != null, "Stun");
         }
     }
 
