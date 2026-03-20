@@ -6,9 +6,9 @@ using UnityEngine;
 /// Implement giống LifeStealProcessor nhưng chạy ở IPreAttack.
 /// Giá trị dùng dạng flat (ví dụ regeneration = 5 => hồi 5 HP trước mỗi lượt đánh).
 /// </summary>
-public class RegenerationProcessor : BaseStatProcessor, IBeAttacked
+public class RegenerationProcessor : BaseStatProcessor, IPostAttack
 {
-    public void ProcessBeAttacked(BaseEntity source, BaseEntity target, List<BaseEntity> allAliveEnemies = null)
+    public void ProcessPostAttack(BaseEntity source, BaseEntity target, List<BaseEntity> allAliveEnemies = null)
     {
         if (target.Stats.regeneration > 0)
         {

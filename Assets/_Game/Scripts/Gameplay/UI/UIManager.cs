@@ -12,6 +12,8 @@ public class UIManager : EventEmitter
     public List<ItemPanelUI> itemPanelUIList;
     public TextMeshProUGUI playerStatsLabelText;
     public TextMeshProUGUI playerStatsValueText;
+    
+    public GameObject skipButton;
 
     public void ShowItemSelection(List<ItemDataSO> itemDataList)
     {
@@ -37,6 +39,8 @@ public class UIManager : EventEmitter
         {
             itemPanelUIList[i].SetInfoFromItem(itemDataList[i]);
         }
+        
+        skipButton.SetActive(true);    
     }
 
     public void CloseItemPanel()
@@ -45,6 +49,9 @@ public class UIManager : EventEmitter
         {
             itemPanelUIList[i].gameObject.SetActive(false);
         }
+        
+        skipButton.SetActive(false);    
+        
     }
 
     public void SetUIStats(Stats stats)
