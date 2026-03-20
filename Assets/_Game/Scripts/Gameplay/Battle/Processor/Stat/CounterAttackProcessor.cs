@@ -17,7 +17,7 @@ public class CounterAttackProcessor : BaseStatProcessor, IBeAttacked
         int roll = Random.Range(0, 100);
         if (roll >= target.Stats.thorn) return;
 
-        source.TakeDamage(source.lastDamageDealt* target.Stats.thorn);
+        source.TakeDamage(source.Stats.physicalDamage);
 
         // source.IsAttacked = false;
         

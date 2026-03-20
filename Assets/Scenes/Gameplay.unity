@@ -296,7 +296,7 @@ MonoBehaviour:
   countText: {fileID: 463611118}
   icon: {fileID: 63319023}
   description: "T\xE1 \u0110i\u1EC1n\n\n(2) +10% T\u1ED1c \u0111\u1ED9 H\u1ED3i ph\u1EE5c
-    HP/l\u01B0\u1EE3t \u0111\xE1nh\n(4) +5 H\xFAt m\xE1u\n"
+    HP/l\u01B0\u1EE3t \u0111\xE1nh.\n(4) +5 H\xFAt m\xE1u"
 --- !u!1 &72778743
 GameObject:
   m_ObjectHideFlags: 0
@@ -4786,8 +4786,8 @@ MonoBehaviour:
   count: 0
   countText: {fileID: 1750794557}
   icon: {fileID: 966658634}
-  description: "Nhi\u1EC7t N\u0103ng\n\n(2) + 10 Linh Ho\u1EA1t\n(4) + 20% Ph\u1EA3n
-    \u0110\xF2n"
+  description: "Nhi\u1EC7t N\u0103ng\n\n(2) +10 Linh Ho\u1EA1t\n(4) +20% Ph\u1EA3n
+    \u0111\xF2n"
 --- !u!1 &970220658
 GameObject:
   m_ObjectHideFlags: 0
@@ -5924,7 +5924,7 @@ MonoBehaviour:
   countText: {fileID: 1985542480}
   icon: {fileID: 1090982689}
   description: "X\xE2y D\u1EF1ng\n\n(2) +20% Ph\u1EA3n \u0110\xF2n\n(4) M\u1ED7i
-    Khi B\u1ECB T\u1EA5n C\xF4ng T\u0103ng 5 Gi\xE1p T\u1ED1i \u0110a 25 \n"
+    Khi B\u1ECB T\u1EA5n C\xF4ng T\u0103ng 5 Gi\xE1p T\u1ED1i \u0110a 25"
 --- !u!1 &1099733554
 GameObject:
   m_ObjectHideFlags: 0
@@ -6818,8 +6818,8 @@ MonoBehaviour:
   count: 0
   countText: {fileID: 853876820}
   icon: {fileID: 1258509052}
-  description: "S\u1EAFc L\u1EBBm\n\n(2) +50% S\xE1t th\u01B0\u01A1ng Ch\xED m\u1EA1ng.\n(4)
-    +15% Khu\u1EBFch \u0111\u1EA1i s\xE1t th\u01B0\u01A1ng V\u1EADt l\xFD."
+  description: "S\u1EAFc L\u1EBBm\n\n(2) +50% S\xE1t th\u01B0\u01A1ng b\u1EA1o k\xEDch\n(4)
+    +15% Khu\u1EBFch \u0111\u1EA1i ST v\u1EADt l\xFD"
 --- !u!1 &1382521193
 GameObject:
   m_ObjectHideFlags: 0
@@ -7237,9 +7237,9 @@ MonoBehaviour:
   count: 0
   countText: {fileID: 484854341}
   icon: {fileID: 1439538004}
-  description: "C\u01A1 Kh\xED\n\n(2) +15% T\u1ED1c \u0111\u1ED9.\n(4) \u1EDE l\u01B0\u1EE3t
-    \u0111\xE1nh th\u1EE9 ba, \xE1p d\u1EE5ng hi\u1EC7u \u1EE9ng L\xE0m Cho\xE1ng
-    l\xEAn k\u1EBB \u0111\u1ECBch ch\u1ECBu \u0111\xF2n."
+  description: "C\u01A1 Kh\xED\n\n(2) +15 Linh ho\u1EA1t\n(4) \u1EDE l\u01B0\u1EE3t
+    \u0111\xE1nh th\u1EE9 3 l\xEAn k\u1EBB \u0111\u1ECBch \u0111\xF3, l\xE0m cho\xE1ng
+    k\u1EBB \u0111\u1ECBch ch\u1ECBu \u0111\xF2n"
 --- !u!1 &1452639346
 GameObject:
   m_ObjectHideFlags: 0
@@ -7403,8 +7403,8 @@ MonoBehaviour:
   count: 0
   countText: {fileID: 541022229}
   icon: {fileID: 1580783751}
-  description: "\u0110i\u1EC7n N\u0103ng\n\n(2) + 5 K\xEDch \u0110i\u1EC7n\n(4) +
-    20 K\xEDch \u0110i\u1EC7n\n"
+  description: "\u0110i\u1EC7n N\u0103ng\n\n(2) +5 K\xEDch \u0110i\u1EC7n.\n(4) +20
+    K\xEDch \u0110i\u1EC7n\n"
 --- !u!1 &1600439891
 GameObject:
   m_ObjectHideFlags: 0
@@ -8783,8 +8783,8 @@ MonoBehaviour:
   count: 0
   countText: {fileID: 792690068}
   icon: {fileID: 1820871861}
-  description: "B\u1EA3o H\u1ED9\n\n(2) + 20 Gi\xE1p c\u01A1 b\u1EA3n \n(4) +10%
-    T\u1EF7 l\u1EC7 N\xE9 \u0111\xF2n."
+  description: "B\u1EA3o H\u1ED9\n\n(2) +20 Gi\xE1p c\u01A1 b\u1EA3n\n(4) +10% T\u1EC9
+    l\u1EC7 n\xE9 \u0111\xF2n"
 --- !u!1 &1854932926
 GameObject:
   m_ObjectHideFlags: 0
@@ -9155,8 +9155,8 @@ MonoBehaviour:
   count: 0
   countText: {fileID: 1099733556}
   icon: {fileID: 1940342959}
-  description: "N\u1EB7ng \u0110\xF4\n\n(2) +15% T\u1EF7 l\u1EC7 Ch\xED m\u1EA1ng.\n(4)
-    +20% S\xE1t th\u01B0\u01A1ng V\u1EADt l\xFD c\u01A1 b\u1EA3n.\n"
+  description: "N\u1EB7ng \u0110\xF4\n\n(2) +15% T\u1EC9 l\u1EC7 b\u1EA1o k\xEDch\n(4)
+    +10 S\xE1t th\u01B0\u01A1ng v\u1EADt l\xFD"
 --- !u!1 &1985542478
 GameObject:
   m_ObjectHideFlags: 0
@@ -9384,7 +9384,7 @@ MonoBehaviour:
   count: 0
   countText: {fileID: 1893405296}
   icon: {fileID: 1988639768}
-  description: "\u0110o \u0110\u1EA1c\n\n(2) +20 May M\u1EAFn\n(4) +15% N\xE9 \u0110\xF2n"
+  description: "\u0110o \u0110\u1EA1c\n\n(2) +20 May m\u1EAFn\n(4) +15% N\xE9 \u0111\xF2n"
 --- !u!1 &2092393754
 GameObject:
   m_ObjectHideFlags: 0
@@ -9671,7 +9671,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4324382265001867262, guid: e30f78459481c8f409d6b1d0d0de9e60, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8026503254252521083, guid: e30f78459481c8f409d6b1d0d0de9e60, type: 3}
       propertyPath: m_Pivot.x
@@ -9756,7 +9756,16 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4343213313881624531, guid: e30f78459481c8f409d6b1d0d0de9e60, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 4817490980086781199, guid: e30f78459481c8f409d6b1d0d0de9e60, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 5249833007185043637, guid: e30f78459481c8f409d6b1d0d0de9e60, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: e30f78459481c8f409d6b1d0d0de9e60, type: 3}
 --- !u!114 &8135372264766584376 stripped
 MonoBehaviour:

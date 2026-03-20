@@ -18,10 +18,11 @@ public class NhietNangProcessor : ItemClassProcessor
         base.OnMilestoneUp(target);
         if (this.currentMilestone == 1)
         {
-
+            target.Stats.speed += 10;
         }
         else if (this.currentMilestone == 2)
         {
+            target.Stats.thorn += 20;
 
         }
     }
@@ -31,10 +32,12 @@ public class NhietNangProcessor : ItemClassProcessor
         base.OnMilestoneDown(target);
         if (this.currentMilestone == 0)
         {
+            target.Stats.speed -= 10;
 
         }
         else if (this.currentMilestone == 1)
         {
+            target.Stats.thorn += 20;
 
         }
     }
